@@ -1,0 +1,113 @@
+package org.brms.hhinsurance;
+global java.util.List flatRoofEligibility;
+
+rule "Flat roof Percentage: less than 10 %"
+    when
+        FlatRoofPolicy(roofPercent == "lessThan10" || roofPercent == "")
+    then
+        flatRoofEligibility.add("American Integrity");
+        flatRoofEligibility.add("American Strategic");
+        flatRoofEligibility.add("Anchor");
+        flatRoofEligibility.add("Bankers");
+        flatRoofEligibility.add("Cabrillo");
+        flatRoofEligibility.add("Centauri");
+        flatRoofEligibility.add("Edison");
+        flatRoofEligibility.add("FedNat");
+        flatRoofEligibility.add("Florida Peninsula");
+        flatRoofEligibility.add("Frontline");
+        flatRoofEligibility.add("GeoVera");
+        flatRoofEligibility.add("Heritage");
+        flatRoofEligibility.add("Homeowners Choice");
+        flatRoofEligibility.add("Monarch");
+        flatRoofEligibility.add("Olympus");
+        flatRoofEligibility.add("Prepared");
+        flatRoofEligibility.add("Service (SageSure)");
+        flatRoofEligibility.add("Southern Oak");
+        flatRoofEligibility.add("Swyfft");
+        flatRoofEligibility.add("St. Johns");
+        flatRoofEligibility.add("The Hearth");
+        flatRoofEligibility.add("TypTap Home");
+        flatRoofEligibility.add("United");
+        flatRoofEligibility.add("Universal PC");
+        flatRoofEligibility.add("Velocity");
+        flatRoofEligibility.add("Western World");
+end
+rule "Flat roof Percentage: 11 to 20%"
+    when
+        FlatRoofPolicy(roofPercent in ("11to15","16to20"))
+    then
+        flatRoofEligibility.add("American Integrity");
+        flatRoofEligibility.add("Anchor");
+        flatRoofEligibility.add("Edison");
+        flatRoofEligibility.add("FedNat");
+        flatRoofEligibility.add("Florida Peninsula");
+        flatRoofEligibility.add("Frontline");
+        flatRoofEligibility.add("GeoVera");
+        flatRoofEligibility.add("Heritage");
+        flatRoofEligibility.add("Homeowners Choice");
+        flatRoofEligibility.add("Monarch");
+        flatRoofEligibility.add("Olympus");
+        flatRoofEligibility.add("Prepared");
+        flatRoofEligibility.add("Service (SageSure)");
+        flatRoofEligibility.add("Southern Oak");
+        flatRoofEligibility.add("Swyfft");
+        flatRoofEligibility.add("St. Johns");
+        flatRoofEligibility.add("The Hearth");
+        flatRoofEligibility.add("TypTap Home");
+        flatRoofEligibility.add("United");
+        flatRoofEligibility.add("Universal PC");
+        flatRoofEligibility.add("Velocity");
+        flatRoofEligibility.add("Western World");
+end
+
+rule "Flat roof Percentage: 21% to 25%"
+    when
+        FlatRoofPolicy(roofPercent == "21to25")
+    then
+        flatRoofEligibility.add("American Integrity");
+        flatRoofEligibility.add("Anchor");
+        flatRoofEligibility.add("Edison");
+        flatRoofEligibility.add("FedNat");
+        flatRoofEligibility.add("Florida Peninsula");
+        flatRoofEligibility.add("GeoVera");
+        flatRoofEligibility.add("Heritage");
+        flatRoofEligibility.add("Homeowners Choice");
+        flatRoofEligibility.add("Monarch");
+        flatRoofEligibility.add("Prepared");
+        flatRoofEligibility.add("Service (SageSure)");
+        flatRoofEligibility.add("Southern Oak");
+        
+        flatRoofEligibility.add("Swyfft");
+        flatRoofEligibility.add("The Hearth");
+        flatRoofEligibility.add("TypTap Home");
+        flatRoofEligibility.add("Universal PC");
+        flatRoofEligibility.add("Velocity");
+        flatRoofEligibility.add("Western World");
+end
+
+rule "Flat roof Percentage: greater than 25%"
+    when
+        FlatRoofPolicy(roofPercent in ("26to30","31to40","41to50","51to60","61to70","71to80","81to90","91to100"))
+    then
+        flatRoofEligibility.add("Anchor");
+        flatRoofEligibility.add("Edison");
+        flatRoofEligibility.add("FedNat");
+        flatRoofEligibility.add("Florida Peninsula");
+        flatRoofEligibility.add("GeoVera");
+        flatRoofEligibility.add("Homeowners Choice");
+        flatRoofEligibility.add("Monarch");
+        flatRoofEligibility.add("Prepared");
+        flatRoofEligibility.add("Service (SageSure)");
+        flatRoofEligibility.add("Southern Oak");
+        
+        flatRoofEligibility.add("Swyfft");
+        flatRoofEligibility.add("The Hearth");
+        flatRoofEligibility.add("TypTap Home");
+        flatRoofEligibility.add("Universal PC");
+        flatRoofEligibility.add("Velocity");
+        flatRoofEligibility.add("Western World");
+end
+
+
+
+

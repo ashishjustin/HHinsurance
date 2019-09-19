@@ -1,0 +1,53 @@
+package org.brms.hhinsurance;
+global java.util.List coverageB;
+global java.util.List coverageBpercent;
+
+rule "If Garage is there"
+when
+   o:OtherStructure(hasGarage == "no");
+then
+    coverageB.clear();
+    coverageB.add(0.02*o.getCoverageA());
+    coverageBpercent.clear();
+    coverageBpercent.add("2%");
+end
+
+rule "If Garage is not there"
+when
+   o:OtherStructure(hasGarage == "yes");
+then
+   drools.setFocus("garage type");
+end
+
+rule "If Garage type is attached to main house"
+ruleflow-group "garage type"
+when
+   o:OtherStructure(garageStyle == "attachedToTheMainHouse");
+then
+    coverageB.clear();
+    coverageB.add(0.02*o.getCoverageA());
+    coverageBpercent.clear();
+    coverageBpercent.add("2%");
+end
+
+rule "If Garage is detached without living space"
+ruleflow-group "garage type"
+when
+   o:OtherStructure(garageStyle == "detachedSeperatedtructureWithoutLivingSpace");
+then
+    coverageB.clear();
+    coverageB.add(0.10*o.getCoverageA());
+    coverageBpercent.clear();
+    coverageBpercent.add("10%");
+end
+
+rule "If Garage is detached with living space"
+ruleflow-group "garage type"
+when
+   o:OtherStructure(garageStyle == "detachedHasLivingSpace");
+then
+    coverageB.clear();
+    coverageB.add(0.10*o.getCoverageA());
+    coverageBpercent.clear();
+    coverageBpercent.add("Custom");
+end

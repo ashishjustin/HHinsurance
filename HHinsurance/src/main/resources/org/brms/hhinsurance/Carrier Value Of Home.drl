@@ -1,0 +1,72 @@
+package org.brms.hhinsurance;
+global java.util.List coverageEligibility;
+
+rule "Coverage A between 0 to 749,999"
+when
+    ValueOfHome(coverageA <= 749999)
+then
+    coverageEligibility.add("American Integrity");
+    coverageEligibility.add("American Strategic");
+    coverageEligibility.add("Anchor");
+    coverageEligibility.add("Bankers");
+    coverageEligibility.add("Cabrillo");
+    coverageEligibility.add("Centauri");
+    coverageEligibility.add("Edison");
+    coverageEligibility.add("FedNat");
+    coverageEligibility.add("Florida Peninsula");
+    coverageEligibility.add("Frontline");
+    coverageEligibility.add("GeoVera");
+    coverageEligibility.add("Heritage");
+    coverageEligibility.add("Homeowners Choice");
+    coverageEligibility.add("Monarch");
+    coverageEligibility.add("Olympus");
+    coverageEligibility.add("Prepared");
+    coverageEligibility.add("Service (SageSure)");
+    coverageEligibility.add("Southern Oak");
+    
+    coverageEligibility.add("Swyfft");
+    coverageEligibility.add("St. Johns");
+    coverageEligibility.add("The Hearth");
+    coverageEligibility.add("TypTap Home");
+    coverageEligibility.add("United");
+    coverageEligibility.add("Universal PC");
+    coverageEligibility.add("Velocity");
+    coverageEligibility.add("Western World");
+end
+
+rule "Coverage A between 750,000 to 999,999"
+when
+    ValueOfHome((coverageA>749999)&&(coverageA<=999999))
+then
+    coverageEligibility.add("American Integrity");
+    coverageEligibility.add("American Strategic");
+    coverageEligibility.add("Anchor");
+    coverageEligibility.add("Bankers");
+    coverageEligibility.add("Centauri");
+    coverageEligibility.add("Edison");
+    coverageEligibility.add("FedNat");
+    coverageEligibility.add("Florida Peninsula");
+    coverageEligibility.add("Frontline");
+    coverageEligibility.add("Heritage");
+    coverageEligibility.add("Monarch");
+    coverageEligibility.add("Olympus");
+    coverageEligibility.add("Prepared");
+    coverageEligibility.add("Service (SageSure)");
+    coverageEligibility.add("Southern Oak");
+    coverageEligibility.add("Swyfft");
+    coverageEligibility.add("St. Johns");
+    coverageEligibility.add("The Hearth");
+    coverageEligibility.add("United");
+    coverageEligibility.add("Universal PC");
+    coverageEligibility.add("Velocity");
+    coverageEligibility.add("Western World");
+end
+
+rule "Coverage A greater than 1,000,000"
+when
+    ValueOfHome(coverageA>=1000000)
+then
+    coverageEligibility.clear();
+end
+    
+    

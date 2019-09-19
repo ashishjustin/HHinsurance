@@ -1,0 +1,58 @@
+package org.brms.hhinsurance;
+global java.util.List fireAlarm;
+global java.util.List burglarAlarm;
+
+rule "check if fire"
+
+when
+    alarmsystem(alarmSystemType=="Fire")
+then
+    fireAlarm.clear();
+    burglarAlarm.clear();
+    fireAlarm.add("Rep to Central Station");
+    burglarAlarm.add("None");
+end
+
+rule "check if burglar or fire"
+
+when
+    alarmsystem(alarmSystemType=="Burglar and Fire")
+then
+    fireAlarm.clear();
+    burglarAlarm.clear();
+    fireAlarm.add("Rep to Central Station");
+    burglarAlarm.add("Rep to Central Station");
+end
+
+rule "check if burglar"
+
+when
+    alarmsystem(alarmSystemType=="Burglar")
+then
+    fireAlarm.clear();
+    burglarAlarm.clear();
+    fireAlarm.add("smoke Alarm");
+    burglarAlarm.add("Rep to Central Station");
+end
+
+rule "check if other"
+
+when
+    alarmsystem(alarmSystemType=="None")
+then
+    fireAlarm.clear();
+    burglarAlarm.clear();
+    fireAlarm.add("Local Fire Alarm");
+    burglarAlarm.add("Local Burglar Alarm");
+end
+
+rule "check if null"
+
+when
+    alarmsystem(alarmSystemType=="")
+then
+    fireAlarm.clear();
+    burglarAlarm.clear();
+    fireAlarm.add("None");
+    burglarAlarm.add("None");
+end

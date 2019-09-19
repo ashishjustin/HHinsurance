@@ -1,0 +1,94 @@
+package org.brms.hhinsurance;
+global java.util.List pool;
+global java.util.List screenedEnclosureSquareFeet;
+global java.util.List overPool;
+global java.util.List poolScreenEnclosure;
+global java.util.List poolFencedOrScreened;
+global java.util.List screenedEnclosureCoverageAmount;
+global java.util.List poolScreenedEnclosureStatus;
+
+rule "check if inground and yes"
+
+when 
+    poolScreenedEnclosure(hasPool=="inGround" && screendEnclosure=="yes")
+then
+    pool.clear();
+    screenedEnclosureSquareFeet.clear();
+    overPool.clear();
+    poolScreenEnclosure.clear();
+    poolFencedOrScreened.clear();
+    poolScreenedEnclosureStatus.clear();
+    
+    pool.add("Inground - 300 - 600 sq. ft.");
+    screenedEnclosureSquareFeet.add("500");
+    overPool.add("1");
+    poolScreenEnclosure.add("1");
+    poolFencedOrScreened.add("1");
+    poolScreenedEnclosureStatus.add("1");
+end
+
+rule "check if inground and no"
+
+when 
+    poolScreenedEnclosure(hasPool=="inGround" && screendEnclosure=="no")
+then
+    pool.clear();
+    screenedEnclosureSquareFeet.clear();
+    screenedEnclosureCoverageAmount.clear();
+    overPool.clear();
+    poolScreenEnclosure.clear();
+    poolFencedOrScreened.clear();
+    poolScreenedEnclosureStatus.clear();
+  
+    
+    pool.add("Inground - 300 - 600 sq. ft.");
+    screenedEnclosureSquareFeet.add("");
+    screenedEnclosureCoverageAmount.add("");
+    overPool.add("0");
+    poolScreenEnclosure.add("0");
+    poolFencedOrScreened.add("1");
+end
+
+rule "check if above ground permanent "
+
+when 
+    poolScreenedEnclosure(hasPool=="aboveGroundPermanent")
+then
+    pool.clear();
+    screenedEnclosureSquareFeet.clear();
+    screenedEnclosureCoverageAmount.clear();
+    overPool.clear();
+    poolScreenEnclosure.clear();
+    poolFencedOrScreened.clear();
+    poolScreenedEnclosureStatus.clear();
+  
+    
+    pool.add("Above Ground - Detached");
+    screenedEnclosureSquareFeet.add("");
+    screenedEnclosureCoverageAmount.add("");
+    overPool.add("0");
+    poolScreenEnclosure.add("0");
+    poolFencedOrScreened.add("1");
+end
+
+rule "check if above ground temporary "
+
+when 
+    poolScreenedEnclosure(hasPool!="aboveGroundPermanent" && hasPool!="inGround")
+then
+    pool.clear();
+    screenedEnclosureSquareFeet.clear();
+    screenedEnclosureCoverageAmount.clear();
+    overPool.clear();
+    poolScreenEnclosure.clear();
+    poolFencedOrScreened.clear();
+    poolScreenedEnclosureStatus.clear();
+  
+    
+    pool.add("None");
+    screenedEnclosureSquareFeet.add("");
+    screenedEnclosureCoverageAmount.add("");
+    overPool.add("");
+    poolScreenEnclosure.add("");
+    poolFencedOrScreened.add("");
+end

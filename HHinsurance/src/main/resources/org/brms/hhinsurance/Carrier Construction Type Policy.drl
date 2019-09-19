@@ -1,0 +1,68 @@
+package org.brms.hhinsurance;
+global java.util.List constructionEligibility;
+
+rule "Construction type:logs"
+    when
+        ConstructionPolicy(constructionType == "Logs")
+    then
+        constructionEligibility.add("Homeowners Choice");
+        constructionEligibility.add("Olympus");
+        constructionEligibility.add("Service (SageSure)");
+        constructionEligibility.add("Swyfft");
+        constructionEligibility.add("The Hearth");
+        constructionEligibility.add("TypTap Home");
+        constructionEligibility.add("Universal PC");
+end
+
+rule "Construction type:Asbestos"
+    when
+        ConstructionPolicy(constructionType == "Asbestos")
+    then
+        constructionEligibility.add("American Integrity");
+        constructionEligibility.add("American Strategic");
+        constructionEligibility.add("Anchor");
+        constructionEligibility.add("Bankers");
+        constructionEligibility.add("Cabrillo");
+        constructionEligibility.add("Edison");
+        constructionEligibility.add("Florida Peninsula");
+        constructionEligibility.add("Heritage");
+        constructionEligibility.add("Homeowners Choice");
+        constructionEligibility.add("Olympus");
+        constructionEligibility.add("Service (SageSure)");
+        constructionEligibility.add("Swyfft");
+        constructionEligibility.add("The Hearth");
+        constructionEligibility.add("TypTap Home");
+        constructionEligibility.add("Universal PC");
+end
+
+rule "Construction type:other"
+    when
+        ConstructionPolicy(constructionType not in ("Asbestos","Logs"))
+    then
+        constructionEligibility.add("American Integrity");
+        constructionEligibility.add("American Strategic");
+        constructionEligibility.add("Anchor");
+        constructionEligibility.add("Bankers");
+        constructionEligibility.add("Cabrillo");
+        constructionEligibility.add("Centauri");
+        constructionEligibility.add("Edison");
+        constructionEligibility.add("FedNat");
+        constructionEligibility.add("Florida Peninsula");
+        constructionEligibility.add("Frontline");
+        constructionEligibility.add("GeoVera");
+        constructionEligibility.add("Heritage");
+        constructionEligibility.add("Homeowners Choice");
+        constructionEligibility.add("Monarch");
+        constructionEligibility.add("Olympus");
+        constructionEligibility.add("Prepared");
+        constructionEligibility.add("Service (SageSure)");
+        constructionEligibility.add("Southern Oak");
+        constructionEligibility.add("Swyfft");
+        constructionEligibility.add("St. Johns");
+        constructionEligibility.add("The Hearth");
+        constructionEligibility.add("TypTap Home");
+        constructionEligibility.add("United");
+        constructionEligibility.add("Universal PC");
+        constructionEligibility.add("Velocity");
+        constructionEligibility.add("Western World");
+end

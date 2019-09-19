@@ -1,0 +1,42 @@
+package org.brms.hhinsurance;
+global java.util.List gatedCommunity;
+
+rule "checking for planned community"
+
+when
+    gatedcommunity(securityType=="plannedCommunitySingle" || securityType=="plannedCommunity3")
+then
+    gatedCommunity.clear();
+    gatedCommunity.add("Single Entry");
+end
+
+rule "checking for gated with passkey"
+when
+    gatedcommunity(securityType=="gatedWithPasskey")
+then
+    gatedCommunity.clear();
+    gatedCommunity.add("Passkey Gate");
+end
+
+rule "checking for gated with man"
+when
+    gatedcommunity(securityType=="gatedWithMan")
+then
+    gatedCommunity.clear();
+    gatedCommunity.add("24 hr Manned Gate");
+end
+
+rule "checking for gated with security"
+when
+    gatedcommunity(securityType=="24HourSecurityPatrol")
+then
+    gatedCommunity.clear();
+    gatedCommunity.add("24 hr Security");
+end
+rule "checking if null"
+when
+    gatedcommunity(securityType=="")
+then
+    gatedCommunity.clear();
+    gatedCommunity.add("No");
+end

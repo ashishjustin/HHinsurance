@@ -1,0 +1,34 @@
+package org.brms.hhinsurance;
+global java.util.List value;
+global java.util.List key;
+
+rule "Type of occupancy is primary"
+    when
+        OccupancyType(occupied=="Primary")
+    then
+        value.clear();
+        key.clear();
+        value.add(0);
+        key.add("The occupancy is Primary");
+end
+
+rule "If Type of occupancy is secondary or seasonal"
+    when
+        OccupancyType((occupied=="Secondary")||(occupied=="Seasonal"))
+    then
+        value.clear();
+        key.clear();
+        value.add(1);
+        key.add("The occupancy is Secondary or Seasonal");
+end
+
+rule "If Type of occupancy is Tenant"
+    when
+        OccupancyType(occupied=="tenantOccupied")
+    then
+        value.clear();
+        key.clear();
+        value.add(2);
+        key.add("The occupancy is Tenant");
+end
+

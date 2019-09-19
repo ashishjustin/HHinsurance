@@ -1,0 +1,122 @@
+package org.brms.hhinsurance;
+global java.util.List plumbEligibility;
+
+rule "Plumbing : American integrplumbEligibilityity"
+	when
+		PlumbPolicy(plumbingType not in ("PEX","Polybutylene"))
+	then
+       		plumbEligibility.add("American Integrity");
+end
+
+
+rule "Plumbing: Not Galvanized and polybutylene"
+	when
+		PlumbPolicy(plumbingType not in ("Galvanized","Polybutylene"))
+	then
+        plumbEligibility.add("Edison");			
+ 		plumbEligibility.add("Florida Peninsula");
+		plumbEligibility.add("Southern Oak");
+		plumbEligibility.add("St. Johns");
+
+end
+
+rule "Plumbing : Not Polybutylene American integrity"
+	when
+		PlumbPolicy(plumbingType not in ("Polybutylene"))
+	then
+        plumbEligibility.add("American Strategic");		
+		plumbEligibility.add("Cabrillo - Safe Harbor");
+ 		plumbEligibility.add("Anchor");
+		plumbEligibility.add("Centauri");
+		plumbEligibility.add("Federated National");
+		plumbEligibility.add("Frontline");
+		plumbEligibility.add("Geo Vera");
+		plumbEligibility.add("Heritage");
+		plumbEligibility.add("Homeowners Choice");
+		plumbEligibility.add("Prepared");
+		
+		plumbEligibility.add("TypTap Home");
+end
+
+rule "Plumbing : Western World"
+	when
+		PlumbPolicy(plumbingType not in ("PEX","Polybutylene","Galvanized"))
+	then
+        	plumbEligibility.add("Western World");
+end
+
+rule "Plumbing : United"
+	when
+		PlumbPolicy((yearBuilt<2011 && plumbingType not in ("PEX","Polybutylene")) ||(yearBuilt>2010 && plumbingType not in ("Polybutylene"))) 
+    	then
+    		plumbEligibility.add("United");
+end
+
+rule "Plumbing : Universal"
+	when
+		PlumbPolicy((yearBuilt<2010 && plumbingType not in ("PEX","Polybutylene")) ||(yearBuilt>2009 && plumbingType not in ("Polybutylene"))) 
+    	then
+    		plumbEligibility.add("Universal");
+end
+
+rule "Plumbing : Velocity"
+	when
+		PlumbPolicy((yearBuilt<2013 && plumbingType not in ("PEX","Polybutylene")) ||(yearBuilt>2012 && plumbingType not in ("Polybutylene"))) 
+    	then
+    		plumbEligibility.add("Velocity");
+end
+
+rule "Plumbing : Service (SageSure)"
+	when
+		PlumbPolicy((yearBuilt<2009 && plumbingType not in ("PEX","Polybutylene")) ||(yearBuilt>2008 && plumbingType not in ("Polybutylene"))) 
+    	then
+    		plumbEligibility.add("Service (SageSure)");
+end
+
+rule "Plumbing : Olympus"
+	when
+		PlumbPolicy((yearBuilt<2005 && plumbingType not in ("PEX","Polybutylene")) || (yearBuilt>2004 && plumbingType not in ("Galvanized","Polybutylene"))) 
+    	then
+    		plumbEligibility.add("Olympus");
+end
+
+rule "Plumbing  : Service (SageSure) greater than 2008"
+    when
+        PlumbPolicy(yearBuilt>2008)
+    then
+        plumbEligibility.add("Service (SageSure)");
+end
+
+rule "Plumbing : null"
+    when
+        PlumbPolicy(plumbingType in (null))
+    then
+		plumbEligibility.add("American Integrity");
+		plumbEligibility.add("American Strategic");
+		plumbEligibility.add("Anchor");
+        plumbEligibility.add("Cabrillo - Safe Harbor");
+        plumbEligibility.add("Centauri");
+        plumbEligibility.add("Edison");
+  		plumbEligibility.add("FedNat");
+		plumbEligibility.add("Florida Peninsula");
+		plumbEligibility.add("Frontline");
+		plumbEligibility.add("GeoVera");
+		plumbEligibility.add("Heritage");
+		plumbEligibility.add("Homeowners Choice");
+		plumbEligibility.add("Olympus");
+		plumbEligibility.add("Prepared");
+		plumbEligibility.add("Service (SageSure)");
+		plumbEligibility.add("Southern Oak");
+		
+		plumbEligibility.add("St. Johns");
+		plumbEligibility.add("TypTap");
+		plumbEligibility.add("United");
+		plumbEligibility.add("Universal");
+		plumbEligibility.add("Velocity");
+		plumbEligibility.add("Western World");
+end
+
+
+
+
+

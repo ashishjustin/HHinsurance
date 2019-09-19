@@ -1,0 +1,54 @@
+package org.brms.hhinsurance;
+global java.util.List ageOfHomeEligibility;
+
+rule "Age of Home from current year to 40 years"
+when
+    AgeOfHomeCarrier(yearBuilt >= (year-40))
+then
+    ageOfHomeEligibility.add("American Integrity");
+    ageOfHomeEligibility.add("American Strategic");
+    ageOfHomeEligibility.add("Anchor");
+    ageOfHomeEligibility.add("Bankers");
+    ageOfHomeEligibility.add("Cabrillo");
+    ageOfHomeEligibility.add("Centauri");
+    ageOfHomeEligibility.add("Edison");
+    ageOfHomeEligibility.add("FedNat");
+    ageOfHomeEligibility.add("Florida Peninsula");
+    ageOfHomeEligibility.add("Frontline");
+    ageOfHomeEligibility.add("GeoVera");
+    ageOfHomeEligibility.add("Heritage");
+    ageOfHomeEligibility.add("Homeowners Choice");
+    ageOfHomeEligibility.add("Monarch");
+    ageOfHomeEligibility.add("Olympus");
+    ageOfHomeEligibility.add("Prepared");
+    ageOfHomeEligibility.add("Service (SageSure)");
+    ageOfHomeEligibility.add("Southern Oak");
+    ageOfHomeEligibility.add("Swyfft");
+    ageOfHomeEligibility.add("St. Johns");
+    ageOfHomeEligibility.add("The Hearth");
+    ageOfHomeEligibility.add("TypTap Home");
+    ageOfHomeEligibility.add("United");
+    ageOfHomeEligibility.add("Universal PC");
+    ageOfHomeEligibility.add("Velocity");
+    ageOfHomeEligibility.add("Western World");
+end
+
+rule "Age of Home 40 years and above"
+when
+    AgeOfHomeCarrier(yearBuilt < (year-40))
+then
+    ageOfHomeEligibility.add("American Integrity");
+    ageOfHomeEligibility.add("Cabrillo");
+    ageOfHomeEligibility.add("Frontline");
+    ageOfHomeEligibility.add("GeoVera");
+    ageOfHomeEligibility.add("Homeowners Choice");
+    ageOfHomeEligibility.add("Olympus");
+    ageOfHomeEligibility.add("Prepared");
+    ageOfHomeEligibility.add("Service (SageSure)");
+    ageOfHomeEligibility.add("St. Johns");
+    ageOfHomeEligibility.add("TypTap Home");
+    ageOfHomeEligibility.add("United");
+    ageOfHomeEligibility.add("Universal PC");
+    ageOfHomeEligibility.add("Velocity");
+    ageOfHomeEligibility.add("Western World");
+end

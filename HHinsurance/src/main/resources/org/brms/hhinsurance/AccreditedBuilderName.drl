@@ -1,0 +1,26 @@
+package org.brms.hhinsurance;
+global java.util.List AccreditedBuilder;
+global java.util.List AccreditedBuilderName;
+
+rule "checking accreditedbuilder is yes"
+when
+    Accreditedbuilder(accredited=="yes" || accreditedSupplement=="yes")
+then
+    AccreditedBuilder.clear();
+    AccreditedBuilder.add(1);
+    AccreditedBuilderName.clear();
+    AccreditedBuilderName.add("KB Homes");
+    System.out.println("accreditedbuilderNames rule 1");
+end
+
+rule "checking accreditedbuilder supplementary is no"
+when
+    Accreditedbuilder(accreditedSupplement=="no")
+then
+    AccreditedBuilder.clear();
+    AccreditedBuilder.add("0");
+    AccreditedBuilderName.clear();
+    AccreditedBuilderName.add("");
+    System.out.println("accreditedbuilderNames rule 2");
+end
+

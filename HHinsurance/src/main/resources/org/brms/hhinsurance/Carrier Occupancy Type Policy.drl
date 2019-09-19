@@ -1,0 +1,193 @@
+package org.brms.hhinsurance;
+global java.util.List occupancyEligibility;
+
+rule "Occupancy Carrier: All carriers"
+    when
+        OccupancyPolicy(occupancyType == "Primary" || (occupancyType in ("Secondary","Seasonal") && securedGatedCommunity in ("gatedWithMan","gatedWithPasskey")))
+    then
+        occupancyEligibility.add("American Integrity");
+        occupancyEligibility.add("American Strategic");
+        occupancyEligibility.add("Anchor");
+        occupancyEligibility.add("Bankers");
+        occupancyEligibility.add("Cabrillo");
+        occupancyEligibility.add("Centauri");
+        occupancyEligibility.add("Edison");
+        occupancyEligibility.add("FedNat");
+        occupancyEligibility.add("Florida Peninsula");
+        occupancyEligibility.add("Frontline");
+        occupancyEligibility.add("GeoVera");
+        occupancyEligibility.add("Heritage");
+        occupancyEligibility.add("Homeowners Choice");
+        occupancyEligibility.add("Monarch");
+        occupancyEligibility.add("Olympus");
+        occupancyEligibility.add("Prepared");
+        occupancyEligibility.add("Service (SageSure)");
+        occupancyEligibility.add("Southern Oak");
+        
+        occupancyEligibility.add("Swyfft");
+        occupancyEligibility.add("St. Johns");
+        occupancyEligibility.add("The Hearth");
+        occupancyEligibility.add("TypTap Home");
+        occupancyEligibility.add("United");
+        occupancyEligibility.add("Universal PC");
+        occupancyEligibility.add("Velocity");
+        occupancyEligibility.add("Western World");
+end
+
+rule "Occupancy Carrier: Secondary and Seasonal"
+    when
+        OccupancyPolicy(occupancyType in ("Secondary","Seasonal"))
+    then
+        drools.setFocus("Security");
+end
+
+
+rule "Secondary and Seasonal Occupancy Carriers"
+ruleflow-group "Security"
+    when
+        OccupancyPolicy(alarmType in ("None","Burglar","Fire") || securedGatedCommunity in ("None","plannedCommunity3"))
+    then
+        occupancyEligibility.add("Anchor");
+        occupancyEligibility.add("Cabrillo");
+        occupancyEligibility.add("FedNat");
+        occupancyEligibility.add("Frontline");
+        occupancyEligibility.add("GeoVera");
+        occupancyEligibility.add("Homeowners Choice");
+        occupancyEligibility.add("Monarch");
+        occupancyEligibility.add("Olympus");
+        occupancyEligibility.add("Prepared");
+        occupancyEligibility.add("Service (SageSure)");
+        
+        occupancyEligibility.add("Swyfft");
+        occupancyEligibility.add("The Hearth");
+        occupancyEligibility.add("TypTap Home");
+        occupancyEligibility.add("United");
+        occupancyEligibility.add("Universal PC");
+        occupancyEligibility.add("Velocity");
+        occupancyEligibility.add("Western World");
+end
+
+rule "Secondary and Seasonal Occupancy Carriers for planned community single"
+ruleflow-group "Security"
+    when
+        OccupancyPolicy(securedGatedCommunity in ("plannedCommunitySingle"))
+    then
+        occupancyEligibility.add("Anchor");
+        occupancyEligibility.add("Bankers");
+        occupancyEligibility.add("Cabrillo");
+        occupancyEligibility.add("FedNat");
+        occupancyEligibility.add("Frontline");
+        occupancyEligibility.add("GeoVera");
+        occupancyEligibility.add("Homeowners Choice");
+        occupancyEligibility.add("Monarch");
+        occupancyEligibility.add("Olympus");
+        occupancyEligibility.add("Prepared");
+        occupancyEligibility.add("Service (SageSure)");
+        
+        occupancyEligibility.add("Swyfft");
+        occupancyEligibility.add("The Hearth");
+        occupancyEligibility.add("TypTap Home");
+        occupancyEligibility.add("United");
+        occupancyEligibility.add("Universal PC");
+        occupancyEligibility.add("Velocity");
+        occupancyEligibility.add("Western World");
+end
+
+rule "Alarm burglar and fire Carrier"
+ruleflow-group "Security"
+    when
+        OccupancyPolicy(alarmType in ("Burglar and Fire"))
+    then
+        occupancyEligibility.add("American Integrity");
+        occupancyEligibility.add("Anchor");
+        occupancyEligibility.add("Bankers");
+        occupancyEligibility.add("Cabrillo");
+        occupancyEligibility.add("Centauri");
+        occupancyEligibility.add("Edison");
+        occupancyEligibility.add("FedNat");
+        occupancyEligibility.add("Florida Peninsula");
+        occupancyEligibility.add("Frontline");
+        occupancyEligibility.add("GeoVera");
+        occupancyEligibility.add("Heritage");
+        occupancyEligibility.add("Homeowners Choice");
+        occupancyEligibility.add("Monarch");
+        occupancyEligibility.add("Olympus");
+        occupancyEligibility.add("Prepared");
+        occupancyEligibility.add("Service (SageSure)");
+        
+        occupancyEligibility.add("Swyfft");
+        occupancyEligibility.add("St. Johns");
+        occupancyEligibility.add("The Hearth");
+        occupancyEligibility.add("TypTap Home");
+        occupancyEligibility.add("United");
+        occupancyEligibility.add("Universal PC");
+        occupancyEligibility.add("Velocity");
+        occupancyEligibility.add("Western World");    
+end
+
+rule "Secured Community 24HourSecurityPatrol"
+ruleflow-group "Security"
+    when
+        OccupancyPolicy(securedGatedCommunity in ("24HourSecurityPatrol"))
+    then
+        occupancyEligibility.add("American Integrity");
+        occupancyEligibility.add("American Strategic");
+        occupancyEligibility.add("Anchor");
+        occupancyEligibility.add("Bankers");
+        occupancyEligibility.add("Cabrillo");
+        occupancyEligibility.add("Centauri");
+        occupancyEligibility.add("Edison");
+        occupancyEligibility.add("FedNat");
+        occupancyEligibility.add("Florida Peninsula");
+        occupancyEligibility.add("Frontline");
+        occupancyEligibility.add("GeoVera");
+        occupancyEligibility.add("Heritage");
+        occupancyEligibility.add("Homeowners Choice");
+        occupancyEligibility.add("Monarch");
+        occupancyEligibility.add("Olympus");
+        occupancyEligibility.add("Prepared");
+        occupancyEligibility.add("Service (SageSure)");
+        
+        occupancyEligibility.add("Swyfft");
+        occupancyEligibility.add("St. Johns");
+        occupancyEligibility.add("The Hearth");
+        occupancyEligibility.add("TypTap Home");
+        occupancyEligibility.add("United");
+        occupancyEligibility.add("Universal PC");
+        occupancyEligibility.add("Velocity");
+        occupancyEligibility.add("Western World");
+end
+
+rule "Secondary and Seasonal Occupancy Carriers not Security"
+ruleflow-group "Security"
+    when
+        OccupancyPolicy(alarmType in ("") && securedGatedCommunity in (""))
+    then
+        occupancyEligibility.add("American Integrity");
+        occupancyEligibility.add("American Strategic");
+        occupancyEligibility.add("Anchor");
+        occupancyEligibility.add("Bankers");
+        occupancyEligibility.add("Cabrillo");
+        occupancyEligibility.add("Centauri");
+        occupancyEligibility.add("Edison");
+        occupancyEligibility.add("FedNat");
+        occupancyEligibility.add("Florida Peninsula");
+        occupancyEligibility.add("Frontline");
+        occupancyEligibility.add("GeoVera");
+        occupancyEligibility.add("Heritage");
+        occupancyEligibility.add("Homeowners Choice");
+        occupancyEligibility.add("Monarch");
+        occupancyEligibility.add("Olympus");
+        occupancyEligibility.add("Prepared");
+        occupancyEligibility.add("Service (SageSure)");
+        occupancyEligibility.add("Southern Oak");
+        occupancyEligibility.add("Swyfft");
+        occupancyEligibility.add("St. Johns");
+        occupancyEligibility.add("The Hearth");
+        occupancyEligibility.add("TypTap Home");
+        occupancyEligibility.add("United");
+        occupancyEligibility.add("Universal PC");
+        occupancyEligibility.add("Velocity");
+        occupancyEligibility.add("Western World");
+end
+        

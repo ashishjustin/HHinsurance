@@ -1,0 +1,58 @@
+package org.brms.hhinsurance;
+global java.util.List waterBackup;
+
+rule "carrier which is $25,$5000 and $1000 available"
+when
+    WaterBackup(carrierList in ("Cabrillo","Monarch","Centauri","FedNat","Florida Specialty","Prepared","Universal PC","Velocity"))
+then
+    waterBackup.clear();
+    waterBackup.add("Available - $25 ; Sublimit - $5,000 ; Deductible - $1,000");
+end
+
+rule "carrier which is $25,$5000 and $250 available"
+when
+    WaterBackup(carrierList in ("Anchor","Bankers","Florida Peninsula","Olympus","Service (SageSure)","Southern Oak","St. Johns"))
+then
+    waterBackup.clear();
+    waterBackup.add("Available - $25 ; Sublimit - $5,000 ; Deductible - $250");
+end
+
+rule "carrier which is $30,$5000 and $250 available"
+when
+    WaterBackup(carrierList in ("Frontline"))
+then
+    waterBackup.clear();
+    waterBackup.add("Available - $30 ; Sublimit - $5,000 ; Deductible - $250");
+end
+
+rule "carrier which is $30,$5000 and $1000 available"
+when
+    WaterBackup(carrierList in ("Heritage"))
+then
+    waterBackup.clear();
+    waterBackup.add("Available - $30 ; Sublimit - $5,000 ; Deductible - $1,000");
+end
+
+rule "carrier which is $100,$5000 and $1000 available"
+when
+    WaterBackup(carrierList in ("Western World"))
+then
+    waterBackup.clear();
+    waterBackup.add("Available - $100 ; Sublimit - $5,000 ; Deductible - $1,000");
+end
+
+rule "carrier which is $25,$5000 and AOP available"
+when
+    WaterBackup(carrierList in ("American Integrity","American Strategic","Swyfft","United"))
+then
+    waterBackup.clear();
+    waterBackup.add("Available - $25 ; Sublimit - $5,000 ; Deductible - AOP Deductible Applies");
+end
+
+rule "carrier which is water backup is not available"
+when
+    WaterBackup(carrierList in ("Edison","GeoVera","Homeowners Choice","TypTap Home"))
+then
+    waterBackup.clear();
+    waterBackup.add("Not Available");
+end

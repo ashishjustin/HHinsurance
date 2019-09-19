@@ -1,0 +1,22 @@
+package org.brms.hhinsurance;
+global java.util.List value;
+global java.util.List key;
+
+rule "if HOA is Unknown"
+    when
+        HomeOwnersAssociation(homeOwnersAsso=="UnKnown")
+    then
+        value.clear();
+        key.clear();
+        value.add(1);
+        key.add("Display the fee for HOA");
+    end
+
+rule "if HOA is not unknown"
+    when
+        HomeOwnersAssociation(homeOwnersAsso!="UnKnown")
+    then
+        value.clear();
+        key.clear();
+        key.add("Don't display the option of HOA fee");
+    end

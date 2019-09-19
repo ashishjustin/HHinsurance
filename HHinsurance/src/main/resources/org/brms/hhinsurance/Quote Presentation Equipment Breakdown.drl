@@ -1,0 +1,58 @@
+package org.brms.hhinsurance;
+global java.util.List equipmentBreakdown;
+
+rule "carrier which is $50,$100000 and $500 available"
+when
+    EquipmentBreakdown(carrierList in ("Anchor","Centauri","Florida Specialty","Heritage","Service (SageSure)","St. Johns"))
+then
+    equipmentBreakdown.clear();
+    equipmentBreakdown.add("Available - $50 ; Sublimit - $100,000 ; Deductible - $500");
+end
+
+rule "carrier which is $33,$100000 and $500 available"
+when
+    EquipmentBreakdown(carrierList in ("Prepared"))
+then
+    equipmentBreakdown.clear();
+    equipmentBreakdown.add("Available - $33 ; Sublimit - $100,000 ; Deductible - $500");
+end
+
+rule "carrier which is $40,$50000 and $500 available"
+when
+    EquipmentBreakdown(carrierList in ("United"))
+then
+    equipmentBreakdown.clear();
+    equipmentBreakdown.add("Available - $40 ; Sublimit - $50,000 ; Deductible - $500");
+end
+
+rule "carrier which is $44,$10000 and $500 available"
+when
+    EquipmentBreakdown(carrierList in ("Western World"))
+then
+    equipmentBreakdown.clear();
+    equipmentBreakdown.add("Available - $44 ; Sublimit - $10,000 ; Deductible - $500");
+end
+
+rule "carrier which is $45,$50000 and $500 available"
+when
+    EquipmentBreakdown(carrierList in ("American Integrity"))
+then
+    equipmentBreakdown.clear();
+    equipmentBreakdown.add("Available - $45 ; Sublimit - $50,000 ; Deductible - $500");
+end
+
+rule "carrier which is $50,$50000 and $500 available"
+when
+    EquipmentBreakdown(carrierList in ("FedNat","Monarch"))
+then
+    equipmentBreakdown.clear();
+    equipmentBreakdown.add("Available - $50 ; Sublimit - $50,000 ; Deductible - $500");
+end
+
+rule "carrier which equipment breakup is not available"
+when
+    EquipmentBreakdown(carrierList in ("American Strategic","Bankers","Cabrillo","Edison","Florida Peninsula","Frontline","GeoVera","Homeowners Choice","Olympus","Southern Oak","Swyfft","TypTap Home","Universal PC","Velocity"))
+then
+    equipmentBreakdown.clear();
+    equipmentBreakdown.add("Not Available");
+end

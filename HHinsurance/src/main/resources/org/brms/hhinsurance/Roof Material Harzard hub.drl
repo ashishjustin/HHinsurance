@@ -1,0 +1,58 @@
+package org.brms.hhinsurance;
+global java.util.List roofMaterialMap;
+
+rule "For 3 - Tab shingle"
+when 
+    RoofMaterialHazard(roofMaterialType in ("Fiberglass","Fiberglass Roof","Shingle-fiber glass","3 Ply Composition","4 Ply Composition","Fiberglass Shingles","Composite Rolled"));
+then
+    roofMaterialMap.clear();
+    roofMaterialMap.add("3-Tab Shingle");
+end
+
+rule "For Architectural shingles"
+when 
+    RoofMaterialHazard(roofMaterialType in ("comp shingle,Composition Shingle","Composition,Shingle","Comp./Shingle","Conventional Shingle","Dimensional Shingles","Shingle/Architect","Shingle/F-Glass","Arch Shingle","Composition/Asphalt","Corrugated Shingle","Shingle-Asphalt","Composite/Asphalt Shingle","Composition/Asphalt Shingle","Asphalt","Composition","Asphalt Shingle","Roof Composite Shingle","Dimensional Shingles","Composite","Heavy Composition","Comp./Built Up","Comp/Built Up","Asphalt/Built-Up","Shingle","Roof Shingle","Shingle-Composition","Composite/Rock","Fiberglass","Architectural Shingle","Heavy Composition","Comp/Shingle","Composition Shingle","Unspecified Shingle","Asphlt/Fibrgl Shingl","Asphalt/Composition","Architectural Shingle","Architectural,Shingle-asphalt","Shingle-asphalt/fiberglass","Shingle-architectural","Asphalt","Shingle, Asphalt","Asphalt/F-Glass Shingle","3D Composition","Rolled Composition","Composite","Rolled Asphalt","Asphalt Composition","Architectually Dimensioned","3-Tab,Architectural Asphalt","Composite Shingle","Architecturally Dimensioned","Shingle & Slate","Shingle & Tin","Composition Shingle","Shingle","Composite Shingles","Dimensional","Compstn/Fiberglass","Composition/Fiberglass","Single","Asphalt/Rock","Asphalt/Fiberglass"));
+then
+    roofMaterialMap.clear();
+    roofMaterialMap.add("Architectural Shingles");
+end
+
+rule "For Tar and Gravel"
+when 
+    RoofMaterialHazard(roofMaterialType in ("Gravel","flat/low pitch","Gravel","Built Up - T&G","Steel/Bar/Joist","Blt Up-Foam/Other","Tar/Gravel","Tar","Flat Roof With Facade Front","Tar/Stone","Hot Mop","Built-Up Gravel","Built-Up Roof","Built-Up/Tar","Built-Up/Flat","Hot Mop / Built Up","Built Up","Tar And Gravel","Tar Over Tin","Flat/Low Pitch","Built-Up Or Flat","Tar/Gravel","Flat","Built Up Gravel","Gravel Roof","Built Up Grade","Built Up W/ Ctng","Built Up With Gravel Bug","Mansard","Flat Built Up","Blt-Up/Asphalt Mop","Built Up","Rock & Stone","Torch Down","Pitch & Gravel","Tar","Aluminum Over Tar","Hot Mop W/ Chip","Blt Up - Foam/Other","Built Up - Tar/Gravel","Flat Roof","Flat","Tar & Rock","Built-Up/Rubber","Rock/Gravel","Rock","Rock/Stone","Pitch & Gravel","Tar & Gravel Roof","Roof Built-Up","GRAVEL ROOF","Rock","Tar and gravel","Hot Tar","Tar Pebble"));
+then
+    roofMaterialMap.clear();
+    roofMaterialMap.add("Tar and Gravel");
+end
+
+rule "For Metal"
+when 
+    RoofMaterialHazard(roofMaterialType in ("Metal Shake","Steel","Steel Backed Shingles","Metal/Aluminum","Copper","Galvanized","Tin","Tin/Metal Roof","Aluminum/Steel","Roof Metal","Corrugated Steel","Metal","Copper Roof","Aluminum Covering","Aluminum","Metal Siding","Aluminum","Standing Seam","Metal, Propanel","Metal, Corrugated","Steel Backed Shingles","Copper","Metal Cover","T-Lock","Standing Metal Seam","Galvanized","Slate/Imitation Slate","Metal-Copper","Metal-Galv Steel","Metal-Other","Metal-Tin","Metal Frames","Corrugated Steel","Metal /Tile","Corrugated","Metal/Steel","Galvanized To Metal","Shake Metal","Metal","Metal Shake","Metal Roof","Tin/Metal","Corrugated Metal","Aluminum Shingles","Built Up Copper","Metal Shingle","Steel/Tin","Cooper"));
+then
+    roofMaterialMap.clear();
+    roofMaterialMap.add("Metal");
+end
+
+rule "For Tile"
+when 
+    RoofMaterialHazard(roofMaterialType in ("Concrete Tile","Cement Tile","Clay Tile","Concrete Composite","Tile Clay","Tile Slate","Curved/S-Tile Roof","Clay","Spanish Sty. Tile Rf","Tile/Terrazo","Concrete Shingle","Slate","Masonary","Spanish","Barrel Tile","Cement","Tile/Slate","Tile - Quarry","Pitched Tile","Barrel","Concrete Tile","Slate/Asbestos","Concrete/Steel","Spanish Clay Tile","Flat Tile","Barrel Tiles","Clay Tile","Tile Or Slate","Cement","Barrel/Truss","Title","Concrete","Concrete/Cement","Clay","Curve/Arc/Round","Synthetic Tile","Tile","Cement Shake","Concrete","Partial Tile","Curved/S-Tile Roof","Tile/Slate","Roof Concrete","Flat Tile Roof","Tile Roof","Concrete Shake","Imitation Slate","Slate Roof","Slate","Spanish Clay Tile","Tile","Barrel","S-Tile","Tile/Concrete","Flat Tile","Terra-Cotta","Cement Tile","Slate/Tiled","State"));
+then
+    roofMaterialMap.clear();
+    roofMaterialMap.add("Tile");
+end
+
+rule "For Flat - Other"
+when 
+    RoofMaterialHazard(roofMaterialType in ("Flat Metal","Modified Butumen","Aluminum Over Tar","Rolled","Bitumen","All Flat","Tpo (G)","Shed","Roll","Rolled Rubber","Roll Roof","Composition Roll","Rolled/Hot Mop","Urethane","Membrane","Tpo Membrane"));
+then
+    roofMaterialMap.clear();
+    roofMaterialMap.add("Flat-Other");
+end
+
+rule "For Others"
+when 
+    RoofMaterialHazard(roofMaterialType in ("Mansard","Synthetic","mansard","other-rmks","other-attch","Other","Rubberized","Other","Wood Shake","Asbestos Shingle","Roof - Other"));
+then
+    roofMaterialMap.clear();
+    roofMaterialMap.add("Other");
+end

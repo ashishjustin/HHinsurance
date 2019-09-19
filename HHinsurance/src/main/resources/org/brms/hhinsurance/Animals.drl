@@ -1,0 +1,22 @@
+package org.brms.hhinsurance;
+global java.util.List value;
+global java.util.List key;
+
+rule "if have Animals"
+when
+    Animal(animals=="yes")
+then
+        value.clear();
+        key.clear();
+        value.add(1);
+        key.add("Display animals related options ");
+end
+
+rule "if no Animals"
+when
+    Animal(animals=="no")
+then
+        value.clear();
+        key.clear();
+        key.add("Don't Display animals related options");
+end

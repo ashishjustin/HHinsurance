@@ -1,0 +1,93 @@
+package org.brms.hhinsurance;
+global java.util.List foundationEligibility;
+
+rule "Foundation: American Integrity"
+    when
+        FoundationPolicy(foundation not in ("Stilts or Pilings - No Enclosed Space Below"))
+    then
+        foundationEligibility.add("American Integrity");
+end
+
+rule "Foundation: American Strategy, St. Johns"
+    when
+        FoundationPolicy(foundation not in ("Crawlspace - Partially enclosed with lattice type material","Crawlspace - Open Piers","Stilts or Pilings - No Enclosed Space Below"))
+    then
+        foundationEligibility.add("American Strategic");
+        foundationEligibility.add("St. Johns");
+end
+
+rule "Foundation: Not Crawlspace, Stilts or Pilings"
+    when
+        FoundationPolicy(foundation not in ("Crawlspace - Open Piers","Stilts or Pilings - No Enclosed Space Below"))
+    then
+        foundationEligibility.add("Cabrillo");
+        foundationEligibility.add("Centauri");
+        foundationEligibility.add("Prepared");
+        foundationEligibility.add("Southern Oak");
+end
+
+rule "Foundation: Anchor 0 to 2000 year built"
+   when
+        FoundationPolicy((foundation not in ("Crawlspace - Open Piers","Stilts or Pilings - No Enclosed Space Below")) && yearBuilt < 2002)
+   then
+       foundationEligibility.add("Anchor");     
+end
+
+rule "Foundation: Anchor greater than 2000 year built"
+   when
+        FoundationPolicy(foundation not in ("") && yearBuilt > 2001)
+   then
+       foundationEligibility.add("Anchor"); 
+       foundationEligibility.add("Universal PC"); 
+       foundationEligibility.add("Velocity"); 
+end
+
+rule "Foundation: Any type"
+   when
+       FoundationPolicy(foundation not in (""))
+   then
+       foundationEligibility.add("FedNat");    
+       foundationEligibility.add("Frontline"); 
+       foundationEligibility.add("GeoVera"); 
+       foundationEligibility.add("Homeowners Choice"); 
+       foundationEligibility.add("Olympus"); 
+        
+       foundationEligibility.add("TypTap Home"); 
+       foundationEligibility.add("Western World"); 
+       foundationEligibility.add("Bankers"); 
+       foundationEligibility.add("Monarch"); 
+       foundationEligibility.add("Swyfft"); 
+end
+
+rule "Foundation: year<2001"
+   when
+       FoundationPolicy(foundation not in ("Crawlspace - Partially enclosed with lattice type material","Crawlspace - Open Piers","Stilts or Pilings - No Enclosed Space Below","Unfinished Basement","Finished Basement") && yearBuilt <2001)
+   then
+       foundationEligibility.add("Universal PC");   
+       foundationEligibility.add("Velocity"); 
+end
+
+rule "Foundation: Florida Peninsula and Edison"
+   when
+       FoundationPolicy(foundation not in ("Crawlspace - Partially enclosed with lattice type material","Crawlspace - Open Piers"))
+   then
+       foundationEligibility.add("Edison");   
+       foundationEligibility.add("Florida Peninsula"); 
+end
+rule "Foundation: Crawlspace - Open Piers"
+   when
+       FoundationPolicy(foundation not in ("Crawlspace - Open Piers"))
+   then
+       foundationEligibility.add("Service (SageSure)");   
+       foundationEligibility.add("United"); 
+       foundationEligibility.add("The Hearth");
+end
+
+rule "Foundation: Heritage"
+   when
+       FoundationPolicy(foundation not in ("Crawlspace - Open Piers","Stilts or Pilings - No Enclosed Space Below"))
+   then
+       foundationEligibility.add("Heritage"); 
+end
+
+

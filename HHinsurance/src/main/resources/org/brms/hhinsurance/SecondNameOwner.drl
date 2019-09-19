@@ -1,0 +1,23 @@
+package org.brms.hhinsurance;
+global java.util.List value;
+global java.util.List key;
+
+rule "Check whether second owner is there"
+    when
+        SecondOwner(nameInsured=="yes")
+    then
+        value.clear();
+        key.clear();
+        value.add(1);
+        key.add("Display the form for the second owners details");
+    end
+
+rule "Check if no second owner"
+    when
+        SecondOwner(nameInsured=="no")
+    then
+        value.clear();
+        key.clear();
+        key.add("Don't Display the form for second owners details");
+    end
+

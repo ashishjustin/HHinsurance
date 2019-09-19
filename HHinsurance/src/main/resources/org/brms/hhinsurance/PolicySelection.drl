@@ -1,0 +1,223 @@
+package org.brms.hhinsurance;
+global java.util.List usageType;
+global java.util.List monthsOwnerOccupied;
+global java.util.List rentalTerm;
+global java.util.List coverageCPercent;
+global java.util.List additionalLawOrdinance;
+global java.util.List coverageC;
+global java.util.List families;
+global java.util.List floors;
+
+rule "Primary Occupancy"
+    when
+        PolicySelection(occupancyType=="Primary") 
+    then
+        usageType.clear();
+        monthsOwnerOccupied.clear();
+        rentalTerm.clear();
+		usageType.add("Primary");
+		monthsOwnerOccupied.add("9 months or more");
+		rentalTerm.add("");
+		System.out.println("Primary Occupancy");
+end
+
+rule "Seasonal or secondary Occupancy"
+    when
+        PolicySelection(occupancyType=="Secondary" || occupancyType=="Seasonal") 
+    then
+        drools.setFocus("Rental");
+	System.out.println("Seasonal or secondary Occupancy");
+end
+
+rule "Available for rent1"
+ruleflow-group "Rental"
+    when
+        PolicySelection(planToRent=="yes")
+	then
+	    usageType.clear();
+        monthsOwnerOccupied.clear();
+        rentalTerm.clear();
+		usageType.add("Rental");
+		monthsOwnerOccupied.add("4 - 8 months");
+		rentalTerm.add("Short-term");
+		System.out.println("Available for rent1");
+end
+
+rule "Not available for rent1"
+ruleflow-group "Rental"
+    when
+       P:PolicySelection(planToRent=="no")
+	then
+	    usageType.clear();
+        monthsOwnerOccupied.clear();
+        rentalTerm.clear();
+	    usageType.add(P.getOccupancyType());
+		monthsOwnerOccupied.add("4 - 8 months");
+		rentalTerm.add("");
+		System.out.println("Not available for rent1");
+end	
+
+rule "Tenant Occupied"	
+    when
+        PolicySelection(occupancyType=="tenantOccupied") 
+    then 
+        drools.setFocus("TenantType");
+        System.out.println("Tenant Occupied");
+end
+
+rule "Tenant Type:annual"
+ruleflow-group "TenantType"
+    when
+        PolicySelection(tenantType=="annual")
+	then	
+	    usageType.clear();
+        monthsOwnerOccupied.clear();
+        rentalTerm.clear();
+		usageType.add("Rental");
+		monthsOwnerOccupied.add("9 months or more");
+		rentalTerm.add("Annual");
+		System.out.println("Tenant Type:annual");
+end
+
+rule "Tenant Type:Seasonal"
+ruleflow-group "TenantType"
+    when
+        PolicySelection(tenantType=="Seasonal")
+    then
+        usageType.clear();
+        monthsOwnerOccupied.clear();
+        rentalTerm.clear();
+		usageType.add("Rental");
+		monthsOwnerOccupied.add("9 months or more");
+		rentalTerm.add("Short-term");
+		System.out.println("Tenant Type:Seasonal");
+end
+
+rule "Tenant Type:not annual and not secondary"
+ruleflow-group "TenantType"
+    when
+        PolicySelection(tenantType!="annual" && tenantType!="Seasonal")
+	then
+	    usageType.clear();
+        monthsOwnerOccupied.clear();
+        rentalTerm.clear();
+        usageType.add("Rental");
+		monthsOwnerOccupied.add("4 - 8 months");
+		rentalTerm.add("Short-term");
+		System.out.println("Tenant Type:not annual and not secondary");
+end	 
+			
+rule "Additional Law ordinance HO3"
+    when
+        PolicySelection(formType=="HO-3: Home Owners Policy") 
+	then
+	    additionalLawOrdinance.clear();
+		additionalLawOrdinance.add("25%");
+		System.out.println("Additional Law ordinance HO3");
+end
+
+rule "Additional Law ordinance non HO3"
+    when
+        PolicySelection(formType!="HO-3: Home Owners Policy") 
+	then
+	    additionalLawOrdinance.clear();
+		additionalLawOrdinance.add("");
+		System.out.println("Additional Law ordinance HO3");
+end
+
+
+rule "Coverage C for HO-6: Condo Owners Policy"		
+  when
+        p:PolicySelection(formType=="HO-6: Condo Owners Policy" && tenantType!="Annual") 
+	then
+	    coverageCPercent.clear();
+		coverageC.clear();
+        coverageC.add(0.5*p.getCoverageA());
+        coverageCPercent.add("50%");
+end
+
+
+rule "Coverage C for HO3 and DP3"		
+  when
+        p:PolicySelection(formType!="HO-6: Condo Owners Policy" && tenantType!="Annual") 
+	then
+	    coverageCPercent.clear();
+		coverageC.clear();
+        coverageC.add(0.25*p.getCoverageA());
+        coverageCPercent.add("25%");
+end
+
+
+rule "Coverage C for HO-6: Condo Owners Policy and Annual tenant"		
+  when
+        PolicySelection(formType!="HO-6: Condo Owners Policy" && tenantType=="Annual") 
+	then
+	    coverageCPercent.clear();
+		coverageC.clear();
+        coverageC.add(5000.00);
+        coverageCPercent.add("Custom");
+end
+
+/*
+rule "Coverage C for HO-6: Condo Owners Policy"		
+  when
+        PolicySelection(formType=="HO-6: Condo Owners Policy" && tenantType!="annual") 
+	then
+	    coverageCPercent.clear();
+		coverageC.clear();
+        coverageC.add();
+        coverageCPercent.add("");
+    	System.out.println("Coverage C for HO-6: Condo Owners Policy");
+end
+
+rule "Coverage C for HO3 and DP3"		
+  when
+        PolicySelection(formType!="HO-6: Condo Owners Policy" && tenantType!="annual") 
+	then
+	    coverageCPercent.clear();
+		coverageC.clear();
+        coverageC.add(0.25);
+        coverageCPercent.add("25%");
+    	System.out.println("Coverage C for HO3 and DP3");
+end
+*/
+
+rule "Structure type Family: single, org.brms.hhinsurance.ArkRoyal( )org.brms.hhinsurance.additionalStructTrampoline( ), condominium"
+    when
+        PolicySelection(structureType=="Single Family" || structureType=="Row House" || structureType=="Condominium")
+    then
+        families.clear();
+        families.add("1");
+end
+
+rule "Structure type Family: duplex"
+    when
+        PolicySelection(structureType=="Duplex")
+    then
+        families.clear();
+        families.add("2");
+end
+
+rule "Structure type Family: triplex"
+    when
+        PolicySelection(structureType=="Triplex")
+    then
+        families.clear();
+        families.add("3");
+end
+
+rule "Structure type Family: quadplex"
+    when
+        PolicySelection(structureType=="Quadplex")
+    then
+        families.clear();
+        families.add("4");
+end
+
+rule "Floor rule"
+when
+   PolicySelection(structureType!="Row House" || townType!="Unknown" || occupancyType!="tenantOccupied" || HOAfee < 200)
+then
+   floors.clear();
+   floors.add("1");
+end

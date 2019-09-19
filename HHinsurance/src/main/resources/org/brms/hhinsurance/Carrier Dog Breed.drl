@@ -1,0 +1,162 @@
+package org.brms.hhinsurance;
+global java.util.List dogEligibility;
+
+rule "Dog breed : American integrity"
+    when
+        DogPolicy(dogBreed not in ("pitBull","staffordshireTerriers","Wolf","None of the Above") && dogBreed in ("akita", "alaskanMalamute","American Bandogge","americanBulldog","beauceron","belgianMalinois","Boerboel","boxer","bullTerrier","Bully Kutta","Cane Corso","catahoulaLeopard","Caucasian Ovcharka","caucasianMountainDog","Caucasian Shepherd","chowChow","Dalmation","dobermanPincher","dogoArgentino","Fila Brasilerio","Fox Terrier", "germanShepherd","giantSchnauzer","greatDane","Gull Dong","Gull Terrier","husky","Japanese Tosa","keeshond","Korean Jinbo","mastiff","Ovtcharka","Pakistani Bull Dog","presaCanario", "rhodeisanRidgeback","rottweiler","Thai Ridgeback","Tosa Inu","Tosa Ken"))
+    then
+        dogEligibility.add("American Integrity");
+end
+
+rule "Dog breed : American Strategic"
+	when
+        DogPolicy(dogBreed not in ("akita","americanBulldog","beauceron","caucasianMountainDog","chowChow","dobermanPincher","germanShepherd","greatDane","pitBull","rottweiler","staffordshireTerriers","Wolf","None of the Above") && dogBreed in ("alaskanMalamute","American Bandogge","belgianMalinois","Boerboel","boxer","bullTerrier","Bully Kutta","Cane Corso","catahoulaLeopard","Caucasian Ovcharka","Caucasian Shepherd","Dalmation","dogoArgentino","Fila Brasilerio","Fox Terrier","giantSchnauzer","Gull Dong","Gull Terrier","husky","Japanese Tosa","keeshond", "Korean Jinbo","mastiff","Ovtcharka","Pakistani Bull Dog","presaCanario", "rhodeisanRidgeback","Thai Ridgeback","Tosa Inu","Tosa Ken"))
+	then
+		dogEligibility.add("American Strategic");
+end
+
+rule "Dog breed : Anchor"
+	when
+        DogPolicy(dogBreed not in ("akita","alaskanMalamute","catahoulaLeopard","chowChow","dobermanPincher","pitBull","presaCanario","greatDane","pitBull","rottweiler","staffordshireTerriers","Wolf","None of the Above") && dogBreed in ("American Bandogge","americanBulldog","beauceron","belgianMalinois","Boerboel","boxer","bullTerrier","Bully Kutta","Cane Corso","Caucasian Ovcharka","caucasianMountainDog","Caucasian Shepherd","Dalmation","dogoArgentino","Fila Brasilerio","Fox Terrier", "germanShepherd","giantSchnauzer","Gull Dong","Gull Terrier","husky","Japanese Tosa","keeshond", "Korean Jinbo","mastiff","Ovtcharka","Pakistani Bull Dog", "rhodeisanRidgeback","Thai Ridgeback","Tosa Inu","Tosa Ken"))
+	then
+		dogEligibility.add("Anchor");
+end
+
+rule "Dog breed : Cabrillo"
+	when
+        DogPolicy(dogBreed not in ("akita","americanBulldog","chowChow","dobermanPincher","pitBull","presaCanario","rottweiler","staffordshireTerriers","Wolf","None of the Above") && dogBreed in ("alaskanMalamute","American Bandogge","beauceron","belgianMalinois","Boerboel","boxer","bullTerrier","Bully Kutta","Cane Corso","catahoulaLeopard","Caucasian Ovcharka","caucasianMountainDog","Caucasian Shepherd","Dalmation","dogoArgentino","Fila Brasilerio","Fox Terrier", "germanShepherd","giantSchnauzer","greatDane","Gull Dong","Gull Terrier","husky","Japanese Tosa","keeshond", "Korean Jinbo","mastiff","Ovtcharka","Pakistani Bull Dog", "rhodeisanRidgeback","Thai Ridgeback","Tosa Inu","Tosa Ken"))
+	then
+		dogEligibility.add("Cabrillo");
+end
+
+rule "Dog breed : Centauri"
+	when
+        	DogPolicy(dogBreed not in ("akita","americanBulldog","beauceron","caucasianMountainDog","chowChow","dobermanPincher","germanShepherd","greatDane","pitBull","rottweiler","staffordshireTerriers","Wolf","None of the Above") && dogBreed in ("alaskanMalamute","American Bandogge","belgianMalinois","Boerboel","boxer","bullTerrier","Bully Kutta","Cane Corso","catahoulaLeopard","Caucasian Ovcharka","Caucasian Shepherd","Dalmation","dogoArgentino","Fila Brasilerio","Fox Terrier", "giantSchnauzer","Gull Dong","Gull Terrier","husky","Japanese Tosa","keeshond", "Korean Jinbo","mastiff","Ovtcharka","Pakistani Bull Dog","presaCanario", "rhodeisanRidgeback","Thai Ridgeback","Tosa Inu","Tosa Ken"))
+	then
+		dogEligibility.add("Centauri");
+end
+
+rule "Dog breed : Not Wolf"
+	when
+    	DogPolicy(dogBreed not in ("Wolf","None of the Above") && dogBreed in ("akita","alaskanMalamute","American Bandogge","americanBulldog","beauceron","belgianMalinois","Boerboel","boxer","bullTerrier","Bully Kutta","Cane Corso","catahoulaLeopard","Caucasian Ovcharka","caucasianMountainDog","Caucasian Shepherd","chowChow","Dalmation","dobermanPincher","dogoArgentino","Fila Brasilerio","Fox Terrier", "germanShepherd","giantSchnauzer","greatDane","Gull Dong","Gull Terrier","husky","Japanese Tosa","keeshond", "Korean Jinbo","mastiff","Ovtcharka","Pakistani Bull Dog","pitBull","presaCanario", "rhodeisanRidgeback","rottweiler","staffordshireTerriers","Thai Ridgeback","Tosa Inu","Tosa Ken"))
+	then
+		dogEligibility.add("Edison");
+		dogEligibility.add("FedNat");
+		dogEligibility.add("Frontline");
+		dogEligibility.add("Geo Vera");
+end
+
+rule "Dog breed : Florida Peninsula"
+	when
+    	DogPolicy(dogBreed not in ("akita","alaskanMalamute","chowChow","dobermanPincher","germanShepherd","greatDane","husky","mastiff","pitBull","presaCanario","rottweiler","staffordshireTerriers","Wolf","None of the Above") && dogBreed in ("American Bandogge","americanBulldog","beauceron","belgianMalinois","Boerboel","boxer","bullTerrier","Bully Kutta","Cane Corso","catahoulaLeopard","Caucasian Ovcharka","caucasianMountainDog","Caucasian Shepherd","Dalmation","dogoArgentino","Fila Brasilerio","Fox Terrier", "giantSchnauzer","Gull Dong","Gull Terrier","Japanese Tosa","keeshond","Korean Jinbo","Ovtcharka","Pakistani Bull Dog","rhodeisanRidgeback","Thai Ridgeback","Tosa Inu","Tosa Ken"))
+	then
+		dogEligibility.add("Florida Peninsula");
+end
+
+rule "Dog breed : Heritage"
+	when
+        DogPolicy(dogBreed not in ("akita","americanBulldog","beauceron","belgianMalinois","caucasianMountainDog","chowChow","dobermanPincher","germanShepherd","greatDane","keeshond","mastiff","pitBull","presaCanario","rhodeisanRidgeback","rottweiler","staffordshireTerriers","Wolf","None of the Above") && dogBreed in ("alaskanMalamute","American Bandogge","Boerboel","boxer","bullTerrier","Bully Kutta","Cane Corso","catahoulaLeopard","Caucasian Ovcharka","Caucasian Shepherd","Dalmation","dogoArgentino","Fila Brasilerio","Fox Terrier","giantSchnauzer","Gull Dong","Gull Terrier","husky","Japanese Tosa","Korean Jinbo","Ovtcharka","Pakistani Bull Dog","Thai Ridgeback","Tosa Inu","Tosa Ken"))
+	then
+		dogEligibility.add("Heritage");
+end
+
+rule "Dog breed : Homeowners Choice"
+	when
+        DogPolicy(dogBreed not in ("akita","alaskanMalamute","bullTerrier","chowChow","dobermanPincher","germanShepherd","giantSchnauzer","husky","mastiff","pitBull","presaCanario","rottweiler","Wolf","None of the Above") && dogBreed in ("American Bandogge","americanBulldog","beauceron","belgianMalinois","Boerboel","boxer","Bully Kutta","Cane Corso","catahoulaLeopard","Caucasian Ovcharka","caucasianMountainDog","Caucasian Shepherd","Dalmation","dogoArgentino","Fila Brasilerio","Fox Terrier", "greatDane","Gull Dong","Gull Terrier","Japanese Tosa","keeshond","Korean Jinbo","Ovtcharka","Pakistani Bull Dog","pitBull", "rhodeisanRidgeback","staffordshireTerriers","Thai Ridgeback","Tosa Inu","Tosa Ken"))
+	then
+		dogEligibility.add("Homeowners Choice");
+end
+
+rule "Dog breed : Olympus"
+	when
+        DogPolicy(dogBreed not in ("akita","chowChow","dobermanPincher","dogoArgentino","pitBull","presaCanario","rottweiler","staffordshireTerriers","Wolf","None of the Above") && dogBreed in ("alaskanMalamute","American Bandogge","americanBulldog","beauceron","belgianMalinois","Boerboel","boxer","bullTerrier","Bully Kutta","Cane Corso","catahoulaLeopard","Caucasian Ovcharka","caucasianMountainDog","Caucasian Shepherd","Dalmation","Fila Brasilerio","Fox Terrier", "germanShepherd","giantSchnauzer","greatDane","Gull Dong","Gull Terrier","husky","Japanese Tosa","keeshond", "Korean Jinbo","mastiff","Ovtcharka","Pakistani Bull Dog","rhodeisanRidgeback","Thai Ridgeback","Tosa Inu","Tosa Ken"))
+	then
+		dogEligibility.add("Olympus");
+end
+
+rule "Dog breed : Prepared"
+	when
+        DogPolicy(dogBreed not in ("akita","chowChow","pitBull","presaCanario","rottweiler","staffordshireTerriers","Wolf","None of the Above") && dogBreed in ("alaskanMalamute","American Bandogge","americanBulldog","beauceron","belgianMalinois","Boerboel","boxer","bullTerrier","Bully Kutta","Cane Corso","catahoulaLeopard","Caucasian Ovcharka","caucasianMountainDog","Caucasian Shepherd","Dalmation","dobermanPincher","dogoArgentino","Fila Brasilerio","Fox Terrier", "germanShepherd","giantSchnauzer","greatDane","Gull Dong","Gull Terrier","husky","Japanese Tosa","keeshond", "Korean Jinbo","mastiff","Ovtcharka","Pakistani Bull Dog","rhodeisanRidgeback","Thai Ridgeback","Tosa Inu","Tosa Ken"))
+	then
+		dogEligibility.add("Prepared");
+end
+
+rule "Dog breed : No restriction"
+	when
+        DogPolicy(dogBreed not in ("None of the Above"))
+	then
+		dogEligibility.add("Bankers");
+		dogEligibility.add("Monarch");
+		dogEligibility.add("The Hearth");
+		dogEligibility.add("TypTap Home");
+		dogEligibility.add("United");
+		dogEligibility.add("Western World");
+end
+
+rule "Dog breed : Universal PC"
+	when
+        DogPolicy(dogBreed not in ("akita","chowChow","pitBull","presaCanario","staffordshireTerriers","None of the Above") && dogBreed in ("alaskanMalamute","American Bandogge","americanBulldog","beauceron","belgianMalinois","Boerboel","boxer","bullTerrier","Bully Kutta","Cane Corso","catahoulaLeopard","Caucasian Ovcharka","caucasianMountainDog","Caucasian Shepherd","Dalmation","dobermanPincher","dogoArgentino","Fila Brasilerio","Fox Terrier", "germanShepherd","giantSchnauzer","greatDane","Gull Dong","Gull Terrier","husky","Japanese Tosa","keeshond", "Korean Jinbo","mastiff","Ovtcharka","Pakistani Bull Dog", "rhodeisanRidgeback","rottweiler","Thai Ridgeback","Tosa Inu","Tosa Ken","Wolf"))
+	then
+		dogEligibility.add("Universal PC");
+end
+
+rule "Dog breed : Velocity"
+    when
+    	DogPolicy(dogBreed not in ("akita","alaskanMalamute","chowChow","dobermanPincher","germanShepherd","greatDane","husky","pitBull","presaCanario","rottweiler","staffordshireTerriers","Wolf","None of the Above") && dogBreed in ("American Bandogge","americanBulldog","beauceron","belgianMalinois","Boerboel","boxer","bullTerrier","Bully Kutta","Cane Corso","catahoulaLeopard","Caucasian Ovcharka","caucasianMountainDog","Caucasian Shepherd","chowChow","Dalmation","dogoArgentino","Fila Brasilerio","Fox Terrier","giantSchnauzer","Gull Dong","Gull Terrier","Japanese Tosa","keeshond", "Korean Jinbo","mastiff","Ovtcharka","Pakistani Bull Dog","rhodeisanRidgeback","Thai Ridgeback","Tosa Inu","Tosa Ken"))
+    then
+        dogEligibility.add("Velocity");
+end
+
+rule "Dog breed : Southern Oak"
+    when
+    	DogPolicy(dogBreed not in ("akita","americanBulldog","beauceron","belgianMalinois","caucasianMountainDog","chowChow","dobermanPincher","germanShepherd","greatDane","keeshond","mastiff","pitBull","rhodeisanRidgeback","rottweiler","staffordshireTerriers","Wolf","None of the Above") && dogBreed in ("alaskanMalamute","American Bandogge","Boerboel","boxer","bullTerrier","Bully Kutta","Cane Corso","catahoulaLeopard","Caucasian Ovcharka","Caucasian Shepherd","Dalmation","dogoArgentino","Fila Brasilerio","Fox Terrier","giantSchnauzer","Gull Dong","Gull Terrier","husky","Japanese Tosa","Korean Jinbo","Ovtcharka","Pakistani Bull Dog","presaCanario","Thai Ridgeback","Tosa Inu","Tosa Ken"))
+    then
+    	dogEligibility.add("Southern Oak");
+end
+
+rule "Dog breed : St. Johns"
+    when
+    	DogPolicy(dogBreed not in ("akita","americanBulldog","beauceron","belgianMalinois","catahoulaLeopard","Caucasian Shepherd","chowChow","dobermanPincher","germanShepherd","greatDane","mastiff","pitBull","presaCanario","rottweiler","staffordshireTerriers","Wolf","None of the Above") && dogBreed in ("alaskanMalamute","American Bandogge","Boerboel","boxer","bullTerrier","Bully Kutta","Cane Corso","Caucasian Ovcharka","caucasianMountainDog","Dalmation","dogoArgentino","Fila Brasilerio","Fox Terrier", "giantSchnauzer","Gull Dong","Gull Terrier","husky","Japanese Tosa","keeshond", "Korean Jinbo","Ovtcharka","Pakistani Bull Dog","rhodeisanRidgeback","Thai Ridgeback","Tosa Inu","Tosa Ken"))
+    then
+        dogEligibility.add("St. Johns");
+end
+
+rule "Dog breed : Service (SageSure)"
+    when
+       DogPolicy(dogBreed not in ("akita","alaskanMalamute","americanBulldog","beauceron","boxer","bullTerrier","caucasianMountainDog","chowChow","Dalmation","dobermanPincher","germanShepherd","giantSchnauzer","greatDane","husky","mastiff","Ovtcharka","pitBull","presaCanario","rhodeisanRidgeback","rottweiler","staffordshireTerriers","Wolf","None of the Above") && dogBreed in ("American Bandogge","belgianMalinois","Boerboel","Bully Kutta","Cane Corso","catahoulaLeopard","Caucasian Ovcharka","Caucasian Shepherd","dogoArgentino","Fila Brasilerio","Fox Terrier","Gull Dong","Gull Terrier","Japanese Tosa","keeshond","Korean Jinbo","Pakistani Bull Dog","Thai Ridgeback","Tosa Inu","Tosa Ken"))
+    then
+        dogEligibility.add("Service (SageSure)");
+end
+
+
+rule "Dogbreed : null"
+    when
+        DogPolicy(dogBreed in ("","None of the Above"))
+    then
+		dogEligibility.add("American Integrity");
+		dogEligibility.add("American Strategic");
+		dogEligibility.add("Anchor");
+        dogEligibility.add("Cabrillo");
+        dogEligibility.add("Centauri");
+        dogEligibility.add("Edison");
+  		dogEligibility.add("FedNat");
+		dogEligibility.add("Florida Peninsula");
+		dogEligibility.add("Frontline");
+		dogEligibility.add("GeoVera");
+		dogEligibility.add("Heritage");
+		dogEligibility.add("Homeowners Choice");
+		dogEligibility.add("Olympus");
+		dogEligibility.add("Prepared");
+		dogEligibility.add("Service (SageSure)");
+		dogEligibility.add("Southern Oak");
+		dogEligibility.add("St. Johns");
+		dogEligibility.add("TypTap");
+		dogEligibility.add("United");
+		dogEligibility.add("Universal PC");
+		dogEligibility.add("Velocity");
+		dogEligibility.add("Western World");
+		dogEligibility.add("Bankers");
+        dogEligibility.add("Monarch");
+        dogEligibility.add("Swyfft");
+        dogEligibility.add("The Hearth");
+end

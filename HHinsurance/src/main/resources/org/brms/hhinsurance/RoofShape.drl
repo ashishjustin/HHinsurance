@@ -1,0 +1,22 @@
+package org.brms.hhinsurance;
+global java.util.List value;
+global java.util.List key;
+
+rule "Check whether roof shape is flat"
+    when
+        RoofShape((roofShape=="flat")||(roofShape=="gable")||(roofShape=="other")||(roofShape=="unknown"))
+    then
+        value.clear();
+        key.clear();
+        key.add("Display: Roof shape is flat or gable");
+end
+
+rule "Check whether roof shape is hip"
+    when
+        RoofShape((roofShape=="hip")||(roofShape=="combination"))
+    then
+        value.clear();
+        key.clear();
+        value.add("val:1");
+        key.add("Display: Roof shape is hip or combination of all");
+end

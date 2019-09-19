@@ -1,0 +1,42 @@
+package org.brms.hhinsurance;
+global java.util.List personalInjury;
+
+rule "carrier for which $15 is available"
+when
+    PersonalInjury(carrierList in ("American Integrity","Monarch","American Strategic","Cabrillo","Centauri","FedNat","Florida Specialty","Heritage","Olympus","Prepared","Service (SageSure)","Southern Oak","Swyfft","St. Johns","United","Velocity"))
+then
+    personalInjury.clear();
+    personalInjury.add("Available - $15");
+end
+
+rule "carrier for which $20 is available"
+when
+    PersonalInjury(carrierList in ("Western World"))
+then
+    personalInjury.clear();
+    personalInjury.add("Available - $20");
+end
+
+rule "carrier for which $25 is available"
+when
+    PersonalInjury(carrierList in ("Anchor","Bankers"))
+then
+    personalInjury.clear();
+    personalInjury.add("Available - $25");
+end
+
+rule "carrier for which $30 is available"
+when
+    PersonalInjury(carrierList in ("Frontline"))
+then
+    personalInjury.clear();
+    personalInjury.add("Available - $30");
+end
+
+rule "carrier not available"
+when
+    PersonalInjury(carrierList in ("Edison","Florida Peninsula","GeoVera","Homeowners Choice","TypTap Home","Universal PC"))
+then
+    personalInjury.clear();
+    personalInjury.add("Not Available");
+end

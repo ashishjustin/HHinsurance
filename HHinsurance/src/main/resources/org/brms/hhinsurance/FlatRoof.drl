@@ -1,0 +1,22 @@
+package org.brms.hhinsurance;
+global java.util.List value;
+global java.util.List key;
+
+rule "if flat roof is present"
+    when
+        FlatRoof(flatRoof=="yes")
+    then
+            value.clear();
+            key.clear();
+            value.add(1);
+            key.add("Display flatroof update and percentage");
+    end
+
+rule "if no flat roof"
+    when
+        FlatRoof(flatRoof=="no")
+    then
+            value.clear();
+            key.clear();
+            key.add("Don't Display flatroof update and percentage");
+    end

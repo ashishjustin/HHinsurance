@@ -1,0 +1,88 @@
+package org.brms.hhinsurance;
+global java.util.List roofShape;
+global java.util.List roofHipPercent;
+
+rule "Roof Shape : Hip and combination"
+when 
+    RoofShapeHip(roof.equals("hip") || roof.equals("combination"))
+then
+    drools.setFocus("RoofShapePercentage");
+end
+
+rule "Roof shape percentage:0 to 70"
+ruleflow-group "RoofShapePercentage"
+when
+    RoofShapeHip(percentageOfRoofShape=="lessThan50" || percentageOfRoofShape=="50to70")
+then
+    roofShape.clear();
+    roofHipPercent.clear();
+    roofShape.add("Gable");
+    roofHipPercent.add("N/A");
+end
+
+rule "Roof shape percentage 71 to 75"
+ruleflow-group "RoofShapePercentage"
+when
+    RoofShapeHip(percentageOfRoofShape=="71to75")
+then
+    roofShape.clear();
+    roofHipPercent.clear();
+    roofShape.add("Gable");
+    roofHipPercent.add("70%");
+end
+
+rule "Roof shape percentage 76 to 80"
+ruleflow-group "RoofShapePercentage"
+when
+    RoofShapeHip(percentageOfRoofShape=="76to80")
+then
+    roofShape.clear();
+    roofHipPercent.clear();
+    roofShape.add("Gable");
+    roofHipPercent.add("75%");
+end
+
+rule "Roof shape percentage 81 to 85"
+ruleflow-group "RoofShapePercentage"
+when
+    RoofShapeHip(percentageOfRoofShape=="81to85")
+then
+    roofShape.clear();
+    roofHipPercent.clear();
+    roofShape.add("Gable");
+    roofHipPercent.add("80%");
+end
+
+rule "Roof shape percentage 86 to 89"
+ruleflow-group "RoofShapePercentage"
+when
+    RoofShapeHip(percentageOfRoofShape=="86to89")
+then
+    roofShape.clear();
+    roofHipPercent.clear();
+    roofShape.add("Gable");
+    roofHipPercent.add("85%");
+end
+
+rule "Roof shape percentage 90 to 100"
+ruleflow-group "RoofShapePercentage"
+when
+    RoofShapeHip(percentageOfRoofShape=="90to95" || percentageOfRoofShape=="96to100") 
+then
+    roofShape.clear();
+    roofHipPercent.clear();
+    roofShape.add("Hip");
+    roofHipPercent.add("");
+end
+
+rule "Roof shape flat, other, unknown"
+when 
+    RoofShapeHip(roof != "hip" && roof != "combination")
+then
+    roofShape.clear();
+    roofHipPercent.clear();
+    roofShape.add("Gable");
+    roofHipPercent.add("N/A");
+end
+
+

@@ -1,0 +1,22 @@
+package org.brms.hhinsurance;
+global java.util.List value;
+global java.util.List key;
+
+rule "Type secondary or seasonal has no 12 months of planning out rent"
+    when
+        Occupancy(occupied=="yes")
+    then
+        value.clear();
+        key.clear();
+        value.add(1);
+        key.add("Display what is the shortest term");
+end
+
+rule "if secondary or seasonal has no 12 months of planning out rent"
+    when
+        Occupancy(occupied=="no")
+    then
+        value.clear();
+        key.clear();
+        key.add("Dont Display what is the shortest term");
+end

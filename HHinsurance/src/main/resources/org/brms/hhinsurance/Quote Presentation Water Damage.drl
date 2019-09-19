@@ -1,0 +1,35 @@
+package org.brms.hhinsurance;
+global java.util.List waterDamage;
+
+rule "if Age of Home from current year to 40 years"
+when
+    WaterDamage((yearBuilt >= year-40) && carrierList in("American Integrity","American Strategic","Bankers","Monarch","Anchor","Cabrillo","Centauri","Edison","FedNat","Florida Peninsula","Florida Specialty","Frontline","GeoVera","Heritage","Olympus","Prepared","Service","Southern Oak","Swyfft","St. Johns","TypTap Home","United","Universal PC","Velocity","Western World"))
+then
+    waterDamage.clear();
+    waterDamage.add("Full");
+end
+
+rule "if Age of Home 40 years and above"
+when
+    WaterDamage(yearBuilt < year-40)
+then
+   drools.setFocus("CarrierList");
+end
+
+rule "carrier giving full coverages"
+ruleflow-group "CarrierList"
+when
+    WaterDamage(carrierList in("Cabrillo","Frontline","GeoVera","Olympus","Prepared","Service (SageSure)","St. Johns","TypTap Home","Universal PC","Velocity","Western World"))
+then
+    waterDamage.clear();
+    waterDamage.add("Full");
+end
+
+rule "carrier giving limited coverages"
+ruleflow-group "CarrierList"
+when
+    WaterDamage(carrierList in("American Integrity","Bankers","Monarch","American Strategic","Anchor","Centauri","Edison","FedNat","Florida Peninsula","Florida Specialty","Heritage","Southern Oak","Swyfft","United"))
+then
+    waterDamage.clear();
+    waterDamage.add("Limited");
+end

@@ -1,0 +1,63 @@
+package org.brms.hhinsurance;
+global java.util.List value;
+global java.util.List key;
+
+rule "if had wind mitigation"
+when
+    WindMitigation((windMitigation=="yes")&&(suplement1!="yes")&&(suplement3!="yes")&&(suplement6!="yes"))
+then
+    value.clear();
+    key.clear();
+    value.add(1);
+    key.add("Display suplement1 options");
+end
+
+rule "if suplement 1 is there"
+when
+    WindMitigation((windMitigation!="yes")&&(suplement1=="yes")&&(suplement3!="yes")&&(suplement6!="yes"))
+then
+    value.clear();
+    key.clear();
+    value.add(2);
+    key.add("Display suplement2 and 3 options");
+end
+
+rule "if suplement 3 is there"
+when
+    WindMitigation((windMitigation!="yes")&&(suplement1!="yes")&&(suplement3=="yes")&&(suplement6!="yes"))
+then
+    value.clear();
+    key.clear();
+    value.add(3);
+    key.add("Display suplement4 options");
+end
+
+rule "if suplement 6 is there"
+when
+    WindMitigation((windMitigation!="yes")&&(suplement1!="yes")&&(suplement3!="yes")&&(suplement6=="yes"))
+then
+    value.clear();
+    key.clear();
+    value.add(4);
+    key.add("Display suplement7 options");
+end
+
+rule "if windmitigation is No"
+when
+    WindMitigation(windMitigation=="No")
+then
+    value.clear();
+    key.clear();
+    value.add(5);
+    key.add("Display Are you aware of your property?");
+end
+
+rule "if windmitigation is Unknown"
+when
+    WindMitigation(windMitigation=="Unknown")
+then
+    value.clear();
+    key.clear();
+    value.add(6);
+    key.add("Display Are you aware of your property?");
+end

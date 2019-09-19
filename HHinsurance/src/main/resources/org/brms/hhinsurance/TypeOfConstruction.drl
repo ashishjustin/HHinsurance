@@ -1,0 +1,209 @@
+package org.brms.hhinsurance;
+global java.util.List constructionList;
+global java.util.List constructionTypeList;
+global java.util.List masonryConstructionList;
+global java.util.List frameConstructionList;
+global java.util.List hardiPlankList;
+        
+rule "Masonary construction:Other"
+when
+    TypeOfConstruction(masonryConstruction == "Other")
+then
+    masonryConstructionList.clear();
+    masonryConstructionList.add("Concrete Block");
+    hardiPlankList.clear();
+    hardiPlankList.add("0");
+end
+
+rule "ConstructionType :Superior"
+when
+    TypeOfConstruction(constructionType == "Superior")
+then
+    constructionList.clear();
+    constructionList.add("Superior");
+    constructionTypeList.clear();
+    constructionTypeList.add("Masonry");
+    frameConstructionList.clear();
+    frameConstructionList.add("");
+    masonryConstructionList.clear();
+    masonryConstructionList.add("Superior");
+    hardiPlankList.clear();
+    hardiPlankList.add("0");
+end
+
+
+
+rule "Frame Construction :Concrete Boards - Hardiboard"
+when
+    TypeOfConstruction(frameConstruction == "Concrete Boards - Hardiboard")
+then
+    hardiPlankList.clear();
+    hardiPlankList.add("1");
+
+    frameConstructionList.clear();
+    frameConstructionList.add("Frame");
+end
+
+rule "Frame construction: Asbestos or Other"
+when
+    TypeOfConstruction(frameConstruction == "Asbestos" || frameConstruction == "Other")
+then
+    frameConstructionList.clear();
+    frameConstructionList.add("Frame");
+    hardiPlankList.clear();
+    hardiPlankList.add("0");
+end
+ 
+rule "ConstructionType : Masonry and frame"
+when
+    t:TypeOfConstruction(constructionType == "Masonry" || constructionType == "Frame")
+then
+    constructionTypeList.clear();
+    constructionTypeList.add(t.getConstructionType());
+end
+
+rule "ConstructionType : MixedMasonryFrame"
+when
+    TypeOfConstruction(constructionType == "Mixed Masonry-Frame")
+then
+    hardiPlankList.clear();
+    hardiPlankList.add("0");
+    drools.setFocus("MixedMasonryFrame");
+end
+
+
+rule "Ratio : 49 to 51"
+ruleflow-group "MixedMasonryFrame"
+when
+    t:TypeOfConstruction(constructionRatio == "masonry49frame51")
+then
+    constructionList.clear();
+    constructionList.add(t.getFrameConstruction());
+    constructionTypeList.clear();
+    constructionTypeList.add("Frame");
+    frameConstructionList.clear();
+    frameConstructionList.add(t.getFrameConstruction());
+    masonryConstructionList.clear();
+    masonryConstructionList.add("");
+end
+
+
+rule "Ratio : 50 to 50"
+ruleflow-group "MixedMasonryFrame"
+when
+    t:TypeOfConstruction(constructionRatio == "masonry50frame50")
+then
+    constructionList.clear();
+    constructionList.add("Masonry 50% - Frame 50%");
+    constructionTypeList.clear();
+    constructionTypeList.add("Mixed Masonry-Frame");
+    frameConstructionList.clear();
+    frameConstructionList.add(t.getFrameConstruction());
+    masonryConstructionList.clear();
+    masonryConstructionList.add(t.getMasonryConstruction());
+end
+
+rule "Ratio : 67 to 33"
+ruleflow-group "MixedMasonryFrame"
+when
+    t:TypeOfConstruction(constructionRatio == "masonry67frame33")
+then
+    constructionList.clear();
+    constructionList.add("Masonry 67% - Frame 33%");
+    constructionTypeList.clear();
+    constructionTypeList.add("Mixed Masonry-Frame");
+    frameConstructionList.clear();
+    frameConstructionList.add(t.getFrameConstruction());
+    masonryConstructionList.clear();
+    masonryConstructionList.add(t.getMasonryConstruction());
+end
+
+rule "Ratio : 75 to 25"
+ruleflow-group "MixedMasonryFrame"
+when
+    t:TypeOfConstruction(constructionRatio == "masonry75frame25")
+then
+    constructionList.clear();
+    constructionList.add("Masonry 75% - Frame 25%");
+    constructionTypeList.clear();
+    constructionTypeList.add("Mixed Masonry-Frame");
+    frameConstructionList.clear();
+    frameConstructionList.add(t.getFrameConstruction());
+    masonryConstructionList.clear();
+    masonryConstructionList.add(t.getMasonryConstruction());
+end
+
+rule "Ratio : 76 to 24"
+ruleflow-group "MixedMasonryFrame"
+when
+    t:TypeOfConstruction(constructionRatio == "masonry76frame24")
+then
+    constructionList.clear();
+    constructionList.add(t.getMasonryConstruction());
+    constructionTypeList.clear();
+    constructionTypeList.add("Masonry");
+    frameConstructionList.clear();
+    frameConstructionList.add("");
+    masonryConstructionList.clear();
+    masonryConstructionList.add(t.getMasonryConstruction());
+end
+
+rule "Masonary Construction:not null"
+when
+    t:TypeOfConstruction((masonryConstruction != "") && (masonryConstruction !="Other"))
+then
+    masonryConstructionList.clear();
+    masonryConstructionList.add(t.getMasonryConstruction());
+    constructionList.clear();
+    constructionList.add(t.getMasonryConstruction());
+    hardiPlankList.clear();
+    hardiPlankList.add("0");
+end
+
+rule "Masonary Construction:not null and not other"
+when
+    t:TypeOfConstruction((masonryConstruction !="Other"))
+then
+    masonryConstructionList.clear();
+    masonryConstructionList.add(t.getMasonryConstruction());
+    hardiPlankList.clear();
+    hardiPlankList.add("0");
+end
+
+
+rule "Frame Construction:not null"
+when
+    t:TypeOfConstruction((frameConstruction != "") && (frameConstruction!="Asbestos") && (frameConstruction!="Other"))
+then
+    frameConstructionList.clear();
+    frameConstructionList.add(t.getFrameConstruction());
+    constructionList.clear();
+    constructionList.add(t.getFrameConstruction());
+    hardiPlankList.clear();
+    hardiPlankList.add("0");
+end
+
+rule "Frame Construction:not null and not asbestos and not other"
+when
+    t:TypeOfConstruction((frameConstruction != "") && (frameConstruction!="Asbestos") && (frameConstruction!="Other"))
+then
+    frameConstructionList.clear();
+    frameConstructionList.add(t.getFrameConstruction());
+    hardiPlankList.clear();
+    hardiPlankList.add("0");
+end
+
+rule "Frame and masonary constructions are"
+when
+    t:TypeOfConstruction((frameConstruction == "") && (masonryConstruction == ""))
+then
+    constructionList.clear();
+    constructionList.add("");
+    hardiPlankList.clear();
+    hardiPlankList.add("0");
+end
+
+
+
+
+		

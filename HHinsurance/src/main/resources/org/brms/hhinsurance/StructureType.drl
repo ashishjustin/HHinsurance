@@ -1,0 +1,54 @@
+package org.brms.hhinsurance;
+global java.util.List value;
+global java.util.List key;
+
+rule "check whether it is a row house"
+when
+    StructureType(structureType=="Row House")
+then
+    value.clear();
+    key.clear();
+    value.add(2);
+    key.add("Display: Show thw homowners association options?");
+end
+
+rule "check whether it is condominium"
+when
+    StructureType(structureType=="Condominium")
+then
+    value.clear();
+    key.clear();
+    value.add(1);
+    key.add("Display: How many stories is the unit");
+end
+
+rule "Check number of stories six or above"
+    when
+        StructureType(stories>5)
+    then
+        value.clear();
+        key.clear();
+        value.add(3);
+        key.add("Have more than 5 stories so dont display options");
+end
+
+rule "check whether it is not a row house"
+    when
+        StructureType(structureType!="Row House" && structureType!="Condominium" && stories<6)
+    then
+        value.clear();
+        key.clear();
+        value.add(4);
+        key.add("Display: How many stories?");
+end
+
+rule "check whether it is not a row house,condominium and single family"
+    when
+        StructureType(structureType=="Single Family" || structureType=="Quadplex" || structureType=="Triplex"|| structureType=="Duplex")
+    then
+        value.clear();
+        key.clear();
+        value.add(0);
+        key.add("Dont display anything");
+end
+

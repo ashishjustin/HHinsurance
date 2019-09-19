@@ -1,0 +1,25 @@
+package org.brms.hhinsurance;
+global java.util.List value;
+global java.util.List key;
+
+rule "if accredited builder is certified"
+
+when
+    AgeOfHome(ifCertified=="yes")
+then
+    value.clear();
+    key.clear();
+    value.add(1);
+    key.add("Built by certified builder");
+end
+
+rule "if accredited builder is not certified"
+
+when
+    AgeOfHome(ifCertified=="no")
+then
+    value.clear();
+    key.clear();
+    key.add("Not built by a certified builder");
+end
+

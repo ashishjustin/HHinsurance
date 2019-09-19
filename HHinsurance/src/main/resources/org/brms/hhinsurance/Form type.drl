@@ -1,0 +1,166 @@
+package org.brms.hhinsurance;
+global java.util.List formType;
+
+rule "StructureType:Condominium"
+when 
+    FormType(structureType=="Condominium") 
+then
+    formType.clear();
+    formType.add("HO-6: Condo Owners Policy");
+end
+
+rule "Structure Type:triplex or quad plex"
+when
+    FormType(structureType=="Triplex" || structureType=="Quadplex")
+then
+    formType.clear();
+    formType.add("DP-3 Dwelling Fire/Renters");
+end
+
+rule "Structure type for Town house"
+when
+    FormType(structureType=="Row House" && (occupancyType=="tenantOccupied"|| occupancyType!="tenantOccupied")) 
+then 
+    drools.setFocus("TownHouse");
+end
+
+rule "Structure type:singleFamily or duplex"
+    when 
+        FormType(structureType=="Single Family" || structureType=="Duplex")
+    then
+        drools.setFocus("OccupancyType");  
+end
+
+rule "Check town type and home owners association fee"
+ruleflow-group "TownHouse"
+    when
+        FormType((townType=="UnKnown" && (HOAfee > 200)) || townType=="yes")
+    then
+        formType.clear();
+        formType.add("HO-6: Condo Owners Policy");
+end
+
+rule "Not available for rent"
+    when
+        FormType(structureType=="Row House" && planToRent=="no") 
+    then
+        drools.setFocus("OccupancyType"); 
+end
+
+rule "Occupancy Type : Primary"
+ruleflow-group  "OccupancyType"
+    when
+        FormType(occupancyType== "Primary")
+    then
+        formType.clear();
+        formType.add("HO-3: Home Owners Policy");
+end
+
+rule "available for rent"
+    when
+        FormType(structureType=="Row House") 
+    then
+        drools.setFocus("OccupancyType1"); 
+end
+
+rule "Available for rent based on structure type"
+ruleflow-group  "OccupancyType1"
+when
+        FormType(townType=="yes" && occupancyType=="tenantOccupied")
+    then
+        formType.clear();
+        formType.add("HO-6: Condo Owners Policy");
+end
+
+
+rule "Occupancy Type : Secondary or seasonal"
+ruleflow-group  "OccupancyType"
+    when
+        FormType(occupancyType=="Secondary" || occupancyType=="Seasonal")
+    then
+        drools.setFocus("AvailableRent");
+end
+
+rule "Available for rent"
+ruleflow-group  "AvailableRent"
+when
+        FormType(planToRent=="yes")
+    then
+        formType.clear();
+        formType.add("DP-3 Dwelling Fire/Renters");
+end
+
+rule "Not Available for rent but seasonal or secondary"
+ruleflow-group  "AvailableRent"
+when
+        FormType(planToRent=="no")
+    then
+        formType.clear();
+        formType.add("HO-3: Home Owners Policy");
+end
+
+rule "Tenant occupied"
+    when
+        FormType(occupancyType=="tenantOccupied" && structureType!="Condominium")
+    then
+        drools.setFocus("TenantOccupied");
+end
+
+rule "Not HO6 form type"
+ruleflow-group  "TenantOccupied"
+    when
+        FormType((townType!="UnKnown" && HOAfee<200) || townType!="yes")
+    then
+        formType.clear();
+        formType.add("DP-3 Dwelling Fire/Renters");
+end    
+
+rule "StructureType:TownHouse"
+   when
+       FormType(structureType=="Row House")
+   then
+       drools.setFocus("TownType");
+end
+
+rule "Townhouse and town type yes"
+ruleflow-group "TownType"
+   when
+       FormType(townType == "yes")
+   then
+       formType.clear();
+       formType.add("HO-6: Condo Owners Policy");
+end
+
+
+rule "Townhouse and town type no"
+ruleflow-group "TownType"
+   when
+       FormType(townType == "no")
+   then
+       drools.setFocus("OccupancyType");
+end
+
+rule "Townhouse and town type unknown"
+ruleflow-group "TownType"
+   when
+       FormType(townType == "UnKnown")
+   then
+       drools.setFocus("HOAFee");
+end
+
+rule "Townhouse and HOAFee < 200"
+ruleflow-group "HOAFee"
+   when
+       FormType(HOAfee<200)
+   then
+       drools.setFocus("OccupancyType");
+end
+
+rule "Townhouse and HOAFee>200"
+ruleflow-group "HOAFee"
+   when
+       FormType(HOAfee>200)
+   then
+       formType.clear();
+       formType.add("HO-6: Condo Owners Policy");
+end
