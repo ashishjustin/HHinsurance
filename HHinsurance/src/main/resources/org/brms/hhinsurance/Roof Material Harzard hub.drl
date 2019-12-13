@@ -22,7 +22,7 @@ when
     RoofMaterialHazard(roofMaterialType in ("Gravel","flat/low pitch","Gravel","Built Up - T&G","Steel/Bar/Joist","Blt Up-Foam/Other","Tar/Gravel","Tar","Flat Roof With Facade Front","Tar/Stone","Hot Mop","Built-Up Gravel","Built-Up Roof","Built-Up/Tar","Built-Up/Flat","Hot Mop / Built Up","Built Up","Tar And Gravel","Tar Over Tin","Flat/Low Pitch","Built-Up Or Flat","Tar/Gravel","Flat","Built Up Gravel","Gravel Roof","Built Up Grade","Built Up W/ Ctng","Built Up With Gravel Bug","Mansard","Flat Built Up","Blt-Up/Asphalt Mop","Built Up","Rock & Stone","Torch Down","Pitch & Gravel","Tar","Aluminum Over Tar","Hot Mop W/ Chip","Blt Up - Foam/Other","Built Up - Tar/Gravel","Flat Roof","Flat","Tar & Rock","Built-Up/Rubber","Rock/Gravel","Rock","Rock/Stone","Pitch & Gravel","Tar & Gravel Roof","Roof Built-Up","GRAVEL ROOF","Rock","Tar and gravel","Hot Tar","Tar Pebble"));
 then
     roofMaterialMap.clear();
-    roofMaterialMap.add("Tar and Gravel");
+    roofMaterialMap.add("Tar And Gravel");
 end
 
 rule "For Metal"
@@ -46,7 +46,7 @@ when
     RoofMaterialHazard(roofMaterialType in ("Flat Metal","Modified Butumen","Aluminum Over Tar","Rolled","Bitumen","All Flat","Tpo (G)","Shed","Roll","Rolled Rubber","Roll Roof","Composition Roll","Rolled/Hot Mop","Urethane","Membrane","Tpo Membrane"));
 then
     roofMaterialMap.clear();
-    roofMaterialMap.add("Flat-Other");
+    roofMaterialMap.add("Flat");
 end
 
 rule "For Others"

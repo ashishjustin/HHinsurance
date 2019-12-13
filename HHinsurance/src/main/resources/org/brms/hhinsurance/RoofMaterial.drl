@@ -1,10 +1,10 @@
 package org.brms.hhinsurance;
 global java.util.List roofmaterial;
 
-rule "check for Composit shingle"
+rule "check for Composite shingle"
 
 when
-    RoofMaterialName(roofMaterial=="3TabShingle")
+    RoofMaterialName(roofMaterial.equals("3-Tab Shingle"))
 then
     roofmaterial.clear();
     roofmaterial.add("Composite Shingle");
@@ -13,7 +13,7 @@ end
 rule "check for Architectural shingle"
 
 when
-    RoofMaterialName(roofMaterial=="architectural")
+    RoofMaterialName(roofMaterial.equals("Architectural Shingles"))
 then
     roofmaterial.clear();
     roofmaterial.add("Architectural Shingles");
@@ -22,7 +22,7 @@ end
 rule "check for Metal"
 
 when
-    RoofMaterialName(roofMaterial=="metal")
+    RoofMaterialName(roofMaterial.equals("Metal"))
 then
     roofmaterial.clear();
     roofmaterial.add("Metal");
@@ -31,7 +31,7 @@ end
 rule "check for Tile"
 
 when
-    RoofMaterialName(roofMaterial=="tile")
+    RoofMaterialName(roofMaterial.equals("Tile"))
 then
     roofmaterial.clear();
     roofmaterial.add("Tile");
@@ -40,7 +40,7 @@ end
 rule "check for Tar and Gravel"
 
 when
-    RoofMaterialName(roofMaterial=="tarAndGravel")
+    RoofMaterialName(roofMaterial.equals("Tar And Gravel"))
 then
     roofmaterial.clear();
     roofmaterial.add("Tar and Gravel");
@@ -49,7 +49,7 @@ end
 rule "check for others"
 
 when
-    RoofMaterialName(roofMaterial=="Others")
+    RoofMaterialName(roofMaterial in ("Other","Flat","Unknown"))
 then
     roofmaterial.clear();
     roofmaterial.add("Other");

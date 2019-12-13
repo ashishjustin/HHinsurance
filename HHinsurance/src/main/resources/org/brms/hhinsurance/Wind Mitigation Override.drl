@@ -1,0 +1,174 @@
+package org.brms.hhinsurance;
+global java.util.List roofWallOverride;
+global java.util.List protectionOverride;
+
+rule "RoofWall with form1"
+when
+    WindOverride(questionFour in ("Toe Nails" ,"Other","Unknown or Unidentified", "No Attic Access"))
+then
+    roofWallOverride.clear();
+    roofWallOverride.add("Toe Nails");
+end
+
+rule "RoofWall with form2"
+when
+    w:WindOverride(questionFour not in ("Toe Nails" ,"Other","Unknown or Unidentified", "No Attic Access",""))
+then
+    roofWallOverride.clear();
+    roofWallOverride.add(w.getQuestionFour());
+end
+
+rule "RoofWall with form3111"
+when
+    WindOverride(questionFour in (""))
+then
+    drools.setFocus("WithoutForm");
+end
+
+rule "RoofWall with without form1"
+ruleflow-group "WithoutForm"
+when
+    WindOverride(awareClips.equals("yes"))
+then
+    roofWallOverride.clear();
+    roofWallOverride.add("Clips");
+end
+
+
+rule "RoofWall with without form2"
+ruleflow-group "WithoutForm"
+when
+    WindOverride(awareClips.equals("no"))
+then
+    roofWallOverride.clear();
+    roofWallOverride.add("Toe Nails");
+end
+
+rule "RoofWall with without form3"
+ruleflow-group "WithoutForm"
+when
+    w: WindOverride(awareClips.equals("Unknown"))
+then
+    roofWallOverride.clear();
+    roofWallOverride.add(w.getRoofWallConnection());
+end
+
+rule "Question7 yes"
+when
+    WindOverride(questionSeven.equals("yes"))
+then
+    drools.setFocus("Protection");
+end
+
+rule "Question7 no"
+when
+    WindOverride(questionSeven.equals("no"))
+then
+    protectionOverride.clear();
+    protectionOverride.add("Unknown or None");
+end
+
+
+rule "Protection with Form1"
+ruleflow-group "Protection"
+when
+    WindOverride(subSelectionA in ("Toe Nails" ,"Other","Unknown or Unidentified", "No Attic Access"))
+then
+    protectionOverride.clear();
+    protectionOverride.add("Toe Nails");
+end
+
+rule "Protection with Form2"
+ruleflow-group "Protection"
+when
+    WindOverride(subSelectionB in ("Toe Nails" ,"Other","Unknown or Unidentified", "No Attic Access"))
+then
+    protectionOverride.clear();
+    protectionOverride.add("Toe Nails");
+end
+
+rule "Protection without Form yes"
+when
+    WindOverride(awareShutters.equals("yes"))
+then
+    drools.setFocus("Windows Protected");
+end
+
+rule "Windows Protected1"
+ruleflow-group "Windows Protected"
+when
+    WindOverride(protectedWindows.equals("yes"))
+then
+    protectionOverride.clear();
+    protectionOverride.add("Hurricane Protection");
+end
+
+rule "Windows Protected2"
+ruleflow-group "Windows Protected"
+when
+    p:WindOverride(protectedWindows in("no","Unknown"))
+then
+    protectionOverride.clear();
+    protectionOverride.add(p.getOpeningProtection());
+end
+
+
+rule "Protection without Form No/Unknown"
+when
+    p:WindOverride(awareShutters in ("no","Unknown"))
+then
+    protectionOverride.clear();
+    protectionOverride.add(p.getOpeningProtection());
+end
+
+rule "Protection without Form next to A or B yes"
+when
+    WindOverride(questionSeven.equals("yes"))
+then
+    drools.setFocus("SelectionAorB");
+end
+
+rule "Protection without Form next to A or B no"
+when
+    WindOverride(questionSeven in("no","Unknown"))
+then
+     protectionOverride.clear();
+    protectionOverride.add("Unknown or None");
+end
+
+rule "Protection without Form A"
+ruleflow-group "SelectionAorB"
+when
+    WindOverride(selectionAOrB.equals("A"))
+then
+    drools.setFocus("SelectionA");
+end
+
+rule "Protection without Form B"
+ruleflow-group "SelectionAorB"
+when
+    WindOverride(selectionAOrB.equals("B"))
+then
+     protectionOverride.clear();
+    protectionOverride.add("Basic");
+end
+
+
+rule "Selection A1 or A2"
+ruleflow-group "SelectionA"
+when
+    p:WindOverride(subSelectionA in ("One","Two"))
+then
+    protectionOverride.clear();
+    protectionOverride.add("Hurricane Protection");
+end
+
+rule "Selection A3"
+ruleflow-group "SelectionA"
+when
+    p:WindOverride(subSelectionA in ("Three"))
+then
+    protectionOverride.clear();
+    protectionOverride.add("Unknown or None");
+end
+     

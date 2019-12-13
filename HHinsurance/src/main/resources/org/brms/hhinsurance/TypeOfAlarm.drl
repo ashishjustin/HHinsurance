@@ -31,7 +31,7 @@ when
 then
     fireAlarm.clear();
     burglarAlarm.clear();
-    fireAlarm.add("smoke Alarm");
+    fireAlarm.add("Smoke Alarm");
     burglarAlarm.add("Rep to Central Station");
 end
 
