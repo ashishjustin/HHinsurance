@@ -1,0 +1,65 @@
+package org.brms.hhinsurance;
+
+rule "Check for slab foundation and yearBilt less than or equal to 1974"
+    when
+        s:SterlingBuildingDiagramMapping(foundation.equals("Slab Foundation") && yearBuilt <= 1974)
+    then
+        s.setBuildingDiagram("1A");
+end
+
+rule "Check for slab foundation and yearBilt greater than 1974"
+    when
+        s:SterlingBuildingDiagramMapping(foundation.equals("Slab Foundation") && yearBuilt > 1974)
+    then
+        s.setBuildingDiagram("1B");
+end
+
+
+rule "Check for crawlspace foundation"
+    when
+        s:SterlingBuildingDiagramMapping(foundation.equals("crawlspace"))
+    then
+        s.setBuildingDiagram("8");
+end
+
+rule "Check for Home Over Garage foundation and Non-Elevated Utilities in Garage foundationType"
+    when
+        s:SterlingBuildingDiagramMapping(foundation.equals("homeOverGarage") && foundationType.equals("non-elevatedUtilitiesInGarage"))
+    then
+        s.setBuildingDiagram("1B");
+end
+
+rule "Check for Home Over Garage foundation and No Finished Space in the Garage foundationType"
+    when
+        s:SterlingBuildingDiagramMapping(foundation.equals("homeOverGarage") && foundationType.equals("noFinishedSpaceInTheGarage"))
+    then
+        s.setBuildingDiagram("6");
+end
+
+rule "Check for Stilts or Pilings foundation and Open/No Enclosed Space Below foundationType"
+    when
+        s:SterlingBuildingDiagramMapping(foundation.equals("stiltsOrPilings") && foundationType.equals("openNoEnclosedSpaceBelow"))
+    then
+        s.setBuildingDiagram("5");
+end
+
+rule "Check for Stilts or Pilings foundation and Solid Enclosure foundationType"
+    when
+        s:SterlingBuildingDiagramMapping(foundation.equals("stiltsOrPilings") && foundationType.equals("solidEnclosure"))
+    then
+        s.setBuildingDiagram("6");
+end
+
+rule "Check for Basement foundation and Finished Basement foundationType"
+    when
+        s:SterlingBuildingDiagramMapping(foundation.equals("basement") && foundationType.equals("Finished"))
+    then
+        s.setBuildingDiagram("2A");
+end
+
+rule "Check for Basement foundation and UNfinished basement foundationType"
+    when
+        s:SterlingBuildingDiagramMapping(foundation.equals("basement") && foundationType.equals("basement"))
+    then
+        s.setBuildingDiagram("6");
+end

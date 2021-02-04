@@ -1,0 +1,59 @@
+package org.brms.hhinsurance;
+global java.util.List HO3screenedEnclosure;
+global java.util.List DP3screenedEnclosure;
+
+rule "Check carrier is Florida Peninsula for HO3"
+when
+    ScreenedEnclosure(carrier.equals("Florida Peninsula"))
+then
+    HO3screenedEnclosure.clear();
+    HO3screenedEnclosure.add("Included - $10,000");
+end
+
+
+rule "Check carrier is TypTap Home, Homeowners Choice, Olympus, Universal PC for HO3"
+when
+    ScreenedEnclosure(carrier in ("TypTap Home", "Homeowners Choice", "Olympus", "Universal PC"))
+then
+    HO3screenedEnclosure.clear();
+    HO3screenedEnclosure.add("Included - No Limitations");
+end
+
+
+rule "Check carrier is not Florida Peninsula, TypTap Home, Homeowners Choice, Olympus, Universal PC for HO3"
+when
+    s:ScreenedEnclosure(carrier not in ("Florida Peninsula","TypTap Home", "Homeowners Choice", "Olympus", "Universal PC"))
+then
+    HO3screenedEnclosure.clear();
+    HO3screenedEnclosure.add(s.getScreenedEnclosureCoverage());
+end
+
+
+rule "Check carrier is Citizens for DP3"
+when
+    ScreenedEnclosure(carrier in ("Citizens"))
+then
+    DP3screenedEnclosure.clear();
+    DP3screenedEnclosure.add("Not Available");
+end
+
+rule "Check carrier is TypTap Home, Homeowners Choice, Universal PC for DP3"
+when
+    ScreenedEnclosure(carrier in ("TypTap Home", "Homeowners Choice", "Universal PC"))
+then
+    DP3screenedEnclosure.clear();
+    DP3screenedEnclosure.add("Included - No Limitations");
+end
+
+rule "Check carrier is not Citizens, TypTap Home, Homeowners Choice, Universal PC for DP3"
+when
+    s:ScreenedEnclosure(carrier not in ("Citizens","TypTap Home", "Homeowners Choice", "Universal PC"))
+then
+    DP3screenedEnclosure.clear();
+    DP3screenedEnclosure.add(s.getScreenedEnclosureCoverage());
+end
+
+
+
+
+

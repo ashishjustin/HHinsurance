@@ -1,0 +1,58 @@
+package org.brms.hhinsurance;
+global java.util.List value;
+
+rule "if roof cover Asbestos, Wood Shake/Shingles and Other"
+when
+    MMIRoofMaterial(roofCover in ("Asbestos", "Wood Shake/Shingles", "Wood", "Other"))
+then
+    value.clear();
+    value.add("Other");
+end
+
+rule "if roof cover Built-Up, Gravel/Rock and Tar & Gravel"
+when
+   MMIRoofMaterial(roofCover in ("Built-Up", "Gravel/Rock", "Tar & Gravel"))
+then
+    value.clear();
+    value.add("Tar And Gravel");
+end
+
+rule "if roof cover Composition Shingle, Fiberglass, Asphalt and Shingle (Not Wood)"
+when
+    MMIRoofMaterial(roofCover in ("Composition Shingle", "Fiberglass", "Asphalt", "Shingle (Not Wood)"))
+then
+    value.clear();
+    value.add("Architectural Shingles");
+end
+
+rule "if roof cover Concrete, Urethan and Gymsum"
+when
+    MMIRoofMaterial(roofCover in ("Concrete", "Urethan", "Gymsum"))
+then
+    value.clear();
+    value.add("Flat");
+end
+
+rule "if roof cover Metal, Urethan and Gymsum"
+when
+    MMIRoofMaterial(roofCover in ("Metal", "Aluminum", "Steel"))
+then
+    value.clear();
+    value.add("Metal");
+end
+
+rule "if roof cover Slate, Bermuda and Tile"
+when
+    MMIRoofMaterial(roofCover in ("Slate", "Bermuda", "Tile"))
+then
+    value.clear();
+    value.add("Tile");
+end
+
+rule "if roof cover Masonite/Cement Shake and Roll Composition"
+when
+    MMIRoofMaterial(roofCover in ("Masonite/Cement Shake", "Roll Composition"))
+then
+    value.clear();
+    value.add("3-Tab Shingle");
+end

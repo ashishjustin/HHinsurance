@@ -9,10 +9,10 @@ then
     drools.setFocus("RoofShapePercentage");
 end
 
-rule "Roof shape percentage:0 to 70"
+rule "Roof shape percentage:50%hip/50%gable"
 ruleflow-group "RoofShapePercentage"
 when
-    RoofShapeHip(percentageOfRoofShape=="lessThan50" || percentageOfRoofShape=="50to70")
+    RoofShapeHip(percentageOfRoofShape=="50%hip/50%gable" || percentageOfRoofShape=="50%hip/50%flat")
 then
     roofShape.clear();
     roofHipPercent.clear();
@@ -20,21 +20,10 @@ then
     roofHipPercent.add("N/A");
 end
 
-rule "Roof shape percentage 71 to 75"
+rule "Roof shape percentage:75%hip/25%gable"
 ruleflow-group "RoofShapePercentage"
 when
-    RoofShapeHip(percentageOfRoofShape=="71to75")
-then
-    roofShape.clear();
-    roofHipPercent.clear();
-    roofShape.add("Gable");
-    roofHipPercent.add("70%");
-end
-
-rule "Roof shape percentage 76 to 80"
-ruleflow-group "RoofShapePercentage"
-when
-    RoofShapeHip(percentageOfRoofShape=="76to80")
+    RoofShapeHip(percentageOfRoofShape=="75%hip/25%gable" || percentageOfRoofShape=="75%hip/25%flat")
 then
     roofShape.clear();
     roofHipPercent.clear();
@@ -42,32 +31,10 @@ then
     roofHipPercent.add("75%");
 end
 
-rule "Roof shape percentage 81 to 85"
+rule "Roof shape percentage:90%hip/10%gable"
 ruleflow-group "RoofShapePercentage"
 when
-    RoofShapeHip(percentageOfRoofShape=="81to85")
-then
-    roofShape.clear();
-    roofHipPercent.clear();
-    roofShape.add("Gable");
-    roofHipPercent.add("80%");
-end
-
-rule "Roof shape percentage 86 to 89"
-ruleflow-group "RoofShapePercentage"
-when
-    RoofShapeHip(percentageOfRoofShape=="86to89")
-then
-    roofShape.clear();
-    roofHipPercent.clear();
-    roofShape.add("Gable");
-    roofHipPercent.add("85%");
-end
-
-rule "Roof shape percentage 90 to 100"
-ruleflow-group "RoofShapePercentage"
-when
-    RoofShapeHip(percentageOfRoofShape=="90to95" || percentageOfRoofShape=="96to100") 
+    RoofShapeHip(percentageOfRoofShape=="90%hip/10%gable" || percentageOfRoofShape=="100%hip")
 then
     roofShape.clear();
     roofHipPercent.clear();
@@ -75,7 +42,7 @@ then
     roofHipPercent.add("");
 end
 
-rule "Roof shape flat, other, unknown"
+rule "Roof shape Gable, flat, other, unknown"
 when 
     RoofShapeHip(roof != "hip" && roof != "combination")
 then
@@ -84,5 +51,3 @@ then
     roofShape.add("Gable");
     roofHipPercent.add("N/A");
 end
-
-

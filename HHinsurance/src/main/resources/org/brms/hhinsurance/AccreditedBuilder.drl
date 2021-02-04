@@ -3,9 +3,8 @@ global java.util.List value;
 global java.util.List key;
 
 rule "if accredited builder is certified"
-
 when
-    AgeOfHome(ifCertified=="yes")
+    AgeOfHome(ifCertified.equalsIgnoreCase("yes"))
 then
     value.clear();
     key.clear();
@@ -14,9 +13,8 @@ then
 end
 
 rule "if accredited builder is not certified"
-
 when
-    AgeOfHome(ifCertified=="no")
+    AgeOfHome(ifCertified.equalsIgnoreCase("no"))
 then
     value.clear();
     key.clear();

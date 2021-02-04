@@ -1,0 +1,15 @@
+package org.brms.hhinsurance;
+
+rule "Check for A and V floodType"
+    when
+        f:FrontlineFloodPolicyMapping(floodType in ("A", "V"))
+    then
+        f.setFloodPolicy(true);
+end
+
+rule "Check for other than A and V floodType"
+    when
+        f:FrontlineFloodPolicyMapping(floodType not in ("A", "V"))
+    then
+        f.setFloodPolicy(false);
+end

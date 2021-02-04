@@ -9,25 +9,25 @@ public class EquipmentBreakdown implements java.io.Serializable
 
    static final long serialVersionUID = 1L;
 
-   private java.lang.String carrierList;
+   private java.lang.String carrier;
 
    public EquipmentBreakdown()
    {
    }
 
-   public java.lang.String getCarrierList()
+   public java.lang.String getCarrier()
    {
-      return this.carrierList;
+      return this.carrier;
    }
 
-   public void setCarrierList(java.lang.String carrierList)
+   public void setCarrier(java.lang.String carrier)
    {
-      this.carrierList = carrierList;
+      this.carrier = carrier;
    }
 
-   public EquipmentBreakdown(java.lang.String carrierList)
+   public EquipmentBreakdown(java.lang.String carrier)
    {
-      this.carrierList = carrierList;
+      this.carrier = carrier;
    }
 
 }

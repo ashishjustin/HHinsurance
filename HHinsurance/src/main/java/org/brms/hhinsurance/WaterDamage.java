@@ -14,7 +14,7 @@ public class WaterDamage implements java.io.Serializable
    static final long serialVersionUID = 1L;
 
    private java.lang.Integer yearBuilt;
-   private java.lang.String carrierList;
+   private java.lang.String carrier;
 
    public WaterDamage()
    {
@@ -30,23 +30,23 @@ public class WaterDamage implements java.io.Serializable
       this.yearBuilt = yearBuilt;
    }
 
-   public java.lang.String getCarrierList()
+   public java.lang.String getCarrier()
    {
-      return this.carrierList;
+      return this.carrier;
    }
 
-   public void setCarrierList(java.lang.String carrierList)
+   public void setCarrier(java.lang.String carrier)
    {
-      this.carrierList = carrierList;
+      this.carrier = carrier;
    }
 
    public WaterDamage(java.util.Calendar now, int year,
-         java.lang.Integer yearBuilt, java.lang.String carrierList)
+         java.lang.Integer yearBuilt, java.lang.String carrier)
    {
       this.now = now;
       this.year = year;
       this.yearBuilt = yearBuilt;
-      this.carrierList = carrierList;
+      this.carrier = carrier;
    }
 
 }

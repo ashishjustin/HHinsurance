@@ -1,0 +1,51 @@
+package org.brms.hhinsurance;
+global java.util.List roofGeometryTypeWLMForm;
+
+rule "Check roofShape Hip"
+    when
+    	SSRoofGeometry(roofShape in("Hip") )
+    then
+    	roofGeometryTypeWLMForm.clear();
+    	roofGeometryTypeWLMForm.add("300");
+end
+
+rule "Check roofShape Gable"
+    when
+    	SSRoofGeometry(roofShape in("Gable"))
+    then
+    	roofGeometryTypeWLMForm.clear();
+    	roofGeometryTypeWLMForm.add("0");
+end
+
+rule "Check roofShape Flat"
+    when
+    	SSRoofGeometry(roofShape in("Flat"))
+    then
+    	roofGeometryTypeWLMForm.clear();
+    	roofGeometryTypeWLMForm.add("100");
+end
+
+rule "Check roofShape Other"
+    when
+    	SSRoofGeometry(roofShape in("Other"))
+    then
+    	roofGeometryTypeWLMForm.clear();
+    	roofGeometryTypeWLMForm.add("0");
+end
+
+rule "Check roofShape Hip1"
+    when
+    	SSRoofGeometry(roofPercent in("75%", "80%", "85%", ""))
+    then
+    	roofGeometryTypeWLMForm.clear();
+    	roofGeometryTypeWLMForm.add("300");
+end
+
+rule "Check roofShape Hip2"
+    when
+	    SSRoofGeometry(roofPercent in("N/A", "70%"))
+    then
+	    roofGeometryTypeWLMForm.clear();
+	    roofGeometryTypeWLMForm.add("0");
+end
+

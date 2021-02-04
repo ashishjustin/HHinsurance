@@ -1,0 +1,42 @@
+package org.brms.hhinsurance;
+global java.util.List value;
+
+rule "if build quality A and A+"
+when
+    MMIHomeStyle(buildQuality in ("A", "A+"))
+then
+    value.clear();
+    value.add("premium");
+end
+
+rule "if build quality A-, B and B+"
+when
+    MMIHomeStyle(buildQuality in ("A-", "B", "B+"))
+then
+    value.clear();
+    value.add("custom");
+end
+
+rule "if build quality B-, C and C+"
+when
+    MMIHomeStyle(buildQuality in ("B-", "C", "C+"))
+then
+    value.clear();
+    value.add("aboveAverage");
+end
+
+rule "if build quality C-, D and D+"
+when
+    MMIHomeStyle(buildQuality in ("C-", "D", "D+"))
+then
+    value.clear();
+    value.add("standard");
+end
+
+rule "if build quality D-, E, E- and E+"
+when
+    MMIHomeStyle(buildQuality in ("D-", "E", "E-", "E+"))
+then
+    value.clear();
+    value.add("economy");
+end

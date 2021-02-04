@@ -1,0 +1,27 @@
+package org.brms.hhinsurance;
+global java.util.List frontlineFoundationType
+
+
+rule "Check Open_fli foundation type"
+    when
+    	FrontlineFoundationTypeMapping(foundation.equals("Open Foundation") )
+    then
+    	 frontlineFoundationType.clear();
+	     frontlineFoundationType.add("Open_fli");
+end
+
+rule "Check Closed_fli foundation type"
+    when
+    	FrontlineFoundationTypeMapping(foundation in ("Slab", "Crawl Space (25%)", "Crawl Space (50%)", "Crawl Space (100%)", "Basement"))
+    then
+    	 frontlineFoundationType.clear();
+	     frontlineFoundationType.add("Closed_fli");
+end
+
+rule "Check PiersPilingsStilts_fli foundation type"
+    when
+    	FrontlineFoundationTypeMapping(foundation not in ("Open Foundation", "Slab", "Crawl Space (25%)", "Crawl Space (50%)", "Crawl Space (100%)", "Basement"))
+    then
+    	 frontlineFoundationType.clear();
+	     frontlineFoundationType.add("PiersPilingsStilts_fli");
+end

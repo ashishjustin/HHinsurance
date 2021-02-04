@@ -48,7 +48,7 @@ rule "Foundation: Any type"
    then
        foundationEligibility.add("FedNat");    
        foundationEligibility.add("Frontline"); 
-       foundationEligibility.add("GeoVera"); 
+       foundationEligibility.add("Geovera"); 
        foundationEligibility.add("Homeowners Choice"); 
        foundationEligibility.add("Olympus"); 
         

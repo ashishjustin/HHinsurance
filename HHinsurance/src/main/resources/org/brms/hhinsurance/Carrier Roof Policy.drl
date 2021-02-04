@@ -3,10 +3,24 @@ global java.util.List roofEligibility;
 
 rule "Roof age 0-10"
 	when
-		RoofPolicy(age<11 && roofMaterial=="Tar And Gravel")
+		RoofPolicy(age<11)
     then
-       	roofEligibility.add("Velocity");
-	   	roofEligibility.add("Heritage");
+       	drools.setFocus("RoofMaterial0");
+end
+
+rule "RoofMaterial0:3TabShingle,Architectural Shingle, Flat,Other,Unknown"
+ruleflow-group "RoofMaterial0"
+	when
+		RoofPolicy(roofMaterial not in ("Metal","Tile"))
+	then
+	    roofEligibility.add("Olympus");
+end
+
+rule "Roof age 0-14"
+	when
+		RoofPolicy((age<15) && !roofMaterial.equalsIgnoreCase("Metal"))
+    then
+        roofEligibility.add("Bankers");
 end
 
 rule "Roof age 0-15"
@@ -23,7 +37,6 @@ ruleflow-group "RoofMaterial1"
 	then
         roofEligibility.add("American Strategic");
 	    roofEligibility.add("Anchor");
-	    roofEligibility.add("Bankers");
         roofEligibility.add("Cabrillo");
 	    roofEligibility.add("Centauri");
         roofEligibility.add("FedNat");
@@ -108,7 +121,6 @@ ruleflow-group "RoofMaterial2"
 	    roofEligibility.add("Edison");
         roofEligibility.add("Florida Peninsula");
         roofEligibility.add("HomeOwners Choice");
-	    roofEligibility.add("Olympus");
         roofEligibility.add("St. Johns");
 	    roofEligibility.add("TypTap Home");
         roofEligibility.add("Universal PC");
@@ -121,7 +133,6 @@ ruleflow-group "RoofMaterial2"
 		RoofPolicy(roofMaterial == "Architectural Shingles")
     then
 		roofEligibility.add("Anchor");
-		roofEligibility.add("Bankers");
 		roofEligibility.add("Centauri");
 	    roofEligibility.add("Edison");
 	    roofEligibility.add("FedNat");
@@ -129,7 +140,6 @@ ruleflow-group "RoofMaterial2"
 		roofEligibility.add("Frontline");
         roofEligibility.add("Heritage");
         roofEligibility.add("HomeOwners Choice");
-	    roofEligibility.add("Olympus");
         roofEligibility.add("St. Johns");
 	    roofEligibility.add("TypTap Home");
         roofEligibility.add("Universal PC");
@@ -145,7 +155,6 @@ ruleflow-group "RoofMaterial2"
 	    roofEligibility.add("Edison");
         roofEligibility.add("Florida Peninsula");
         roofEligibility.add("Homeowners Choice");
-	    roofEligibility.add("Olympus");
         roofEligibility.add("St.Johns");
 	    roofEligibility.add("TypTap Home");
         roofEligibility.add("Universal PC");
@@ -161,7 +170,6 @@ ruleflow-group "RoofMaterial2"
         roofEligibility.add("Florida Peninsula");
         roofEligibility.add("Heritage");
         roofEligibility.add("Homeowners Choice");
-	    roofEligibility.add("Olympus");
         roofEligibility.add("St.Johns");
 	    roofEligibility.add("TypTap Home");
 		roofEligibility.add("United");
@@ -183,7 +191,6 @@ ruleflow-group "RoofMaterial2"
 		roofEligibility.add("Frontline");
         roofEligibility.add("Heritage");
         roofEligibility.add("HomeOwners Choice");
-	    roofEligibility.add("Olympus");
         roofEligibility.add("St. Johns");
 	    roofEligibility.add("TypTap Home");
 		roofEligibility.add("United");
@@ -199,7 +206,6 @@ ruleflow-group "RoofMaterial2"
     then
 		roofEligibility.add("American Integrity");
 		roofEligibility.add("Anchor");
-	    roofEligibility.add("Bankers");
 		roofEligibility.add("Centauri");
 	    roofEligibility.add("Edison");
 		roofEligibility.add("FedNat");
@@ -207,7 +213,6 @@ ruleflow-group "RoofMaterial2"
 		roofEligibility.add("Frontline");
         roofEligibility.add("Heritage");
         roofEligibility.add("HomeOwners Choice");
-	    roofEligibility.add("Olympus");
         roofEligibility.add("St. Johns");
 	    roofEligibility.add("TypTap Home");
 		roofEligibility.add("United");
@@ -215,6 +220,14 @@ ruleflow-group "RoofMaterial2"
 		roofEligibility.add("Velocity");
 	    roofEligibility.add("Western World");
 end
+
+rule "Roof age 0-24"
+	when
+		RoofPolicy((age<25) && roofMaterial.equalsIgnoreCase("Metal"))
+    then
+        roofEligibility.add("Bankers");
+end
+
 
 rule "Roof age 0-26"
 	when
@@ -301,7 +314,6 @@ ruleflow-group "RoofMaterial5"
 	    roofEligibility.add("American Integrity");
         roofEligibility.add("American Strategic");
 	    roofEligibility.add("Anchor");
-	    roofEligibility.add("Bankers");
         roofEligibility.add("Centauri");
         roofEligibility.add("FedNat");
 	    roofEligibility.add("HomeOwners Choice");
@@ -319,7 +331,6 @@ ruleflow-group "RoofMaterial5"
         roofEligibility.add("American Integrity");
         roofEligibility.add("American Strategic");
 	    roofEligibility.add("Anchor");
-	    roofEligibility.add("Bankers");
         roofEligibility.add("Centauri");
         roofEligibility.add("Federated National");
 	    roofEligibility.add("HomeOwners Choice");
@@ -343,7 +354,7 @@ ruleflow-group "RoofMaterial6"
 	when
 		RoofPolicy(roofMaterial in ("3-Tab Shingle"))
 	then
-	    roofEligibility.add("GeoVera");
+	    roofEligibility.add("Geovera");
 			
 		roofEligibility.add("Swyfft");
 end
@@ -355,7 +366,7 @@ ruleflow-group "RoofMaterial6"
         RoofPolicy(roofMaterial in ("Tile","Metal"))
     then
         roofEligibility.add("Cabrillo");
-        roofEligibility.add("GeoVera");
+        roofEligibility.add("Geovera");
 		roofEligibility.add("Monarch");
 			
 		roofEligibility.add("Service (SageSure)");
@@ -368,7 +379,7 @@ ruleflow-group "RoofMaterial6"
 	when
 		RoofPolicy(roofMaterial in ("Architectural Shingles","Tar And Gravel","Flat","Other","Unknown"))
 	then
-	    roofEligibility.add("GeoVera");
+	    roofEligibility.add("Geovera");
 		roofEligibility.add("Monarch");
 			
 		roofEligibility.add("Swyfft");

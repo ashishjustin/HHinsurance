@@ -1,66 +1,115 @@
 package org.brms.hhinsurance;
-global java.util.List animalLiability;
+global java.util.List HO3AnimalLiability;
+global java.util.List HO6AnimalLiability;
+
+rule "carrier for which $25 and sublimit of $50000 is available for HO3"
+when
+    AnimalLiability(carrier in ("American Strategic","Monarch","Cabrillo","FedNat","Florida Specialty","Heritage","Service (SageSure)","United"))
+then
+    HO3AnimalLiability.clear();
+    HO3AnimalLiability.add("Available - $25 ; Sublimit - $50,000");
+end
+
+rule "carrier for which $25 and sublimit of $25000 is available for HO3"
+when
+    AnimalLiability(carrier in ("Anchor","Bankers","Centauri","Edison","Florida Peninsula","Southern Oak","Velocity"))
+then
+    HO3AnimalLiability.clear();
+    HO3AnimalLiability.add("Available - $25 ; Sublimit - $25,000");
+end
+
+rule "carrier for which $50 and sublimit of $50000 is available for HO3"
+when
+    AnimalLiability(carrier in ("Olympus","Prepared","St. Johns"))
+then
+    HO3AnimalLiability.clear();
+    HO3AnimalLiability.add("Available - $50 ; Sublimit - $50,000");
+end
+
+rule "carrier which is included and sublimit of $50000 is available for HO3"
+when
+    AnimalLiability(carrier in ("Swyfft"))
+then
+    HO3AnimalLiability.clear();
+    HO3AnimalLiability.add("Included ; Sublimit - $50,000");
+end
+
+rule "carrier for which $30 and sublimit of $25000 is available for HO3"
+when
+    AnimalLiability(carrier in ("Frontline"))
+then
+    HO3AnimalLiability.clear();
+    HO3AnimalLiability.add("Available - $30 ; Sublimit - $25,000");
+end
+
+rule "carrier not available in Animal Liability for HO3"
+when
+    AnimalLiability(carrier in ("Geovera","Homeowners Choice","TypTap Home","Universal PC"))
+then
+    HO3AnimalLiability.clear();
+    HO3AnimalLiability.add("Not Available");
+end
+
+rule "carrier for which $25 and sublimit of CoverageE is available for HO3"
+when
+    c:AnimalLiability(carrier in ("Western World"))
+then
+    HO3AnimalLiability.clear();
+    HO3AnimalLiability.add("Available - $25 ; Coverage - "+c.getCoverageE());
+end
+
+rule "carrier for which $50 and sublimit of CoverageE is available for HO3"
+when
+    c:AnimalLiability(carrier in ("American Integrity"))
+then
+    HO3AnimalLiability.clear();
+    HO3AnimalLiability.add("Available - $50 ; Coverage - "+c.getCoverageE());
+end
 
 rule "carrier for which $25 and sublimit of $50000 is available"
 when
-    AnimalLiability(carrierList in ("American Strategic","Monarch","Cabrillo","FedNat","Florida Specialty","Heritage","Service (SageSure","United"))
+    AnimalLiability(carrier in ("American Strategic","Monarch","Cabrillo","FedNat","Heritage","United"))
 then
-    animalLiability.clear();
-    animalLiability.add("Available - $25 ; Sublimit - $50,000");
+    HO6AnimalLiability.clear();
+    HO6AnimalLiability.add("Available - $25 ; Sublimit - $50,000");
 end
 
 rule "carrier for which $25 and sublimit of $25000 is available"
 when
-    AnimalLiability(carrierList in ("Anchor","Bankers","Centauri","Edison","Florida Peninsula","Southern Oak","Velocity"))
+    AnimalLiability(carrier in ("Centauri","Edison","Florida Peninsula","Southern Oak","Velocity","Bankers"))
 then
-    animalLiability.clear();
-    animalLiability.add("Available - $25 ; Sublimit - $25,000");
+    HO6AnimalLiability.clear();
+    HO6AnimalLiability.add("Available - $25 ; Sublimit - $25,000");
 end
 
 rule "carrier for which $50 and sublimit of $50000 is available"
 when
-    AnimalLiability(carrierList in ("Olympus","Prepared","St. Johns"))
+    AnimalLiability(carrier in ("Olympus","Prepared","St. Johns"))
 then
-    animalLiability.clear();
-    animalLiability.add("Available - $50 ; Sublimit - $50,000");
-end
-
-rule "carrier which is included and sublimit of $50000 is available"
-when
-    AnimalLiability(carrierList in ("Swyfft"))
-then
-    animalLiability.clear();
-    animalLiability.add("Included ; Sublimit - $50,000");
+    HO6AnimalLiability.clear();
+    HO6AnimalLiability.add("Available - $50 ; Sublimit - $50,000");
 end
 
 rule "carrier for which $30 and sublimit of $25000 is available"
 when
-    AnimalLiability(carrierList in ("Frontline"))
+    AnimalLiability(carrier in ("Frontline"))
 then
-    animalLiability.clear();
-    animalLiability.add("Available - $30 ; Sublimit - $25,000");
+    HO6AnimalLiability.clear();
+    HO6AnimalLiability.add("Available - $30 ; Sublimit - $25,000");
 end
 
 rule "carrier not available in Animal Liability"
 when
-    AnimalLiability(carrierList in ("GeoVera","Homeowners Choice","TypTap Home","Universal PC"))
+    AnimalLiability(carrier in ("Homeowners Choice","Universal PC","Spinnaker"))
 then
-    animalLiability.clear();
-    animalLiability.add("Not Available");
-end
-
-rule "carrier for which $25 and sublimit of CoverageE is available"
-when
-    c:AnimalLiability(carrierList in ("Western World"))
-then
-    animalLiability.clear();
-    animalLiability.add("Available - $25 ; Coverage - "+c.getCoverageE());
+    HO6AnimalLiability.clear();
+    HO6AnimalLiability.add("Not Available");
 end
 
 rule "carrier for which $50 and sublimit of CoverageE is available"
 when
-    c:AnimalLiability(carrierList in ("American Integrity"))
+    c:AnimalLiability(carrier in ("American Integrity"))
 then
-    animalLiability.clear();
-    animalLiability.add("Available - $50 ; Coverage - "+c.getCoverageE());
+    HO6AnimalLiability.clear();
+    HO6AnimalLiability.add("Available - $50 ; Coverage - "+c.getCoverageE());
 end

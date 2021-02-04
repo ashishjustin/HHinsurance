@@ -142,7 +142,7 @@ rule "Dogbreed : null"
   		dogEligibility.add("FedNat");
 		dogEligibility.add("Florida Peninsula");
 		dogEligibility.add("Frontline");
-		dogEligibility.add("GeoVera");
+		dogEligibility.add("Geovera");
 		dogEligibility.add("Heritage");
 		dogEligibility.add("Homeowners Choice");
 		dogEligibility.add("Olympus");

@@ -1,0 +1,87 @@
+package org.brms.hhinsurance;
+global java.util.List constructionType
+rule "Construction type drop down rule for Condominium"
+when 
+		ConstructionInput(structureType.equals("Condominium"))
+then
+       drools.setFocus("CondominiumStories");
+end
+
+
+rule "Number of stories one for Condominium"
+ruleflow-group "CondominiumStories"
+when
+        ConstructionInput(stories == 1)
+then
+		drools.setFocus("CondominiumType1");
+end
+
+
+rule "100% masonary or 100% frame"
+ruleflow-group "CondominiumType1"
+when
+        ConstructionInput(material in ("stucco","concreteBoardsHardiboard","brick","stone","other","unknown"))
+then
+        constructionType.clear();
+        constructionType.add("100% Masonry");
+        constructionType.add("100% Frame");
+end        
+ 
+rule "Not 100% masonary or 100% frame"
+ruleflow-group "CondominiumType1"
+when
+        ConstructionInput(material not in ("stucco","concreteBoardsHardiboard","brick","stone","other","unknown"))
+then
+        constructionType.clear();
+end        
+
+rule "Number of stories greater than one for Condominium"
+ruleflow-group "CondominiumStories"
+when
+        ConstructionInput(stories > 1)
+then
+		drools.setFocus("CondominiumType2");
+end
+
+
+rule "1: ConstructionType Consominium and stories greater than 1"
+ruleflow-group "CondominiumType2"
+when
+        ConstructionInput(material in ("stucco","other","unknown"))
+then
+        constructionType.clear();
+        constructionType.add("100% Wood Frame");
+        constructionType.add("50/50");
+        constructionType.add("100% Concrete Block");
+        constructionType.add("100% Concrete Block");        
+end     
+
+rule "2: ConstructionType Consominium and stories greater than 1"
+ruleflow-group "CondominiumType2"
+when
+        ConstructionInput(material in ("concreteBoardsHardiboard","stone","brick"))
+then
+        constructionType.clear();
+        constructionType.add("100% Wood Frame");
+        constructionType.add("50/50");
+        constructionType.add("100% Concrete Block");
+end
+
+rule "3: ConstructionType Consominium and stories greater than 1"
+ruleflow-group "CondominiumType2"
+when
+        ConstructionInput(material in ("concreteBlockPainted"))
+then
+        constructionType.clear();
+        constructionType.add("50/50");
+        constructionType.add("100% Concrete Block");
+        constructionType.add("100% Concrete Block");
+end
+
+rule "4: ConstructionType Consominium and stories greater than 1"
+ruleflow-group "CondominiumType2"
+when
+        ConstructionInput(material in ("aluminumSiding","vinylSiding","woodSiding","asbestos","logs"))
+then
+        constructionType.clear();
+end

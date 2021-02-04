@@ -1,0 +1,75 @@
+package org.brms.hhinsurance;
+global java.util.List frontlineDogBreedType
+
+
+rule "Check other than given god breed"
+    when
+    	FrontlineDogBreedMapping(dogBreed not in ("Akita", "Bull Terrier", "Chow Chow", "Doberman", "German Shepherd", "Rottweiler", "Staffordshire Terriers", "Pit Bull"))
+    then
+    	 frontlineDogBreedType.clear();
+end
+
+rule "Check Akitas god breed"
+    when
+    	FrontlineDogBreedMapping(dogBreed.equals("Akita") )
+    then
+    	 frontlineDogBreedType.clear();
+	     frontlineDogBreedType.add("Akitas");
+end
+
+rule "Check Bull Terrier god breed"
+    when
+    	FrontlineDogBreedMapping(dogBreed.equals("Bull Terrier") )
+    then
+    	 frontlineDogBreedType.clear();
+	     frontlineDogBreedType.add("BullTerriers");
+end
+
+rule "Check Chow Chow god breed"
+    when
+    	FrontlineDogBreedMapping(dogBreed.equals("Chow Chow") )
+    then
+    	 frontlineDogBreedType.clear();
+	     frontlineDogBreedType.add("Chow");
+end
+
+rule "Check Doberman god breed"
+    when
+    	FrontlineDogBreedMapping(dogBreed.equals("Doberman") )
+    then
+    	 frontlineDogBreedType.clear();
+	     frontlineDogBreedType.add("DobermanPinschers");
+end
+
+rule "Check German Shepherd god breed"
+    when
+    	FrontlineDogBreedMapping(dogBreed.equals("German Shepherd") )
+    then
+    	 frontlineDogBreedType.clear();
+	     frontlineDogBreedType.add("GermanShepherds");
+end
+
+rule "Check Rottweiler god breed"
+    when
+    	FrontlineDogBreedMapping(dogBreed.equals("Rottweiler") )
+    then
+    	 frontlineDogBreedType.clear();
+	     frontlineDogBreedType.add("Rottweilers");
+end
+
+rule "Check Staffordshire Terriers god breed"
+    when
+    	FrontlineDogBreedMapping(dogBreed.equals("Staffordshire Terriers") )
+    then
+    	 frontlineDogBreedType.clear();
+	     frontlineDogBreedType.add("StaffordshireBullTerriers");
+end
+
+rule "Check Pit Bull god breed"
+    when
+    	FrontlineDogBreedMapping(dogBreed.equals("Pit Bull"))
+    then
+    	 frontlineDogBreedType.clear();
+	     frontlineDogBreedType.add("PitBulls");
+end
+

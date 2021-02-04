@@ -34,7 +34,7 @@ end
 rule "Check town type and home owners association fee"
 ruleflow-group "TownHouse"
     when
-        FormType((townType=="UnKnown" && (HOAfee > 200)) || townType=="yes")
+        FormType((townType=="Unknown" && (HOAfee > 200)) || townType=="yes")
     then
         formType.clear();
         formType.add("HO-6: Condo Owners Policy");
@@ -109,7 +109,7 @@ end
 rule "Not HO6 form type"
 ruleflow-group  "TenantOccupied"
     when
-        FormType((townType!="UnKnown" && HOAfee<200) || townType!="yes")
+        FormType((townType!="Unknown" && HOAfee<200) || townType!="yes")
     then
         formType.clear();
         formType.add("DP-3 Dwelling Fire/Renters");
@@ -143,7 +143,7 @@ end
 rule "Townhouse and town type unknown"
 ruleflow-group "TownType"
    when
-       FormType(townType == "UnKnown")
+       FormType(townType == "Unknown")
    then
        drools.setFocus("HOAFee");
 end

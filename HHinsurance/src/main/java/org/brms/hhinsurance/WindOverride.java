@@ -22,6 +22,10 @@ public class WindOverride implements java.io.Serializable
 
    private java.lang.String questionSeven;
 
+   private java.lang.String questionSix;
+
+   private java.lang.String questionThree;
+
    public WindOverride()
    {
    }
@@ -126,12 +130,33 @@ public class WindOverride implements java.io.Serializable
       this.questionSeven = questionSeven;
    }
 
+   public java.lang.String getQuestionSix()
+   {
+      return this.questionSix;
+   }
+
+   public void setQuestionSix(java.lang.String questionSix)
+   {
+      this.questionSix = questionSix;
+   }
+
+   public java.lang.String getQuestionThree()
+   {
+      return this.questionThree;
+   }
+
+   public void setQuestionThree(java.lang.String questionThree)
+   {
+      this.questionThree = questionThree;
+   }
+
    public WindOverride(java.lang.String roofWallConnection,
          java.lang.String awareClips, java.lang.String openingProtection,
          java.lang.String selectionAOrB, java.lang.String subSelectionA,
          java.lang.String subSelectionB, java.lang.String awareShutters,
          java.lang.String protectedWindows, java.lang.String questionFour,
-         java.lang.String questionSeven)
+         java.lang.String questionSeven, java.lang.String questionSix,
+         java.lang.String questionThree)
    {
       this.roofWallConnection = roofWallConnection;
       this.awareClips = awareClips;
@@ -143,6 +168,8 @@ public class WindOverride implements java.io.Serializable
       this.protectedWindows = protectedWindows;
       this.questionFour = questionFour;
       this.questionSeven = questionSeven;
+      this.questionSix = questionSix;
+      this.questionThree = questionThree;
    }
 
 }

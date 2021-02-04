@@ -15,7 +15,7 @@ then
     coverageEligibility.add("FedNat");
     coverageEligibility.add("Florida Peninsula");
     coverageEligibility.add("Frontline");
-    coverageEligibility.add("GeoVera");
+    coverageEligibility.add("Geovera");
     coverageEligibility.add("Heritage");
     coverageEligibility.add("Homeowners Choice");
     coverageEligibility.add("Monarch");

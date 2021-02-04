@@ -1,35 +1,107 @@
 package org.brms.hhinsurance;
-global java.util.List waterDamage;
+global java.util.List DP3WaterDamage;
+global java.util.List HO3WaterDamage;
+global java.util.List HO6WaterDamage;
 
-rule "if Age of Home from current year to 40 years"
+
+rule "if Age of Home from current year to 40 years for DP3"
 when
-    WaterDamage((yearBuilt >= year-40) && carrierList in("American Integrity","American Strategic","Bankers","Monarch","Anchor","Cabrillo","Centauri","Edison","FedNat","Florida Peninsula","Florida Specialty","Frontline","GeoVera","Heritage","Olympus","Prepared","Service","Southern Oak","Swyfft","St. Johns","TypTap Home","United","Universal PC","Velocity","Western World"))
+    WaterDamage((yearBuilt >= year-40) && carrier in("American Integrity","American Strategic","Cabrillo","Centauri","Citizens","FedNat","Frontline","Geovera","Heritage","Homeowners Choice","Olympus","Prepared","Southern Oak","St. Johns","United","Universal PC","Velocity"))
 then
-    waterDamage.clear();
-    waterDamage.add("Full");
+    DP3WaterDamage.clear();
+    DP3WaterDamage.add("Full");
 end
 
-rule "if Age of Home 40 years and above"
+rule "if Age of Home 40 years and above for DP3"
 when
     WaterDamage(yearBuilt < year-40)
 then
-   drools.setFocus("CarrierList");
+   drools.setFocus("carrier");
 end
 
-rule "carrier giving full coverages"
-ruleflow-group "CarrierList"
+rule "carrier giving full coverages for DP3"
+ruleflow-group "carrier"
 when
-    WaterDamage(carrierList in("Cabrillo","Frontline","GeoVera","Olympus","Prepared","Service (SageSure)","St. Johns","TypTap Home","Universal PC","Velocity","Western World"))
+    WaterDamage(carrier in("American Integrity","American Strategic","Cabrillo","Centauri","Citizens","FedNat","Frontline","Geovera","Heritage","Homeowners Choice","Olympus","Prepared","Southern Oak","St. Johns","United","Universal PC","Velocity"))
 then
-    waterDamage.clear();
-    waterDamage.add("Full");
+    DP3WaterDamage.clear();
+    DP3WaterDamage.add("Full");
 end
 
-rule "carrier giving limited coverages"
-ruleflow-group "CarrierList"
+rule "carrier giving limited coverages for DP3"
+ruleflow-group "carrier"
 when
-    WaterDamage(carrierList in("American Integrity","Bankers","Monarch","American Strategic","Anchor","Centauri","Edison","FedNat","Florida Peninsula","Florida Specialty","Heritage","Southern Oak","Swyfft","United"))
+    WaterDamage(carrier in("American Integrity","American Strategic","Centauri","FedNat","Heritage","Prepared","Southern Oak","United"))
 then
-    waterDamage.clear();
-    waterDamage.add("Limited");
+    DP3WaterDamage.clear();
+    DP3WaterDamage.add("Limited");
+end
+
+
+
+rule "if Age of Home from current year to 40 years for HO3"
+when
+    WaterDamage((yearBuilt >= year-40) && carrier in("American Integrity","American Strategic","Anchor","Bankers","Cabrillo","Centauri","Edison","FedNat","Florida Peninsula","Florida Specialty","Frontline","Geovera","Heritage","Homeowners Choice","Monarch","Olympus","Prepared","Service (SageSure)","Southern Oak","Swyfft","St. Johns","TypTap Home","United","Universal PC","Velocity","Western World"))
+then
+    HO3WaterDamage.clear();
+    HO3WaterDamage.add("Full");
+end
+
+rule "if Age of Home 40 years and above for HO3"
+when
+    WaterDamage(yearBuilt < year-40)
+then
+   drools.setFocus("carrier");
+end
+
+rule "carrier giving full coverages for HO3"
+ruleflow-group "carrier"
+when
+    WaterDamage(carrier in("American Integrity","American Strategic","Anchor","Bankers","Cabrillo","Centauri","Edison","FedNat","Florida Peninsula","Florida Specialty","Frontline","Geovera","Heritage","Homeowners Choice","Monarch","Olympus","Prepared","Service (SageSure)","Southern Oak","Swyfft","St. Johns","TypTap Home","United","Universal PC","Velocity","Western World"))
+then
+    HO3WaterDamage.clear();
+    HO3WaterDamage.add("Full");
+end
+
+rule "carrier giving limited coverages for HO3"
+ruleflow-group "carrier"
+when
+    WaterDamage(carrier in("American Integrity","American Strategic","Anchor","Bankers","Centauri","Edison","FedNat","Florida Peninsula","Florida Specialty","Heritage","Monarch","Prepared","Southern Oak","Swyfft","United"))
+then
+    HO3WaterDamage.clear();
+    HO3WaterDamage.add("Limited");
+end
+
+
+rule "if Age of Home from current year to 40 years for HO6"
+when
+    WaterDamage((yearBuilt >= year-40) && carrier in("American Integrity","American Strategic","Cabrillo","Centauri","Edison","FedNat","Florida Peninsula","Frontline","Heritage","Homeowners Choice","Monarch","Olympus","Prepared","Southern Oak","St. Johns","United","Universal PC","Velocity","Bankers"))
+then
+    HO6WaterDamage.clear();
+    HO6WaterDamage.add("Full");
+end
+
+rule "if Age of Home 40 years and above for HO6"
+when
+    WaterDamage(yearBuilt < year-40)
+then
+   drools.setFocus("carrier");
+end
+
+rule "carrier giving full coverages for HO6"
+ruleflow-group "carrier"
+when
+    WaterDamage(carrier in("American Integrity","American Strategic","Cabrillo","Centauri","Edison","FedNat","Florida Peninsula","Frontline","Heritage","Homeowners Choice","Monarch","Olympus","Prepared","Southern Oak","St. Johns","United","Universal PC","Velocity"))
+then
+    HO6WaterDamage.clear();
+    HO6WaterDamage.add("Full");
+end
+
+rule "carrier giving limited coverages for HO6"
+ruleflow-group "carrier"
+when
+    WaterDamage(carrier in("American Integrity","American Strategic","Centauri","Edison","FedNat","Florida Peninsula","Heritage","Monarch","Southern Oak","United","Bankers"))
+then
+    HO6WaterDamage.clear();
+    HO6WaterDamage.add("Limited");
 end

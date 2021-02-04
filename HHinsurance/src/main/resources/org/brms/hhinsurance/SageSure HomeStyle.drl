@@ -1,0 +1,48 @@
+package org.brms.hhinsurance;
+global java.util.List sshomeStyle;
+
+rule "check for 1"
+    when
+	    SSHomeStyle(stories in("1") )
+    then
+	    sshomeStyle.clear();
+	    sshomeStyle.add("1100");
+	    drools.setFocus("HomeStyleGroup");
+end
+
+
+rule "check for 2"
+    when
+	    SSHomeStyle(stories in("2") )
+    then
+	    sshomeStyle.clear();
+	    sshomeStyle.add("1200");
+	    drools.setFocus("HomeStyleGroup");
+end
+
+rule "check for 3 and 4+"
+    when
+	    SSHomeStyle(Integer.parseInt(stories) > 2 )
+    then
+	    sshomeStyle.clear();
+	    sshomeStyle.add("1300");
+	    drools.setFocus("HomeStyleGroup");
+end
+
+rule "check for Townhouse (End Unit)"
+ruleflow-group "HomeStyleGroup"
+    when
+	    SSHomeStyle(structureType in("Townhouse (End Unit)") )
+    then
+	    sshomeStyle.clear();
+	    sshomeStyle.add("601");
+end
+
+rule "check for Townhouse (Center Unit)"
+ruleflow-group "HomeStyleGroup"
+    when
+	    SSHomeStyle(structureType in("Townhouse (Center Unit)") )
+    then
+	    sshomeStyle.clear();
+	    sshomeStyle.add("602");
+end

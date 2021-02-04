@@ -3,7 +3,7 @@ global java.util.List occupancyEligibility;
 
 rule "Occupancy Carrier: All carriers"
     when
-        OccupancyPolicy(occupancyType == "Primary" || (occupancyType in ("Secondary","Seasonal") && securedGatedCommunity in ("gatedWithMan","gatedWithPasskey")))
+        OccupancyPolicy(occupancyType.equalsIgnoreCase("tenantOccupied") || occupancyType.equalsIgnoreCase("Primary") || (occupancyType in ("Secondary","Seasonal") && securedGatedCommunity in ("gatedWithMan","gatedWithPasskey")))
     then
         occupancyEligibility.add("American Integrity");
         occupancyEligibility.add("American Strategic");

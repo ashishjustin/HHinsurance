@@ -1,0 +1,114 @@
+package org.brms.hhinsurance;
+global java.util.List constructionMaterialList;
+global java.util.List constructionTypeList;
+
+rule "Brick"
+when
+    MMIWallConstruction(wallConstruction in ("Brick"))
+then
+    constructionMaterialList.clear();
+    constructionMaterialList.add("brick");
+    constructionTypeList.clear();
+    constructionTypeList.add("");
+end
+
+rule "Brick Veneer"
+when
+    MMIWallConstruction(wallConstruction in ("Brick Veneer"))
+then
+    constructionMaterialList.clear();
+    constructionMaterialList.add("brick");
+    constructionTypeList.clear();
+    constructionTypeList.add("100% Wood Frame");
+end
+
+rule "Block and Concrete Block"
+when
+    MMIWallConstruction(wallConstruction in ("Block", "Concrete Block"))
+then
+    constructionMaterialList.clear();
+    constructionMaterialList.add("concreteBlockPainted");
+    constructionTypeList.clear();
+    constructionTypeList.add("");
+end
+
+rule "Composition, Glass, Tile, Other, Adobe, Shingle (Not Wood), Marble, Combination"
+when
+    MMIWallConstruction(wallConstruction in ("Composition", "Glass", "Tile", "Other", "Adobe", "Shingle (Not Wood)", "Marble", "Combination"))
+then
+    constructionMaterialList.clear();
+    constructionMaterialList.add("");
+    constructionTypeList.clear();
+    constructionTypeList.add("");
+end
+
+rule "Block and Concrete, Tilt-up (pre-cast concrete), Masonry"
+when
+    MMIWallConstruction(wallConstruction in ("Concrete", "Tilt-up (pre-cast concrete)", "Masonry"))
+then
+    constructionMaterialList.clear();
+    constructionMaterialList.add("stucco");
+    constructionTypeList.clear();
+    constructionTypeList.add("100% Concrete Block");
+end
+
+rule "Rock, Stone"
+when
+    MMIWallConstruction(wallConstruction in ("Rock, Stone"))
+then
+    constructionMaterialList.clear();
+    constructionMaterialList.add("stone");
+    constructionTypeList.clear();
+    constructionTypeList.add("100% Frame");
+end
+
+rule "Log"
+when
+    MMIWallConstruction(wallConstruction in ("Log"))
+then
+    constructionMaterialList.clear();
+    constructionMaterialList.add("logs");
+    constructionTypeList.clear();
+    constructionTypeList.add("");
+end
+
+rule "Metal"
+when
+    MMIWallConstruction(wallConstruction in ("Metal"))
+then
+    constructionMaterialList.clear();
+    constructionMaterialList.add("aluminumSiding");
+    constructionTypeList.clear();
+    constructionTypeList.add("");
+end
+
+rule "Stucco"
+when
+    MMIWallConstruction(wallConstruction in ("Stucco"))
+then
+    constructionMaterialList.clear();
+    constructionMaterialList.add("stucco");
+    constructionTypeList.clear();
+    constructionTypeList.add("");
+end
+
+rule "Wood Shingle, Wood, Wood Siding"
+when
+    MMIWallConstruction(wallConstruction in ("Wood Shingle", "Wood", "Wood Siding"))
+then
+    constructionMaterialList.clear();
+    constructionMaterialList.add("woodSiding");
+    constructionTypeList.clear();
+    constructionTypeList.add("");
+end
+
+rule "Siding (Alum/Vinyl)"
+when
+    MMIWallConstruction(wallConstruction in ("Siding (Alum/Vinyl)"))
+then
+    constructionMaterialList.clear();
+    constructionMaterialList.add("vinylSiding");
+    constructionTypeList.clear();
+    constructionTypeList.add("");
+end
+

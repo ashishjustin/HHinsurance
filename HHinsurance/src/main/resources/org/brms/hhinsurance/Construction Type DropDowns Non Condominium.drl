@@ -1,0 +1,124 @@
+package org.brms.hhinsurance;
+global java.util.List constructionType;
+
+rule "Construction type drop down rule for not Condominium"
+    when 
+		ConstructionInput(structureType in ("Single Family","Row House","Duplex","Triplex","Quadplex"))
+    then
+       drools.setFocus("NonCondominiumStories");
+end
+
+
+rule "Number of stories one for not Condominium"
+ruleflow-group "NonCondominiumStories"
+    when
+        ConstructionInput(stories == 1)
+    then
+		drools.setFocus("NonCondominiumType1");
+end
+
+
+rule "100% masonary or 100% frame and not Condominium"
+ruleflow-group "NonCondominiumType1"
+    when
+        ConstructionInput(material in ("stucco","concreteBoardsHardiboard","brick","stone","other","unknown"))
+    then
+        constructionType.clear();
+        constructionType.add("100% Masonry");
+        constructionType.add("100% Frame");
+end        
+ 
+rule "Not 100% masonary or 100% frame and not Condominium"
+ruleflow-group "NonCondominiumType1"
+    when
+        ConstructionInput(material not in ("stucco","concreteBoardsHardiboard","brick","stone","other","unknown"))
+    then
+        constructionType.clear();
+end        
+
+
+rule "1. Number of stories two for not Condominium"
+ruleflow-group "NonCondominiumStories"
+    when
+        ConstructionInput(stories == 2)
+    then
+		drools.setFocus("NonCondominiumType2");
+end
+
+rule "No drop down display for NonCondominium"
+ruleflow-group "NonCondominiumType2"
+    when
+        ConstructionInput(material in ("aluminumSiding","vinylSiding","woodSiding","asbestos","logs"))
+    then
+        constructionType.clear();
+end        
+
+rule "All options and not Condominium"
+ruleflow-group "NonCondominiumType2"
+    when
+        ConstructionInput(material in ("stucco","concreteBoardsHardiboard","brick","stone","other","unknown"))
+    then
+        constructionType.clear();
+	    constructionType.add("100% Wood Frame");
+	    constructionType.add("50/50");
+	    constructionType.add("66/34");
+	    constructionType.add("75/25");
+	    constructionType.add("100% Concrete Block");
+end        
+
+
+rule "Concrete block painted and not Condominium"
+ruleflow-group "NonCondominiumType2"
+    when
+        ConstructionInput(material in ("concreteBlockPainted"))
+    then
+        constructionType.clear();
+	    constructionType.add("50/50");
+	    constructionType.add("66/34");
+	    constructionType.add("75/25");
+	    constructionType.add("100% Concrete Block");
+end        
+
+rule "2. Number of stories greater than two for not Condominium"
+ruleflow-group "NonCondominiumStories"
+    when
+        ConstructionInput(stories > 2)
+    then
+		drools.setFocus("NonCondominiumType3");
+end
+
+rule "2. No drop down display for NonCondominium"
+ruleflow-group "NonCondominiumType3"
+    when
+        ConstructionInput(material in ("aluminumSiding","vinylSiding","woodSiding","asbestos","logs"))
+    then
+        constructionType.clear();
+end        
+
+rule "2. All options and not Condominium"
+ruleflow-group "NonCondominiumType3"
+    when
+        ConstructionInput(material in ("stucco","concreteBoardsHardiboard","brick","stone","other","unknown"))
+    then
+        constructionType.clear();
+	    constructionType.add("100% Wood Frame");
+	    constructionType.add("33/67");
+	    constructionType.add("66/34");
+	    constructionType.add("100% Concrete Block");
+end        
+
+
+rule "2. Concrete block painted and not Condominium"
+ruleflow-group "NonCondominiumType3"
+    when
+        ConstructionInput(material in ("concreteBlockPainted"))
+    then
+        constructionType.clear();
+	    constructionType.add("33/67");
+	    constructionType.add("66/34");
+	    constructionType.add("100% Concrete Block");
+end
+
+
+
+

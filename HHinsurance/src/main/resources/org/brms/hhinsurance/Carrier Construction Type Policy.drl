@@ -3,7 +3,7 @@ global java.util.List constructionEligibility;
 
 rule "Construction type:logs"
     when
-        ConstructionPolicy(constructionType == "Logs")
+        ConstructionPolicy(constructionType.equalsIgnoreCase("Logs"))
     then
         constructionEligibility.add("Homeowners Choice");
         constructionEligibility.add("Olympus");
@@ -16,7 +16,7 @@ end
 
 rule "Construction type:Asbestos"
     when
-        ConstructionPolicy(constructionType == "Asbestos")
+        ConstructionPolicy(constructionType.equalsIgnoreCase("Asbestos"))
     then
         constructionEligibility.add("American Integrity");
         constructionEligibility.add("American Strategic");
@@ -49,7 +49,7 @@ rule "Construction type:other"
         constructionEligibility.add("FedNat");
         constructionEligibility.add("Florida Peninsula");
         constructionEligibility.add("Frontline");
-        constructionEligibility.add("GeoVera");
+        constructionEligibility.add("Geovera");
         constructionEligibility.add("Heritage");
         constructionEligibility.add("Homeowners Choice");
         constructionEligibility.add("Monarch");

@@ -1,0 +1,122 @@
+package org.brms.hhinsurance;
+global java.util.List firmDate;
+
+rule "if county year is 1984"
+when
+    FloodFirmDates(county in ("Alachua", "Citrus", "Hernando", "Levy"))
+then
+    firmDate.clear();
+    firmDate.add("1984");
+end
+
+rule "if county year is 1991"
+when
+    FloodFirmDates(county in ("Baker", "Jefferson", "Liberty", "Washington"))
+then
+    firmDate.clear();
+    firmDate.add("1991");
+end
+
+rule "if county year is 1997"
+when
+    FloodFirmDates(county in ("Bay", "Duval", "Escambia", "Indian River", "Okloosa", "Santa Rosa", "Walton", "Okaloosa"))
+then
+    firmDate.clear();
+    firmDate.add("1977");
+end
+
+rule "if county year is 1989"
+when
+    FloodFirmDates(county in ("Bradford"))
+then
+    firmDate.clear();
+    firmDate.add("1989");
+end
+
+rule "if county year is 1975"
+when
+    FloodFirmDates(county in ("Brevard", "Broward", "Charlotte", "Collier", "Manatee", "Miami-dade", "Monroe", "Pinellas", "Sarasota", "St. Johns", "Volusia"))
+then
+    firmDate.clear();
+    firmDate.add("1975");
+end
+
+rule "if county year is 1980"
+when
+    FloodFirmDates(county in ("Calhoun", "Clay", "Hillsborough", "Orange", "Seminole"))
+then
+    firmDate.clear();
+    firmDate.add("1980");
+end
+
+rule "if county year is 1988"
+when
+    FloodFirmDates(county in ("Columbia", "DeSoto", "Gilchrist", "Hardee", "Suwannee", "Union"))
+then
+    firmDate.clear();
+    firmDate.add("1988");
+end
+
+rule "if county year is 1983"
+when
+    FloodFirmDates(county in ("Dixie", "Franklin", "Gulf", "Highlands", "Marion", "Nassau", "Taylor"))
+then
+    firmDate.clear();
+    firmDate.add("1983");
+end
+
+rule "if county year is 1986"
+when
+    FloodFirmDates(county in ("Flagler"))
+then
+    firmDate.clear();
+    firmDate.add("1986");
+end
+
+rule "if county year is 1982"
+when
+    FloodFirmDates(county in ("Glades", "Hendry", "Lake", "St. Lucie", "Sumter"))
+then
+    firmDate.clear();
+    firmDate.add("1982");
+end
+
+rule "if county year is 1987"
+when
+    FloodFirmDates(county in ("Gadsden", "Hamilton", "Lafayette", "Madison"))
+then
+    firmDate.clear();
+    firmDate.add("1987");
+end
+
+rule "if county year is 1990"
+when
+    FloodFirmDates(county in ("Holmes", "Jackson"))
+then
+    firmDate.clear();
+    firmDate.add("1990");
+end
+
+rule "if county year is 1981"
+when
+    FloodFirmDates(county in ("Lee", "Okeechobee", "Osceola", "Pasco", "Polk", "Putnam", "Wakulla"))
+then
+    firmDate.clear();
+    firmDate.add("1981");
+end
+
+rule "if county year is 1976"
+when
+    FloodFirmDates(county in ("Leon"))
+then
+    firmDate.clear();
+    firmDate.add("1976");
+end
+
+rule "if county year is 1978"
+when
+    FloodFirmDates(county in ("Martin", "Palm Beach"))
+then
+    firmDate.clear();
+    firmDate.add("1978");
+end

@@ -1,0 +1,41 @@
+package org.brms.hhinsurance;
+
+rule "Check for No GatedCommunity"
+    when
+        f:FrontineGatedGuardedCommunityMapping(gatedCommunity.equals("No"))
+    then
+        f.setIsGuardedCommunity(false);
+        f.setIsGatedCommunity(false);
+end
+
+rule "Check for Single Entry GatedCommunity"
+    when
+        f:FrontineGatedGuardedCommunityMapping(gatedCommunity.equals("Single Entry"))
+    then
+        f.setIsGuardedCommunity(false);
+        f.setIsGatedCommunity(false);
+end
+
+rule "Check for 24 hr Security GatedCommunity"
+    when
+        f:FrontineGatedGuardedCommunityMapping(gatedCommunity.equals("24 hr Security"))
+    then
+        f.setIsGuardedCommunity(true);
+        f.setIsGatedCommunity(false);
+end
+
+rule "Check for 24 hr Manned Gate GatedCommunity"
+    when
+        f:FrontineGatedGuardedCommunityMapping(gatedCommunity.equals("24 hr Manned Gate"))
+    then
+        f.setIsGuardedCommunity(true);
+        f.setIsGatedCommunity(true);
+end
+
+rule "Check for Passkey Gate GatedCommunity"
+    when
+        f:FrontineGatedGuardedCommunityMapping(gatedCommunity.equals("Passkey Gate"))
+    then
+        f.setIsGuardedCommunity(false);
+        f.setIsGatedCommunity(false);
+end

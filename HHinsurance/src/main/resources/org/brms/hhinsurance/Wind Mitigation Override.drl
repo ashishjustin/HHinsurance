@@ -1,6 +1,8 @@
 package org.brms.hhinsurance;
 global java.util.List roofWallOverride;
 global java.util.List protectionOverride;
+global java.util.List swrOverride;
+global java.util.List roofDeckOverride;
 
 rule "RoofWall with form1"
 when
@@ -157,7 +159,7 @@ end
 rule "Selection A1 or A2"
 ruleflow-group "SelectionA"
 when
-    p:WindOverride(subSelectionA in ("One","Two"))
+    p:WindOverride(subSelectionA in ("one","two"))
 then
     protectionOverride.clear();
     protectionOverride.add("Hurricane Protection");
@@ -166,9 +168,65 @@ end
 rule "Selection A3"
 ruleflow-group "SelectionA"
 when
-    p:WindOverride(subSelectionA in ("Three"))
+    p:WindOverride(subSelectionA in ("three"))
 then
     protectionOverride.clear();
     protectionOverride.add("Unknown or None");
+end
+
+rule "checking if swr is Yes"
+when
+    WindOverride(questionSix in ("swr"))
+then
+    swrOverride.clear();
+    swrOverride.add("Yes");
+end
+
+rule "checking if swr is No/Unknown"
+when
+    WindOverride(questionSix in ("noSwr", "unknown"))
+then
+    swrOverride.clear();
+    swrOverride.add("No");
+end
+
+rule "Roof Deck Level A"
+when
+    WindOverride(questionThree in ("plywoodOriented"))
+then
+    roofDeckOverride.clear();
+    roofDeckOverride.add("Level A");
+end
+
+rule "Roof Deck Level B"
+when
+    WindOverride(questionThree in ("plywoodOsb1"))
+then
+    roofDeckOverride.clear();
+    roofDeckOverride.add("Level B");
+end
+
+rule "Roof Deck Level C"
+when
+    WindOverride(questionThree in ("plywoodOsb2"))
+then
+    roofDeckOverride.clear();
+    roofDeckOverride.add("Level C");
+end
+
+rule "checking Reinforced Concrete Roof Deck"
+when
+    WindOverride(questionThree in ("rcRoofDeck"))
+then
+    roofDeckOverride.clear();
+    roofDeckOverride.add("Reinforced Concrete Roof Deck");
+end
+
+rule "checking Other, Unknown and No attic access"
+when
+    WindOverride(questionThree in ("other", "unknown", "noAttic"))
+then
+    roofDeckOverride.clear();
+    roofDeckOverride.add("Unknown");
 end
      

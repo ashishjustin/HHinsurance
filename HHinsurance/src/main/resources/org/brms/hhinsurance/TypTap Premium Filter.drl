@@ -1,0 +1,69 @@
+package org.brms.hhinsurance;
+global java.util.List premium;
+rule "check for the county with premium 727"
+    when
+        TypTapPremium(county in ("Brevard", "DeSoto", "Duval", "Flagler", "Glades", "Hardee", "Hendry", "Highlands",
+                                 "Indian River", "Martin", "Nassau", "Okeechobee", "Orange", "Osceola", "Polk",
+                                 "Saint Johns", "Saint Lucie", "Seminole", "Volusia"))
+    then
+        premium.add(727);
+end
+
+rule "check for the county with premium 1227"
+    when
+        TypTapPremium(county in ("Charlotte", "Collier", "Lee", "Manatee", "Sarasota"))
+    then
+        premium.add(1227);
+end
+
+rule "check for the county with premium 1427"
+    when
+        TypTapPremium(county in ("Hillsborough"))
+    then
+        premium.add(1427);
+end
+
+rule "check for the county with premium 1627"
+    when
+        TypTapPremium(county in ("Pinellas"))
+    then
+        premium.add(1627);
+end
+
+rule "check for the county with premium 2027"
+    when
+        TypTapPremium(county in ("Palm Beach"))
+    then
+        premium.add(2027);
+end
+
+rule "check for the county with premium 2527"
+    when
+        TypTapPremium(county in ("Alachua", "Baker", "Bay", "Bradford", "Calhoun", "Citrus", "Clay", "Columbia", "Dixie", "Escambia",
+                                 "Franklin", "Gadsden", "Gilchrist", "Gulf", "Hamilton", "Hernando", "Holmes", "Jackson", "Jefferson",
+                                 "Lafayette", "Lake", "Leon", "Levy", "Liberty", "Madison", "Marion", "Okaloosa", "Pasco", "Putnam",
+                                 "Santa Rosa", "Sumter", "Suwannee", "Taylor", "Union", "Wakulla", "Walton", "Washington"))
+    then
+        premium.add(2527);
+end
+
+rule "check for the county with premium 2727"
+    when
+        TypTapPremium(county in ("Broward"))
+    then
+        premium.add(2727);
+end
+
+rule "check for the county with premium 3027"
+    when
+        TypTapPremium(county in ("Miami-dade"))
+    then
+        premium.add(3027);
+end
+
+rule "check for the county with premium 5027"
+    when
+        TypTapPremium(county in ("Monroe"))
+    then
+        premium.add(5027);
+end

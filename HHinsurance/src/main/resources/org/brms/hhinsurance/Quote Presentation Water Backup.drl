@@ -1,58 +1,110 @@
 package org.brms.hhinsurance;
-global java.util.List waterBackup;
+global java.util.List HO3WaterBackup;
+global java.util.List HO6WaterBackup;
 
 rule "carrier which is $25,$5000 and $1000 available"
 when
-    WaterBackup(carrierList in ("Cabrillo","Monarch","Centauri","FedNat","Florida Specialty","Prepared","Universal PC","Velocity"))
+    WaterBackup(carrier in ("Cabrillo","Monarch","Centauri","FedNat","Florida Specialty","Prepared","Universal PC","Velocity"))
 then
-    waterBackup.clear();
-    waterBackup.add("Available - $25 ; Sublimit - $5,000 ; Deductible - $1,000");
+    HO3WaterBackup.clear();
+    HO3WaterBackup.add("Available - $25 ; Sublimit - $5,000 ; Deductible - $1,000");
 end
 
 rule "carrier which is $25,$5000 and $250 available"
 when
-    WaterBackup(carrierList in ("Anchor","Bankers","Florida Peninsula","Olympus","Service (SageSure)","Southern Oak","St. Johns"))
+    WaterBackup(carrier in ("Anchor","Bankers","Florida Peninsula","Olympus","Service (SageSure)","Southern Oak","St. Johns"))
 then
-    waterBackup.clear();
-    waterBackup.add("Available - $25 ; Sublimit - $5,000 ; Deductible - $250");
+    HO3WaterBackup.clear();
+    HO3WaterBackup.add("Available - $25 ; Sublimit - $5,000 ; Deductible - $250");
 end
 
 rule "carrier which is $30,$5000 and $250 available"
 when
-    WaterBackup(carrierList in ("Frontline"))
+    WaterBackup(carrier in ("Frontline"))
 then
-    waterBackup.clear();
-    waterBackup.add("Available - $30 ; Sublimit - $5,000 ; Deductible - $250");
+    HO3WaterBackup.clear();
+    HO3WaterBackup.add("Available - $30 ; Sublimit - $5,000 ; Deductible - $250");
 end
 
 rule "carrier which is $30,$5000 and $1000 available"
 when
-    WaterBackup(carrierList in ("Heritage"))
+    WaterBackup(carrier in ("Heritage"))
 then
-    waterBackup.clear();
-    waterBackup.add("Available - $30 ; Sublimit - $5,000 ; Deductible - $1,000");
+    HO3WaterBackup.clear();
+    HO3WaterBackup.add("Available - $30 ; Sublimit - $5,000 ; Deductible - $1,000");
 end
 
 rule "carrier which is $100,$5000 and $1000 available"
 when
-    WaterBackup(carrierList in ("Western World"))
+    WaterBackup(carrier in ("Western World"))
 then
-    waterBackup.clear();
-    waterBackup.add("Available - $100 ; Sublimit - $5,000 ; Deductible - $1,000");
+    HO3WaterBackup.clear();
+    HO3WaterBackup.add("Available - $100 ; Sublimit - $5,000 ; Deductible - $1,000");
 end
 
 rule "carrier which is $25,$5000 and AOP available"
 when
-    WaterBackup(carrierList in ("American Integrity","American Strategic","Swyfft","United"))
+    WaterBackup(carrier in ("American Integrity","American Strategic","Swyfft","United"))
 then
-    waterBackup.clear();
-    waterBackup.add("Available - $25 ; Sublimit - $5,000 ; Deductible - AOP Deductible Applies");
+    HO3WaterBackup.clear();
+    HO3WaterBackup.add("Available - $25 ; Sublimit - $5,000 ; Deductible - AOP Deductible Applies");
 end
 
 rule "carrier which is water backup is not available"
 when
-    WaterBackup(carrierList in ("Edison","GeoVera","Homeowners Choice","TypTap Home"))
+    WaterBackup(carrier in ("Edison","Geovera","Homeowners Choice","TypTap Home"))
 then
-    waterBackup.clear();
-    waterBackup.add("Not Available");
+    HO3WaterBackup.clear();
+    HO3WaterBackup.add("Not Available");
 end
+
+
+rule "carrier which is $25,$5000 and $1000 available for HO6"
+when
+    WaterBackup(carrier in ("Cabrillo","Monarch","Centauri","FedNat","Prepared","Universal PC","Velocity"))
+then
+    HO6WaterBackup.clear();
+    HO6WaterBackup.add("Available - $25 ; Sublimit - $5,000 ; Deductible - $1,000");
+end
+
+rule "carrier which is $25,$5000 and $250 available for HO6"
+when
+    WaterBackup(carrier in ("Florida Peninsula","Olympus","Southern Oak","St. Johns"))
+then
+    HO6WaterBackup.clear();
+    HO6WaterBackup.add("Available - $25 ; Sublimit - $5,000 ; Deductible - $250");
+end
+
+rule "carrier which is $30,$5000 and $250 available for HO6"
+when
+    WaterBackup(carrier in ("Frontline"))
+then
+    HO6WaterBackup.clear();
+    HO6WaterBackup.add("Available - $30 ; Sublimit - $5,000 ; Deductible - $250");
+end
+
+rule "carrier which is $30,$5000 and $1000 available for HO6"
+when
+    WaterBackup(carrier in ("Heritage"))
+then
+    HO6WaterBackup.clear();
+    HO6WaterBackup.add("Available - $30 ; Sublimit - $5,000 ; Deductible - $1,000");
+end
+
+rule "carrier which is $25,$5000 and AOP available for HO6"
+when
+    WaterBackup(carrier in ("American Integrity","American Strategic","United"))
+then
+    HO6WaterBackup.clear();
+    HO6WaterBackup.add("Available - $25 ; Sublimit - $5,000 ; Deductible - AOP Deductible Applies");
+end
+
+rule "carrier which is water backup is not available for HO6"
+when
+    WaterBackup(carrier in ("Edison","Homeowners Choice","Spinnaker","Bankers"))
+then
+    HO6WaterBackup.clear();
+    HO6WaterBackup.add("Not Available");
+end
+
+

@@ -1,0 +1,74 @@
+package org.brms.hhinsurance;
+global java.util.List frontlineConstructionType
+
+rule "Check M Construction type"
+    when
+    	FrontlineConstructionTypeMapping(constructionType in ("Concrete Block - Stucco", "Concrete Block", "Solid Stone", "Masonry 67% - Frame 33%", "Masonry 75% - Frame 25%") )
+    then
+    	 frontlineConstructionType.clear();
+	     frontlineConstructionType.add("M");
+end
+
+rule "Check masonryveneer_fli Construction type"
+    when
+    	FrontlineConstructionTypeMapping(constructionType in ("Frame - Stucco", "Brick Veneer", "Stone Veneer") )
+    then
+    	 frontlineConstructionType.clear();
+	     frontlineConstructionType.add("masonryveneer_fli");
+end
+
+rule "Check masonryveneer_fli Construction type and Frame Construction type"
+    when
+    	FrontlineConstructionTypeMapping(constructionType.equals("Frame") && frameConstructionType.equals("Hardiplank Siding"))
+    then
+    	 frontlineConstructionType.clear();
+	     frontlineConstructionType.add("masonryveneer_fli");
+end
+
+rule "Check masonryveneer_fli Construction type and Frame Construction type two"
+    when
+    	FrontlineConstructionTypeMapping(constructionType.equals("Masonry 50% - Frame 50%") && frameConstructionType.equals("Hardiplank Siding"))
+    then
+    	 frontlineConstructionType.clear();
+	     frontlineConstructionType.add("masonryveneer_fli");
+end
+
+rule "Check masonryveneer_fli Construction type and Frame Construction type three"
+    when
+    	FrontlineConstructionTypeMapping(constructionType.equals("Masonry 50% - Frame 50%") && frameConstructionType.equals("Brick Veneer"))
+    then
+    	 frontlineConstructionType.clear();
+	     frontlineConstructionType.add("masonryveneer_fli");
+end
+
+rule "Check masonryveneer_fli Construction type and Frame Construction type four"
+    when
+    	FrontlineConstructionTypeMapping(constructionType.equals("Masonry 50% - Frame 50%") && frameConstructionType.equals("Stone Veneer"))
+    then
+    	 frontlineConstructionType.clear();
+	     frontlineConstructionType.add("masonryveneer_fli");
+end
+
+rule "Check superior_fli Construction type"
+    when
+    	FrontlineConstructionTypeMapping(constructionType.equals("Superior"))
+    then
+    	 frontlineConstructionType.clear();
+	     frontlineConstructionType.add("superior_fli");
+end
+
+rule "Check F Construction type"
+    when
+    	FrontlineConstructionTypeMapping(constructionType.equals("Aluminum Siding") || constructionType.equals("Vinyl Siding")|| constructionType.equals("Wood Siding") ||  constructionType.equals("Frame") || constructionType.equals("Logs"))
+    then
+    	 frontlineConstructionType.clear();
+	     frontlineConstructionType.add("F");
+end
+
+rule "Check F Construction type and Frame Construction type"
+    when
+    	FrontlineConstructionTypeMapping((constructionType.equals("Masonry 50% - Frame 50%") && frameConstructionType.equals("Frame - Stucco")) || (constructionType.equals("Masonry 50% - Frame 50%") && frameConstructionType.equals("Frame")) || (constructionType.equals("Frame") && frameConstructionType.equals("Frame")))
+    then
+    	 frontlineConstructionType.clear();
+	     frontlineConstructionType.add("F");
+end

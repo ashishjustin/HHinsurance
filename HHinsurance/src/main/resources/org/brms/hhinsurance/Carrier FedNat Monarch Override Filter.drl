@@ -1,0 +1,44 @@
+package org.brms.hhinsurance;
+global java.util.List carrierEligibility;
+
+rule "Excluded FedNat carrier for the counties"
+    when
+        FedNatMonarchOverrideFilter(county in ("Broward", "Miami-Dade", "Palm Beach", "Hernando", "Monroe", "Pasco") && carrier.equals("FedNat"))
+    then
+        carrierEligibility.add("0");
+end
+
+rule "Included FedNat carrier for the counties"
+    when
+        FedNatMonarchOverrideFilter(county not in ("Broward", "Miami-Dade", "Palm Beach", "Hernando", "Monroe", "Pasco") && carrier.equals("FedNat"))
+    then
+        carrierEligibility.add("1");
+end
+
+rule "If the carrier is not included"
+    when
+        FedNatMonarchOverrideFilter(county in ("Broward", "Miami-Dade", "Monroe", "Palm Beach") && carrier.equals("Monarch") && yearBuilt >= 1990 && dwellingCoverage >= 300000)
+    then
+        carrierEligibility.add("0");
+end
+
+rule "If the carrier is included"
+    when
+        FedNatMonarchOverrideFilter(county not in ("Broward", "Miami-Dade", "Monroe", "Palm Beach") && carrier.equals("Monarch") && yearBuilt >= 1990 && dwellingCoverage >= 300000)
+    then
+        carrierEligibility.add("1");
+end
+
+rule "If the Dwelling Coverage is minimum $4,00,000 and included carrier"
+    when
+        FedNatMonarchOverrideFilter(county in ("Collier", "Lee", "Hernando", "Pasco", "Lake", "Orange", "Osceola", "Seminole") && carrier.equals("Monarch") && yearBuilt >= 1990 && dwellingCoverage >= 400000)
+    then
+        carrierEligibility.add("1");
+end
+
+rule "If Dwelling Coverage is minimum $4,00,000 and not included carrier"
+    when
+        FedNatMonarchOverrideFilter(county not in ("Collier", "Lee", "Hernando", "Pasco", "Lake", "Orange", "Osceola", "Seminole") && carrier.equals("Monarch") && yearBuilt >= 1990 && dwellingCoverage >= 400000)
+    then
+        carrierEligibility.add("0");
+end

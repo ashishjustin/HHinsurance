@@ -1,42 +1,75 @@
 package org.brms.hhinsurance;
-global java.util.List personalInjury;
+global java.util.List HO3PersonalInjury;
+global java.util.List HO6PersonalInjury;
+
+rule "carrier for which $15 is available for HO3"
+when
+    PersonalInjury(carrier in ("American Integrity","Monarch","American Strategic","Cabrillo","Centauri","FedNat","Florida Specialty","Heritage","Olympus","Prepared","Service (SageSure)","Southern Oak","Swyfft","St. Johns","United","Velocity"))
+then
+    HO3PersonalInjury.clear();
+    HO3PersonalInjury.add("Available - $15");
+end
+
+rule "carrier for which $20 is available for HO3"
+when
+    PersonalInjury(carrier in ("Western World"))
+then
+    HO3PersonalInjury.clear();
+    HO3PersonalInjury.add("Available - $20");
+end
+
+rule "carrier for which $25 is available for HO3"
+when
+    PersonalInjury(carrier in ("Anchor","Bankers"))
+then
+    HO3PersonalInjury.clear();
+    HO3PersonalInjury.add("Available - $25");
+end
+
+rule "carrier for which $30 is available for HO3"
+when
+    PersonalInjury(carrier in ("Frontline"))
+then
+    HO3PersonalInjury.clear();
+    HO3PersonalInjury.add("Available - $30");
+end
+
+rule "carrier not available for HO3"
+when
+    PersonalInjury(carrier in ("Edison","Florida Peninsula","Geovera","Homeowners Choice","TypTap Home","Universal PC"))
+then
+    HO3PersonalInjury.clear();
+    HO3PersonalInjury.add("Not Available");
+end
 
 rule "carrier for which $15 is available"
 when
-    PersonalInjury(carrierList in ("American Integrity","Monarch","American Strategic","Cabrillo","Centauri","FedNat","Florida Specialty","Heritage","Olympus","Prepared","Service (SageSure)","Southern Oak","Swyfft","St. Johns","United","Velocity"))
+    PersonalInjury(carrier in ("American Integrity","Monarch","American Strategic","Cabrillo","Centauri","FedNat","Heritage","Olympus","Prepared","Southern Oak","St. Johns","United","Velocity"))
 then
-    personalInjury.clear();
-    personalInjury.add("Available - $15");
-end
-
-rule "carrier for which $20 is available"
-when
-    PersonalInjury(carrierList in ("Western World"))
-then
-    personalInjury.clear();
-    personalInjury.add("Available - $20");
-end
-
-rule "carrier for which $25 is available"
-when
-    PersonalInjury(carrierList in ("Anchor","Bankers"))
-then
-    personalInjury.clear();
-    personalInjury.add("Available - $25");
+    HO6PersonalInjury.clear();
+    HO6PersonalInjury.add("Available - $15");
 end
 
 rule "carrier for which $30 is available"
 when
-    PersonalInjury(carrierList in ("Frontline"))
+    PersonalInjury(carrier in ("Frontline"))
 then
-    personalInjury.clear();
-    personalInjury.add("Available - $30");
+    HO6PersonalInjury.clear();
+    HO6PersonalInjury.add("Available - $30");
 end
 
 rule "carrier not available"
 when
-    PersonalInjury(carrierList in ("Edison","Florida Peninsula","GeoVera","Homeowners Choice","TypTap Home","Universal PC"))
+    PersonalInjury(carrier in ("Edison","Florida Peninsula","Homeowners Choice","Universal PC", "Spinnaker"))
 then
-    personalInjury.clear();
-    personalInjury.add("Not Available");
+    HO6PersonalInjury.clear();
+    HO6PersonalInjury.add("Not Available");
+end
+
+rule "carrier for which $25 is available for HO6"
+when
+    PersonalInjury(carrier in ("Bankers"))
+then
+    HO3PersonalInjury.clear();
+    HO3PersonalInjury.add("Available - $25");
 end

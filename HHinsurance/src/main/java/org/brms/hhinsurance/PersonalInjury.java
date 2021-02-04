@@ -9,25 +9,25 @@ public class PersonalInjury implements java.io.Serializable
 
    static final long serialVersionUID = 1L;
 
-   private java.lang.String carrierList;
+   private java.lang.String carrier;
 
    public PersonalInjury()
    {
    }
 
-   public java.lang.String getCarrierList()
+   public java.lang.String getCarrier()
    {
-      return this.carrierList;
+      return this.carrier;
    }
 
-   public void setCarrierList(java.lang.String carrierList)
+   public void setCarrier(java.lang.String carrier)
    {
-      this.carrierList = carrierList;
+      this.carrier = carrier;
    }
 
-   public PersonalInjury(java.lang.String carrierList)
+   public PersonalInjury(java.lang.String carrier)
    {
-      this.carrierList = carrierList;
+      this.carrier = carrier;
    }
 
 }

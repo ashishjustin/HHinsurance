@@ -1,0 +1,1781 @@
+package org.brms.hhinsurance;
+global java.util.List construction;
+global java.util.List constructionType;
+global java.util.List masonryConstruction;
+global java.util.List frameConstruction;
+global java.util.List hardiplank;
+
+rule "Structure Type : NonCondominium"
+	when 
+	    ConstructionMapping(structureType not in ("Condominium"))
+	then
+	    drools.setFocus("NonCondominiumStories");
+end
+
+rule "Structure Type : Condominium"
+	when 
+		ConstructionMapping(structureType in ("Condominium"))
+	then
+	    drools.setFocus("CondominiumStories");
+end
+
+
+rule "number of Stories Non Condo : 1"
+ruleflow-group "NonCondominiumStories"
+	when
+		ConstructionMapping(stories == 1)
+    then
+        drools.setFocus("StoriesNonCondo1");
+end
+
+rule "number of Stories Non Condo : 2"
+ruleflow-group "NonCondominiumStories"
+	when
+		ConstructionMapping(stories == 2)
+    then
+        drools.setFocus("StoriesNonCondo2");
+end
+
+rule "number of Stories NonCondo greater than 2"
+ruleflow-group "NonCondominiumStories"
+	when
+		ConstructionMapping(stories > 2)
+    then
+        drools.setFocus("StoriesNonCondo3");
+end
+
+rule "1: NonCondominium : Construction material  : Stucco"
+ruleflow-group "StoriesNonCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("stucco"))
+    then
+    	drools.setFocus("ConstructionStuccoNonCondo1");
+end
+
+rule "1: NonCondominium : Stucco : 100% Masonry"
+ruleflow-group "ConstructionStuccoNonCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Masonry"))
+	then
+	    construction.add("Concrete Block - Stucco");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "1:  NonCondominium : Stucco : 100% Frame"
+ruleflow-group "ConstructionStuccoNonCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Frame"))
+	then
+	    construction.add("Frame - Stucco");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Frame - Stucco");
+	    hardiplank.add("0");
+end
+
+
+rule "1: NonCondominium : Construction material  : Concrete Boards/Hardiboard"
+ruleflow-group "StoriesNonCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("concreteBoardsHardiboard"))
+    then
+    	drools.setFocus("ConstructionHardiboardNonCondo1");
+end
+
+rule "1:  NonCondominium : Concrete Hardiboard : 100% Masonry"
+ruleflow-group "ConstructionHardiboardNonCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Masonry"))
+	then
+	    construction.add("Concrete Block - Stucco");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "1: NonCondominium : Concrete Hardiboard : 100% Frame"
+ruleflow-group "ConstructionHardiboardNonCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Frame"))
+	then
+	    construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Hardiplank Siding");
+	    hardiplank.add("1");
+end
+
+rule "1: NonCondominium : Construction material  : Aluminium Siding"
+ruleflow-group "StoriesNonCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("aluminumSiding"))
+    then
+    	construction.add("Aluminum Siding");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Aluminum Siding");
+	    hardiplank.add("0");
+end
+
+rule "1: NonCondominium : Construction material  : Vinyl Siding"
+ruleflow-group "StoriesNonCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("vinylSiding"))
+    then
+    	construction.add("Vinyl Siding");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Vinyl Siding");
+	    hardiplank.add("0");
+end
+
+rule "1: NonCondominium : Construction material  : Wood Siding"
+ruleflow-group "StoriesNonCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("woodSiding"))
+    then
+    	construction.add("Wood Siding");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Wood Siding");
+	    hardiplank.add("0");
+end
+
+rule "1: NonCondominium : Construction material  : Asbestos Siding"
+ruleflow-group "StoriesNonCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("asbestos"))
+    then
+    	construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+rule "1: NonCondominium : Construction material  : Concrete Block Painted"
+ruleflow-group "StoriesNonCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("concreteBlockPainted"))
+    then
+    	construction.add("Concrete Block");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+
+rule "1: NonCondominium : Construction material  : Brick"
+ruleflow-group "StoriesNonCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("brick"))
+    then
+    	drools.setFocus("ConstructionBrickNonCondo1");
+end
+
+rule "1: NonCondominium : Brick : 100% Masonry"
+ruleflow-group "ConstructionBrickNonCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Masonry"))
+	then
+	    construction.add("Solid Stone");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Solid Stone");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "1: NonCondominium : Brick : 100% Frame"
+ruleflow-group "ConstructionBrickNonCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Frame"))
+	then
+	    construction.add("Brick Veneer");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Brick Veneer");
+	    hardiplank.add("0");
+end
+
+
+rule "1: NonCondominium : Construction material  : Stone"
+ruleflow-group "StoriesNonCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("stone"))
+    then
+    	drools.setFocus("ConstructionStoneNonCondo1");
+end
+
+rule "1: NonCondominium : Stone : 100% Masonry"
+ruleflow-group "ConstructionStoneNonCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Masonry"))
+	then
+	    construction.add("Solid Stone");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Solid Stone");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "1: NonCondominium : Stone : 100% Frame"
+ruleflow-group "ConstructionStoneNonCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Frame"))
+	then
+	    construction.add("Stone Veneer");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Stone Veneer");
+	    hardiplank.add("0");
+end
+
+rule "1: NonCondominium : Construction material  : Logs"
+ruleflow-group "StoriesNonCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("logs"))
+    then
+    	construction.add("Logs");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Logs");
+	    hardiplank.add("0");
+end
+
+rule "1: NonCondominium : Construction material  : Other,Unknown"
+ruleflow-group "StoriesNonCondo1"
+	when
+		ConstructionMapping(constructionMaterial in ("other","unknown"))
+    then
+    	drools.setFocus("ConstructionOtherNonCondo1");
+end
+
+
+rule "1: NonCondominium : Other,Unknown : 100% Masonry"
+ruleflow-group "ConstructionOtherNonCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Masonry"))
+	then
+	    construction.add("Concrete Block");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "1: NonCondominium : Other,Unknown : 100% Frame"
+ruleflow-group "ConstructionOtherNonCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Frame"))
+	then
+	    construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+
+rule "2: NonCondominium : Construction material  : Stucco"
+ruleflow-group "StoriesNonCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("stucco"))
+    then
+    	drools.setFocus("ConstructionStuccoNonCondo2");
+end
+
+rule "2: NonCondominium : Stucco : 100% Wood Frame"
+ruleflow-group "ConstructionStuccoNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Wood Frame"))
+	then
+	    construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Frame - Stucco");
+	    hardiplank.add("0");
+end
+
+rule "2: NonCondominium : Stucco : 50/50"
+ruleflow-group "ConstructionStuccoNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("50/50"))
+	then
+	    construction.add("Masonry 50% - Frame 50%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("Frame - Stucco");
+	    hardiplank.add("0");
+end
+
+
+rule "2: NonCondominium : Stucco : 66/34"
+ruleflow-group "ConstructionStuccoNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("66/34"))
+	then
+	    construction.add("Masonry 67% - Frame 33%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("Frame - Stucco");
+	    hardiplank.add("0");
+end
+
+rule "2: NonCondominium : Stucco : 75/25"
+ruleflow-group "ConstructionStuccoNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("75/25"))
+	then
+	    construction.add("Masonry 75% - Frame 25%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("Frame - Stucco");
+	    hardiplank.add("0");
+end
+rule "2: NonCondominium : Stucco : 100% ConcreteBlock"
+ruleflow-group "ConstructionStuccoNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Concrete Block - Stucco");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "2: NonCondominium : Construction material  : Concrete Boards/Hardiboard"
+ruleflow-group "StoriesNonCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("concreteBoardsHardiboard"))
+    then
+    	drools.setFocus("ConstructionHardiboardNonCondo2");
+end
+
+
+rule "2: NonCondominium : concreteBoardsHardiboard : 100% Wood Frame"
+ruleflow-group "ConstructionHardiboardNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Wood Frame"))
+	then
+	    construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Hardiplank Siding");
+	    hardiplank.add("1");
+end
+
+rule "2: NonCondominium : concreteBoardsHardiboard : 50/50"
+ruleflow-group "ConstructionHardiboardNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("50/50"))
+	then
+	    construction.add("Masonry 50% - Frame 50%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("Hardiplank Siding");
+	    hardiplank.add("1");
+end
+
+
+rule "2: NonCondominium : concreteBoardsHardiboard : 66/34"
+ruleflow-group "ConstructionHardiboardNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("66/34"))
+	then
+	    construction.add("Masonry 67% - Frame 33%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("Hardiplank Siding");
+	    hardiplank.add("1");
+end
+
+rule "2: NonCondominium : concreteBoardsHardiboard : 75/25"
+ruleflow-group "ConstructionHardiboardNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("75/25"))
+	then
+	    construction.add("Masonry 75% - Frame 25%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("Hardiplank Siding");
+	    hardiplank.add("1");
+end
+rule "2: NonCondominium : concreteBoardsHardiboard : 100% ConcreteBlock"
+ruleflow-group "ConstructionHardiboardNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Concrete Block - Stucco");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "2: NonCondominium : Construction material  : Aluminium Siding"
+ruleflow-group "StoriesNonCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("aluminumSiding"))
+    then
+    	construction.add("Aluminum Siding");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Aluminum Siding");
+	    hardiplank.add("0");
+end
+
+rule "2: NonCondominium : Construction material  : Vinyl Siding"
+ruleflow-group "StoriesNonCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("vinylSiding"))
+    then
+    	construction.add("Vinyl Siding");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Vinyl Siding");
+	    hardiplank.add("0");
+end
+
+rule "2: NonCondominium : Construction material  : Wood Siding"
+ruleflow-group "StoriesNonCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("woodSiding"))
+    then
+    	construction.add("Wood Siding");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Wood Siding");
+	    hardiplank.add("0");
+end
+
+
+rule "2: NonCondominium : Construction material  : Asbestos Siding"
+ruleflow-group "StoriesNonCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("asbestos"))
+    then
+    	construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+
+rule "2: NonCondominium : Construction material  : Concrete Block Painted"
+ruleflow-group "StoriesNonCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("concreteBlockPainted"))
+    then
+    	drools.setFocus("ConstructionConcreteBlockPaintedNonCondo2");
+end
+
+
+rule "2: NonCondominium : Concrete Block Painted : 50/50"
+ruleflow-group "ConstructionConcreteBlockPaintedNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("50/50"))
+	then
+	    construction.add("Masonry 50% - Frame 50%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+rule "2: NonCondominium : Concrete Block Painted : 66/34"
+ruleflow-group "ConstructionConcreteBlockPaintedNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("66/34"))
+	then
+	    construction.add("Masonry 67% - Frame 33%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+
+rule "2: NonCondominium : Concrete Block Painted : 75/25"
+ruleflow-group "ConstructionConcreteBlockPaintedNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("75/25"))
+	then
+	    construction.add("Masonry 75% - Frame 25%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+rule "2: NonCondominium : Concrete Block Painted : 100% ConcreteBlock"
+ruleflow-group "ConstructionConcreteBlockPaintedNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Concrete Block");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "2: NonCondominium : Construction material  : Brick"
+ruleflow-group "StoriesNonCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("brick"))
+    then
+    	drools.setFocus("ConstructionBrickNonCondo2");
+end
+
+
+
+rule "2: NonCondominium : Brick : 100% Wood Frame"
+ruleflow-group "ConstructionBrickNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Wood Frame"))
+	then
+	    construction.add("Brick Veneer");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Brick Veneer");
+	    hardiplank.add("0");
+end
+
+rule "2: NonCondominium : Brick : 50/50"
+ruleflow-group "ConstructionBrickNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("50/50"))
+	then
+	    construction.add("Masonry 50% - Frame 50%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Brick Veneer");
+	    hardiplank.add("0");
+end
+
+rule "2: NonCondominium : Brick : 66/34"
+ruleflow-group "ConstructionBrickNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("66/34"))
+	then
+	    construction.add("Masonry 67% - Frame 33%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Brick Veneer");
+	    hardiplank.add("0");
+end
+
+rule "2: NonCondominium : Brick : 75/25"
+ruleflow-group "ConstructionBrickNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("75/25"))
+	then
+	    construction.add("Masonry 75% - Frame 25%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Brick Veneer");
+	    hardiplank.add("0");
+end
+
+
+rule "2: NonCondominium : Brick : 100% ConcreteBlock"
+ruleflow-group "ConstructionBrickNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Solid Brick");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Solid Brick");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+
+rule "2: NonCondominium : Construction material  : Stone"
+ruleflow-group "StoriesNonCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("stone"))
+    then
+    	drools.setFocus("ConstructionStoneNonCondo2");
+end
+
+
+rule "2: NonCondominium : Stone : 100% Wood Frame"
+ruleflow-group "ConstructionStoneNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Wood Frame"))
+	then
+	    construction.add("Stone Veneer");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Stone Veneer");
+	    hardiplank.add("0");
+end
+
+rule "2:  NonCondominium : Stone : 50/50"
+ruleflow-group "ConstructionStoneNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("50/50"))
+	then
+	    construction.add("Masonry 50% - Frame 50%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Stone Veneer");
+	    hardiplank.add("0");
+end
+
+
+rule "2:  NonCondominium : Stone : 66/34"
+ruleflow-group "ConstructionStoneNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("66/34"))
+	then
+	    construction.add("Masonry 67% - Frame 33%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Stone Veneer");
+	    hardiplank.add("0");
+end
+
+
+rule "2:  NonCondominium : Stone : 75/25"
+ruleflow-group "ConstructionStoneNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("75/25"))
+	then
+	    construction.add("Masonry 75% - Frame 25%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Stone Veneer");
+	    hardiplank.add("0");
+end
+
+rule "2: NonCondominium : Stone : 100% ConcreteBlock"
+ruleflow-group "ConstructionStoneNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Solid Stone");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Solid Stone");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "2: NonCondominium : Construction material  : Logs"
+ruleflow-group "StoriesNonCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("logs"))
+    then
+    	construction.add("");
+	    constructionType.add("");
+	    masonryConstruction.add("");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "2: NonCondominium : Construction material  : Other,Unknown"
+ruleflow-group "StoriesNonCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("other") || ConstructionMaterial.equalsIgnoreCase("unknown"))
+    then
+    	drools.setFocus("ConstructionOtherNonCondo2");
+end
+
+rule "2: NonCondominium : Other,Unknown : 100% Wood Frame"
+ruleflow-group "ConstructionOtherNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Wood Frame"))
+	then
+	    construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+rule "2: NonCondominium : Other,Unknown : 50/50"
+ruleflow-group "ConstructionOtherNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("50/50"))
+	then
+	    construction.add("Masonry 50% - Frame 50%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+
+rule "2: NonCondominium : Other,Unknown : 66/34"
+ruleflow-group "ConstructionOtherNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("66/34"))
+	then
+	    construction.add("Masonry 67% - Frame 33%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+
+rule "2: NonCondominium : Other,Unknown : 75/25"
+ruleflow-group "ConstructionOtherNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("75/25"))
+	then
+	    construction.add("Masonry 75% - Frame 25%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+rule "2: NonCondominium : Other,Unknown : 100% ConcreteBlock"
+ruleflow-group "ConstructionOtherNonCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Concrete Block");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+
+
+
+rule "3: NonCondominium : Construction material  : Stucco"
+ruleflow-group "StoriesNonCondo3"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("stucco"))
+    then
+    	drools.setFocus("ConstructionStuccoNonCondo3");
+end
+
+rule "3: NonCondominium : Stucco : 100% Wood Frame"
+ruleflow-group "ConstructionStuccoNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Wood Frame"))
+	then
+	    construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Frame - Stucco");
+	    hardiplank.add("0");
+end
+
+
+rule "3: NonCondominium : Stucco : 66/34"
+ruleflow-group "ConstructionStuccoNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("66/34"))
+	then
+	    construction.add("Masonry 67% - Frame 33%");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("Frame - Stucco");
+	    hardiplank.add("0");
+end
+
+rule "3: NonCondominium : Stucco : 33/67"
+ruleflow-group "ConstructionStuccoNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("33/67"))
+	then
+	    construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Frame-Stucco");
+	    hardiplank.add("0");
+end
+
+rule "3: NonCondominium : Stucco : 100% ConcreteBlock"
+ruleflow-group "ConstructionStuccoNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Concrete Block - Stucco");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "3: NonCondominium : Construction material  : Concrete Boards/Hardiboard"
+ruleflow-group "StoriesNonCondo3"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("concreteBoardsHardiboard"))
+    then
+    	drools.setFocus("ConstructionHardiboardNonCondo3");
+end
+
+
+rule "3: NonCondominium : concreteBoardsHardiboard : 100% Wood Frame"
+ruleflow-group "ConstructionHardiboardNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Wood Frame"))
+	then
+	    construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Hardiplank Siding");
+	    hardiplank.add("1");
+end
+
+
+rule "3: NonCondominium : concreteBoardsHardiboard : 66/34"
+ruleflow-group "ConstructionHardiboardNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("66/34"))
+	then
+	    construction.add("Masonry 67% - Frame 33%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("Hardiplank Siding");
+	    hardiplank.add("1");
+end
+
+rule "3: NonCondominium : concreteBoardsHardiboard : 33/67"
+ruleflow-group "ConstructionHardiboardNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("33/67"))
+	then
+	    construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Hardiplank Siding");
+	    hardiplank.add("1");
+end
+rule "3: NonCondominium : concreteBoardsHardiboard : 100% ConcreteBlock"
+ruleflow-group "ConstructionHardiboardNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Concrete Block - Stucco");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "3: NonCondominium : Construction material  : Aluminium Siding"
+ruleflow-group "StoriesNonCondo3"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("aluminumSiding"))
+    then
+    	construction.add("Aluminum Siding");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Aluminum Siding");
+	    hardiplank.add("0");
+end
+
+rule "3: NonCondominium : Construction material  : Vinyl Siding"
+ruleflow-group "StoriesNonCondo3"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("vinylSiding"))
+    then
+    	construction.add("Vinyl Siding");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Vinyl Siding");
+	    hardiplank.add("0");
+end
+
+rule "3: NonCondominium : Construction material  : Wood Siding"
+ruleflow-group "StoriesNonCondo3"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("woodSiding"))
+    then
+    	construction.add("Wood Siding");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Wood Siding");
+	    hardiplank.add("0");
+end
+
+
+rule "3: NonCondominium : Construction material  : Asbestos Siding"
+ruleflow-group "StoriesNonCondo3"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("asbestos"))
+    then
+    	construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+
+rule "3: NonCondominium : Construction material  : Concrete Block Painted"
+ruleflow-group "StoriesNonCondo3"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("concreteBlockPainted"))
+    then
+    	drools.setFocus("ConstructionConcreteBlockPaintedNonCondo3");
+end
+
+rule "3: NonCondominium : Concrete Block Painted : 66/34"
+ruleflow-group "ConstructionConcreteBlockPaintedNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("66/34"))
+	then
+	    construction.add("Masonry 67% - Frame 33%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+
+rule "3: NonCondominium : Concrete Block Painted : 33/67"
+ruleflow-group "ConstructionConcreteBlockPaintedNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("33/67"))
+	then
+	    construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Frame-Stucco");
+	    hardiplank.add("0");
+end
+rule "3: NonCondominium : Concrete Block Painted : 100% ConcreteBlock"
+ruleflow-group "ConstructionConcreteBlockPaintedNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Concrete Block");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "3: NonCondominium : Construction material  : Brick"
+ruleflow-group "StoriesNonCondo3"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("brick"))
+    then
+    	drools.setFocus("ConstructionBrickNonCondo3");
+end
+
+
+
+rule "3: NonCondominium : Brick : 100% Wood Frame"
+ruleflow-group "ConstructionBrickNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Wood Frame"))
+	then
+	    construction.add("Brick Veneer");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Brick Veneer");
+	    hardiplank.add("0");
+end
+
+rule "3: NonCondominium : Brick : 66/34"
+ruleflow-group "ConstructionBrickNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("66/34"))
+	then
+	    construction.add("Masonry 67% - Frame 33%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Brick Veneer");
+	    hardiplank.add("0");
+end
+
+rule "3: NonCondominium : Brick : 33/67"
+ruleflow-group "ConstructionBrickNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("33/67"))
+	then
+	    construction.add("Brick Veneer");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Brick Veneer");
+	    hardiplank.add("0");
+end
+
+
+rule "3: NonCondominium : Brick : 100% ConcreteBlock"
+ruleflow-group "ConstructionBrickNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Solid Brick");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Solid Brick");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+
+rule "3: NonCondominium : Construction material  : Stone"
+ruleflow-group "StoriesNonCondo3"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("stone"))
+    then
+    	drools.setFocus("ConstructionStoneNonCondo3");
+end
+
+
+rule "3: NonCondominium : Stone : 100% Wood Frame"
+ruleflow-group "ConstructionStoneNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Wood Frame"))
+	then
+	    construction.add("Stone Veneer");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Stone Veneer");
+	    hardiplank.add("0");
+end
+
+
+rule "3:  NonCondominium : Stone : 66/34"
+ruleflow-group "ConstructionStoneNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("66/34"))
+	then
+	    construction.add("Masonry 67% - Frame 33%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Stone Veneer");
+	    hardiplank.add("0");
+end
+
+
+rule "3:  NonCondominium : Stone : 33/67"
+ruleflow-group "ConstructionStoneNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("33/67"))
+	then
+	    construction.add("Stone Veneer");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Stone Veneer");
+	    hardiplank.add("0");
+end
+
+rule "3: NonCondominium : Stone : 100% ConcreteBlock"
+ruleflow-group "ConstructionStoneNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Solid Stone");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Solid Stone");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "3: NonCondominium : Construction material  : Logs"
+ruleflow-group "StoriesNonCondo3"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("logs"))
+    then
+    	construction.add("");
+	    constructionType.add("");
+	    masonryConstruction.add("");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "3: NonCondominium : Construction material  : Other,Unknown"
+ruleflow-group "StoriesNonCondo3"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("other") || ConstructionMaterial.equalsIgnoreCase("unknown"))
+    then
+    	drools.setFocus("ConstructionOtherNonCondo3");
+end
+
+rule "3: NonCondominium : Other,Unknown : 100% Wood Frame"
+ruleflow-group "ConstructionOtherNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Wood Frame"))
+	then
+	    construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+rule "3: NonCondominium : Other,Unknown : 33/67"
+ruleflow-group "ConstructionOtherNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("33/67"))
+	then
+	    construction.add("Frame");
+		constructionType.add("Frame");
+		masonryConstruction.add("");
+		frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+rule "3: NonCondominium : Other,Unknown : 66/34"
+ruleflow-group "ConstructionOtherNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("66/34"))
+	then
+	    construction.add("Masonry 67% - Frame 33%");
+	    constructionType.add("Mixed Masonry-Frame");
+		masonryConstruction.add("Concrete Block");
+		frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+rule "3: NonCondominium : Other,Unknown : 100% ConcreteBlock"
+ruleflow-group "ConstructionOtherNonCondo3"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Concrete Block");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+
+rule "number of StoriesCondo : 1"
+ruleflow-group "CondominiumStories"
+	when
+		ConstructionMapping(stories == 1)
+    then
+        drools.setFocus("StoriesCondo1");
+end
+
+
+rule "number of StoriesCondo greater than 1"
+ruleflow-group "CondominiumStories"	
+	when
+		ConstructionMapping(stories > 1)
+    then
+        drools.setFocus("StoriesCondo2");
+end
+
+rule "1: Condominium : Construction material  : Stucco"
+ruleflow-group "StoriesCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("stucco"))
+    then
+    	drools.setFocus("ConstructionStuccoCondo1");
+end
+
+rule "1: Condominium : Stucco : 100% Masonry"
+ruleflow-group "ConstructionStuccoCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Masonry"))
+	then
+	    construction.add("Concrete Block - Stucco");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "1:  Condominium : Stucco : 100% Frame"
+ruleflow-group "ConstructionStuccoCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Frame"))
+	then
+	    construction.add("Frame - Stucco");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Frame - Stucco");
+	    hardiplank.add("0");
+end
+
+
+rule "1: Condominium : Construction material  : Concrete Boards/Hardiboard"
+ruleflow-group "StoriesCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("concreteBoardsHardiboard"))
+    then
+    	drools.setFocus("ConstructionHardiboardCondo1");
+end
+
+rule "1:  Condominium : Concrete Hardiboard : 100% Masonry"
+ruleflow-group "ConstructionHardiboardCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Masonry"))
+	then
+	    construction.add("Concrete Block - Stucco");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "1: Condominium : Concrete Hardiboard : 100% Frame"
+ruleflow-group "ConstructionHardiboardCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Frame"))
+	then
+	    construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Hardiplank Siding");
+	    hardiplank.add("1");
+end
+
+rule "1: Condominium : Construction material  : Aluminium Siding"
+ruleflow-group "StoriesCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("aluminumSiding"))
+    then
+    	construction.add("Aluminum Siding");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Aluminum Siding");
+	    hardiplank.add("0");
+end
+
+rule "1: Condominium : Construction material  : Vinyl Siding"
+ruleflow-group "StoriesCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("vinylSiding"))
+    then
+    	construction.add("Vinyl Siding");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Vinyl Siding");
+	    hardiplank.add("0");
+end
+
+rule "1: Condominium : Construction material  : Wood Siding"
+ruleflow-group "StoriesCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("woodSiding"))
+    then
+    	construction.add("Wood Siding");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Wood Siding");
+	    hardiplank.add("0");
+end
+
+rule "1: Condominium : Construction material  : Asbestos Siding"
+ruleflow-group "StoriesCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("asbestos"))
+    then
+    	construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+rule "1: Condominium : Construction material  : Concrete Block Painted"
+ruleflow-group "StoriesCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("concreteBlockPainted"))
+    then
+    	construction.add("Concrete Block");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+
+rule "1: Condominium : Construction material  : Brick"
+ruleflow-group "StoriesCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("brick"))
+    then
+    	drools.setFocus("ConstructionBrickCondo1");
+end
+
+rule "1: Condominium : Brick : 100% Masonry"
+ruleflow-group "ConstructionBrickCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Masonry"))
+	then
+	    construction.add("Solid Stone");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Solid Stone");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "1: Condominium : Brick : 100% Frame"
+ruleflow-group "ConstructionBrickCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Frame"))
+	then
+	    construction.add("Brick Veneer");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Brick Veneer");
+	    hardiplank.add("0");
+end
+
+
+rule "1: Condominium : Construction material  : Stone"
+ruleflow-group "StoriesCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("stone"))
+    then
+    	drools.setFocus("ConstructionStoneCondo1");
+end
+
+rule "1: Condominium : Stone : 100% Masonry"
+ruleflow-group "ConstructionStoneCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Masonry"))
+	then
+	    construction.add("Solid Stone");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Solid Stone");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "1: Condominium : Stone : 100% Frame"
+ruleflow-group "ConstructionStoneCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Frame"))
+	then
+	    construction.add("Stone Veneer");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Stone Veneer");
+	    hardiplank.add("0");
+end
+
+rule "1: Condominium : Construction material  : Logs"
+ruleflow-group "StoriesCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("logs"))
+    then
+    	construction.add("Logs");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Logs");
+	    hardiplank.add("0");
+end
+
+rule "1: Condominium : Construction material  : Other,Unknown"
+ruleflow-group "StoriesCondo1"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("other") || ConstructionMaterial.equalsIgnoreCase("unknown"))
+    then
+    	drools.setFocus("ConstructionOtherCondo1");
+end
+
+
+rule "1: Condominium : Other,Unknown : 100% Masonry"
+ruleflow-group "ConstructionOtherCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Masonry"))
+	then
+	    construction.add("Concrete Block");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "1: Condominium : Other,Unknown : 100% Frame"
+ruleflow-group "ConstructionOtherCondo1"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Frame"))
+	then
+	    construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+
+rule "2: Condominium : Construction material  : Stucco"
+ruleflow-group "StoriesCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("stucco"))
+    then
+    	drools.setFocus("ConstructionStuccoCondo2");
+end
+
+rule "2: Condominium : Stucco : 100% Wood Frame"
+ruleflow-group "ConstructionStuccoCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Wood Frame"))
+	then
+	    construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Frame - Stucco");
+	    hardiplank.add("0");
+end
+
+rule "2: Condominium : Stucco : 50/50"
+ruleflow-group "ConstructionStuccoCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("50/50"))
+	then
+	    construction.add("Masonry 50% - Frame 50%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("Frame - Stucco");
+	    hardiplank.add("0");
+end
+
+rule "2: Condominium : Stucco : 100% ConcreteBlock"
+ruleflow-group "ConstructionStuccoCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Concrete Block - Stucco");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "2: Condominium : Stucco : 100% ConcreteBlock : Flat Roof"
+ruleflow-group "ConstructionStuccoCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block") && roofShape.equalsIgnoreCase("flat"))
+	then
+	    construction.clear();
+	    constructionType.clear();
+	    masonryConstruction.clear();
+	    frameConstruction.clear();
+	    hardiplank.clear();
+	    construction.add("Superior");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Superior");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+
+rule "2: Condominium : Construction material  : Concrete Boards/Hardiboard"
+ruleflow-group "StoriesCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("concreteBoardsHardiboard"))
+    then
+    	drools.setFocus("ConstructionHardiboardCondo2");
+end
+
+
+rule "2: Condominium : concreteBoardsHardiboard : 100% Wood Frame"
+ruleflow-group "ConstructionHardiboardCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Wood Frame"))
+	then
+	    construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Hardiplank Siding");
+	    hardiplank.add("1");
+end
+
+rule "2: Condominium : concreteBoardsHardiboard : 50/50"
+ruleflow-group "ConstructionHardiboardCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("50/50"))
+	then
+	    construction.add("Masonry 50% - Frame 50%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("Hardiplank Siding");
+	    hardiplank.add("1");
+end
+
+rule "2: Condominium : concreteBoardsHardiboard : 100% ConcreteBlock"
+ruleflow-group "ConstructionHardiboardCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Concrete Block - Stucco");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block - Stucco");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "2: Condominium : Construction material  : Aluminium Siding"
+ruleflow-group "StoriesCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("aluminumSiding"))
+    then
+    	construction.add("Aluminum Siding");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Aluminum Siding");
+	    hardiplank.add("0");
+end
+
+rule "2: Condominium : Construction material  : Vinyl Siding"
+ruleflow-group "StoriesCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("vinylSiding"))
+    then
+    	construction.add("Vinyl Siding");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Vinyl Siding");
+	    hardiplank.add("0");
+end
+
+rule "2: Condominium : Construction material  : Wood Siding"
+ruleflow-group "StoriesCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("woodSiding"))
+    then
+    	construction.add("Wood Siding");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Wood Siding");
+	    hardiplank.add("0");
+end
+
+
+rule "2: Condominium : Construction material  : Asbestos Siding"
+ruleflow-group "StoriesCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("asbestos"))
+    then
+    	construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+
+rule "2: Condominium : Construction material  : Concrete Block Painted"
+ruleflow-group "StoriesCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("concreteBlockPainted"))
+    then
+    	drools.setFocus("ConstructionConcreteBlockPaintedCondo2");
+end
+
+
+rule "2: Condominium : Concrete Block Painted : 50/50"
+ruleflow-group "ConstructionConcreteBlockPaintedCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("50/50"))
+	then
+	    construction.add("Masonry 50% - Frame 50%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+rule "2: Condominium : Concrete Block Painted : 100% ConcreteBlock"
+ruleflow-group "ConstructionConcreteBlockPaintedCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Concrete Block");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "2: Concrete Block Painted : 100% ConcreteBlock : Flat Roof"
+ruleflow-group "ConstructionConcreteBlockPaintedCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block") && roofShape.equalsIgnoreCase("flat"))
+	then
+	    construction.clear();
+	    constructionType.clear();
+	    masonryConstruction.clear();
+	    frameConstruction.clear();
+	    hardiplank.clear();
+	    construction.add("Superior");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Superior");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+
+rule "2: Condominium : Construction material  : Brick"
+ruleflow-group "StoriesCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("brick"))
+    then
+    	drools.setFocus("ConstructionBrickCondo2");
+end
+
+
+
+rule "2: Condominium : Brick : 100% Wood Frame"
+ruleflow-group "ConstructionBrickCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Wood Frame"))
+	then
+	    construction.add("Brick Veneer");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Brick Veneer");
+	    hardiplank.add("0");
+end
+
+rule "2: Condominium : Brick : 50/50"
+ruleflow-group "ConstructionBrickCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("50/50"))
+	then
+	    construction.add("Masonry 50% - Frame 50%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Brick Veneer");
+	    hardiplank.add("0");
+end
+
+rule "2: Condominium : Brick : 100% ConcreteBlock"
+ruleflow-group "ConstructionBrickCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Solid Brick");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Solid Brick");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+
+rule "2: Condominium : Construction material  : Stone"
+ruleflow-group "StoriesCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("stone"))
+    then
+    	drools.setFocus("ConstructionStoneCondo2");
+end
+
+
+rule "2: Condominium : Stone : 100% Wood Frame"
+ruleflow-group "ConstructionStoneCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Wood Frame"))
+	then
+	    construction.add("Stone Veneer");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Stone Veneer");
+	    hardiplank.add("0");
+end
+
+rule "2:  Condominium : Stone : 50/50"
+ruleflow-group "ConstructionStoneCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("50/50"))
+	then
+	    construction.add("Masonry 50% - Frame 50%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Stone Veneer");
+	    hardiplank.add("0");
+end
+
+rule "2: Condominium : Stone : 100% ConcreteBlock"
+ruleflow-group "ConstructionStoneCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Solid Stone");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Solid Stone");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "2: Condominium : Construction material  : Logs"
+ruleflow-group "StoriesCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("logs"))
+    then
+    	construction.add("");
+	    constructionType.add("");
+	    masonryConstruction.add("");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "2: Condominium : Construction material  : Other,Unknown"
+ruleflow-group "StoriesCondo2"
+	when
+		ConstructionMapping(constructionMaterial.equalsIgnoreCase("other") || ConstructionMaterial.equalsIgnoreCase("unknown"))
+    then
+    	drools.setFocus("ConstructionOtherCondo2");
+end
+
+rule "2: Condominium : Other,Unknown : 100% Wood Frame"
+ruleflow-group "ConstructionOtherCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Wood Frame"))
+	then
+	    construction.add("Frame");
+	    constructionType.add("Frame");
+	    masonryConstruction.add("");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+rule "2: Condominium : Other,Unknown : 50/50"
+ruleflow-group "ConstructionOtherCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("50/50"))
+	then
+	    construction.add("Masonry 50% - Frame 50%");
+	    constructionType.add("Mixed Masonry-Frame");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("Frame");
+	    hardiplank.add("0");
+end
+
+rule "2: Condominium : Other,Unknown : 100% ConcreteBlock"
+ruleflow-group "ConstructionOtherCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block"))
+	then
+	    construction.add("Concrete Block");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Concrete Block");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+rule "2: Condominium : Other,Unknown : 100% ConcreteBlock : Flat Roof"
+ruleflow-group "ConstructionOtherCondo2"
+	when
+	    ConstructionMapping(constructionOption.equalsIgnoreCase("100% Concrete Block") && roofShape.equalsIgnoreCase("flat"))
+	then
+	    construction.clear();
+	    constructionType.clear();
+	    masonryConstruction.clear();
+	    frameConstruction.clear();
+	    hardiplank.clear();
+	    construction.add("Superior");
+	    constructionType.add("Masonry");
+	    masonryConstruction.add("Superior");
+	    frameConstruction.add("");
+	    hardiplank.add("0");
+end
+
+
+
+
+

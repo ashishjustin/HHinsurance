@@ -1,0 +1,18 @@
+package org.brms.hhinsurance;
+global java.util.List HO6SpecialCoverageC;
+
+rule "carrier which is available for HO6"
+    when
+        SpecialCoverageC(carrier in ("American Integrity","American Strategic","Cabrillo","Centauri","Heritage","Monarch","Olympus","Prepared","St. Johns","United","Velocity"))
+    then
+        HO6SpecialCoverageC.clear();
+        HO6SpecialCoverageC.add("Available");
+end
+
+rule "carrier which is not available for HO6"
+    when
+        SpecialCoverageC(carrier in ("Edison","FedNat","Florida Peninsula","Frontline","Homeowners Choice","Southern Oak","Spinnaker","Universal PC","Banker"))
+    then
+        HO6SpecialCoverageC.clear();
+        HO6SpecialCoverageC.add("Not Available");
+end

@@ -4,7 +4,7 @@ global java.util.List key;
 
 rule "Check whether you have an alarm"
     when
-        Alarm(alarm=="yes")
+        Alarm(alarm.equalsIgnoreCase("yes"))
     then
     value.clear();
     key.clear();
@@ -14,7 +14,7 @@ end
 
 rule "Check if you have no alarm"
     when
-        Alarm(alarm=="no")
+        Alarm(alarm.equalsIgnoreCase("no"))
     then
     value.clear();
     key.clear();

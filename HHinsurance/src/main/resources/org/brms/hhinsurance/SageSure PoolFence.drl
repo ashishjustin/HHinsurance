@@ -1,0 +1,29 @@
+package org.brms.hhinsurance;
+global java.util.List sspoolFence;
+
+rule "check for 200"
+    when
+	    SSPoolFence(poolFencedOrScreened in("0") )
+    then
+	    sspoolFence.clear();
+	    sspoolFence.add("200");
+	    drools.setFocus("PoolFenceGroup");
+end
+
+rule "check for 100"
+    when
+	    SSPoolFence(poolFencedOrScreened in("1") )
+    then
+	    sspoolFence.clear();
+	    sspoolFence.add("100");
+	    drools.setFocus("PoolFenceGroup");
+end
+
+rule "check for None"
+ruleflow-group "PoolFenceGroup"
+    when
+	    SSPoolFence(pool in("None") )
+    then
+	    sspoolFence.clear();
+	    sspoolFence.add("300");
+end

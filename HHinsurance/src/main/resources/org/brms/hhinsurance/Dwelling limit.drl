@@ -1,0 +1,80 @@
+package org.brms.hhinsurance;
+global java.util.List coverageLimit;
+
+rule "Dwelling limit for HO6"
+    when
+        DwellingLimit(formType in ("HO-6: Condo Owners Policy"))
+    then
+        coverageLimit.add(50000);
+end
+
+rule "Check formtype HO3 or DP3"
+    when 
+        DwellingLimit(formType in ("HO-3: Home Owners Policy","DP-3 Dwelling Fire/Renters"))
+    then
+        drools.setFocus("FormType1");
+end
+
+rule "Year built for HO3 or DP3 greater than 2001"
+ruleflow-group "FormType1"
+    when
+        DwellingLimit(yearBuilt > 2001)
+    then
+        drools.setFocus("County1");
+end
+
+rule "Year built for HO3 or DP3 less than 2002"
+ruleflow-group "FormType1"
+    when
+        DwellingLimit(yearBuilt < 2002)
+    then
+        drools.setFocus("County2");
+end
+
+rule "Dwelling limit : $300,000 and yearBuilt greater than 2001"
+ruleflow-group "County1"
+    when
+        DwellingLimit(county in ("Monroe","Palm Beach","Miami-dade"))
+    then
+        coverageLimit.add(300000);
+end
+
+rule "Dwelling limit : $250,000 and yearBuilt greater than 2001"
+ruleflow-group "County1"
+    when
+        DwellingLimit(county in ("Broward"))
+    then
+        coverageLimit.add(250000);
+end
+
+rule "Dwelling limit : $200,000 and yearBuilt greater than 2001"
+ruleflow-group "County1"
+    when
+        DwellingLimit(county in ("Alachua","Baker","Bradford","Brevard","Calhoun","Citrus","Clay","Collier","Columbia","DeSoto","Dixie","Gadsden","Gilchrist","Glades","Hamilton","Hardee","Hendry","Highlands","Holmes","Jackson","Jefferson","Lafayette","Lee","Levy","Liberty","Madison","Martin","Osceola","Putnam","Sarasota","Sumter","Suwannee","Taylor","Union","Washington"))
+    then
+        coverageLimit.add(200000);
+end
+
+rule "Dwelling limit : $175,000 and yearBuilt greater than 2001"
+ruleflow-group "County1"
+    when
+        DwellingLimit(county in ("Bay","Charlotte","Duval","Escambia","Flagler","Franklin","Gulf","Hernando","Hillsborough","Indian River","Lake","Leon","Manatee","Marion","Nassau","Okaloosa","Okeechobee","Orange","Pasco","Pinellas","Polk","St. Johns","St. Lucie","Santa Rosa","Seminole","Volusia","Wakulla","Walton"))
+    then
+        coverageLimit.add(175000);
+end
+
+rule "Dwelling limit : $300,000 and yearBuilt less than 2002"
+ruleflow-group "County2"
+    when
+        DwellingLimit(county in ("Palm Beach","Monroe"))
+    then
+        coverageLimit.add(300000);
+end
+
+rule "Dwelling limit : $200,000 and yearBuilt less than 2002"
+ruleflow-group "County2"
+    when
+        DwellingLimit(county not in ("Palm Beach","Monroe","Broward","Miami-dade"))
+    then
+        coverageLimit.add(200000);
+end

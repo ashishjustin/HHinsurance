@@ -1,0 +1,31 @@
+
+package org.brms.hhinsurance;
+global java.util.List carriersList;
+
+rule "Open for quoting"
+when
+    OpenClosePolicy(open.equalsIgnoreCase("yes"))
+then
+    carriersList.add("American Integrity");
+    carriersList.add("ASI/Progressive");
+    carriersList.add("Bankers");
+    carriersList.add("Cabrillo");
+    carriersList.add("Centauri");
+    carriersList.add("Edison");
+    carriersList.add("FedNat");
+    carriersList.add("Florida Peninsula");
+    carriersList.add("Frontline");
+    carriersList.add("Geovera");
+    carriersList.add("Heritage");
+    carriersList.add("Monarch");
+    carriersList.add("Olympus");
+    carriersList.add("Prepared");
+    carriersList.add("Service (Sagesure)");
+    carriersList.add("Southern Oak");
+    carriersList.add("St. Johns");
+    carriersList.add("Swyfft");
+    carriersList.add("United");
+    carriersList.add("Universal PC");
+    carriersList.add("Velocity");
+    carriersList.add("Western World");
+end

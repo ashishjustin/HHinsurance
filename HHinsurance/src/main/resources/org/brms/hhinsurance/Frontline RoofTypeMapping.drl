@@ -1,0 +1,51 @@
+package org.brms.hhinsurance;
+global java.util.List frontlineRoofType
+
+
+rule "Check asphaltshingle roof type"
+    when
+    	FrontlineRoofTypeMapping(roofType in ("Tar Shingle", "Composite Shingle") )
+    then
+    	 frontlineRoofType.clear();
+	     frontlineRoofType.add("asphaltshingle");
+end
+
+rule "Check architecturalshingle roof type"
+    when
+    	FrontlineRoofTypeMapping(roofType.equals("Architectural Shingles") )
+    then
+    	 frontlineRoofType.clear();
+	     frontlineRoofType.add("architecturalshingle");
+end
+
+rule "Check metal roof type"
+    when
+    	FrontlineRoofTypeMapping(roofType.equals("Metal") )
+    then
+    	 frontlineRoofType.clear();
+	     frontlineRoofType.add("metal");
+end
+
+rule "Check roofingtarandgravel roof type"
+    when
+    	FrontlineRoofTypeMapping(roofType in ("Tar and Gravel", "Poured Concrete") )
+    then
+    	 frontlineRoofType.clear();
+	     frontlineRoofType.add("roofingtarandgravel");
+end
+
+rule "Check Tile-Concrete roof type"
+    when
+    	FrontlineRoofTypeMapping(roofType in ("Barrel Tile", "Flat Tile", "Tile", "Tile-Concrete") )
+    then
+    	 frontlineRoofType.clear();
+	     frontlineRoofType.add("tile");
+end
+
+rule "Check other roof type"
+    when
+    	FrontlineRoofTypeMapping(roofType not in ("Tar Shingle", "Composite Shingle", "Architectural Shingles", "Metal", "Tar and Gravel", "Poured Concrete", "Barrel Tile", "Flat Tile", "Tile", "Tile-Concrete") )
+    then
+    	 frontlineRoofType.clear();
+	     frontlineRoofType.add("other");
+end

@@ -9,22 +9,12 @@ public class AnimalLiability implements java.io.Serializable
 
    static final long serialVersionUID = 1L;
 
-   private java.lang.String carrierList;
-
    private java.lang.String coverageE;
+
+   private java.lang.String carrier;
 
    public AnimalLiability()
    {
-   }
-
-   public java.lang.String getCarrierList()
-   {
-      return this.carrierList;
-   }
-
-   public void setCarrierList(java.lang.String carrierList)
-   {
-      this.carrierList = carrierList;
    }
 
    public java.lang.String getCoverageE()
@@ -37,10 +27,20 @@ public class AnimalLiability implements java.io.Serializable
       this.coverageE = coverageE;
    }
 
-   public AnimalLiability(java.lang.String carrierList, java.lang.String coverageE)
+   public java.lang.String getCarrier()
    {
-      this.carrierList = carrierList;
+      return this.carrier;
+   }
+
+   public void setCarrier(java.lang.String carrier)
+   {
+      this.carrier = carrier;
+   }
+
+   public AnimalLiability(java.lang.String coverageE, java.lang.String carrier)
+   {
       this.coverageE = coverageE;
+      this.carrier = carrier;
    }
 
 }

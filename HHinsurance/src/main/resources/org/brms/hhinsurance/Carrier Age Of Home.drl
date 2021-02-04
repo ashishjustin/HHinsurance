@@ -1,54 +1,89 @@
 package org.brms.hhinsurance;
-global java.util.List ageOfHomeEligibility;
+global java.util.List DP3AgeOfHomeEligibility;
+global java.util.List HO3AgeOfHomeEligibility;
+global java.util.List HO6AgeOfHomeEligibility;
 
 rule "Age of Home from current year to 40 years"
+
 when
     AgeOfHomeCarrier(yearBuilt >= (year-40))
 then
-    ageOfHomeEligibility.add("American Integrity");
-    ageOfHomeEligibility.add("American Strategic");
-    ageOfHomeEligibility.add("Anchor");
-    ageOfHomeEligibility.add("Bankers");
-    ageOfHomeEligibility.add("Cabrillo");
-    ageOfHomeEligibility.add("Centauri");
-    ageOfHomeEligibility.add("Edison");
-    ageOfHomeEligibility.add("FedNat");
-    ageOfHomeEligibility.add("Florida Peninsula");
-    ageOfHomeEligibility.add("Frontline");
-    ageOfHomeEligibility.add("GeoVera");
-    ageOfHomeEligibility.add("Heritage");
-    ageOfHomeEligibility.add("Homeowners Choice");
-    ageOfHomeEligibility.add("Monarch");
-    ageOfHomeEligibility.add("Olympus");
-    ageOfHomeEligibility.add("Prepared");
-    ageOfHomeEligibility.add("Service (SageSure)");
-    ageOfHomeEligibility.add("Southern Oak");
-    ageOfHomeEligibility.add("Swyfft");
-    ageOfHomeEligibility.add("St. Johns");
-    ageOfHomeEligibility.add("The Hearth");
-    ageOfHomeEligibility.add("TypTap Home");
-    ageOfHomeEligibility.add("United");
-    ageOfHomeEligibility.add("Universal PC");
-    ageOfHomeEligibility.add("Velocity");
-    ageOfHomeEligibility.add("Western World");
+    DP3AgeOfHomeEligibility.add("American Integrity");
+    DP3AgeOfHomeEligibility.add("ASI/Progressive");
+    DP3AgeOfHomeEligibility.add("Cabrillo");
+    DP3AgeOfHomeEligibility.add("Centauri");
+    DP3AgeOfHomeEligibility.add("FedNat");
+    DP3AgeOfHomeEligibility.add("Frontline");
+    DP3AgeOfHomeEligibility.add("Geovera");
+    DP3AgeOfHomeEligibility.add("Heritage");
+    DP3AgeOfHomeEligibility.add("Homeowners Choice");
+    DP3AgeOfHomeEligibility.add("Olympus");
+    DP3AgeOfHomeEligibility.add("Prepared");
+    DP3AgeOfHomeEligibility.add("Southern Oak");
+    DP3AgeOfHomeEligibility.add("St. Johns");
+    DP3AgeOfHomeEligibility.add("United");
+    DP3AgeOfHomeEligibility.add("Universal PC");
+    DP3AgeOfHomeEligibility.add("Velocity");    
+
+    HO3AgeOfHomeEligibility.add("American Integrity");
+    HO3AgeOfHomeEligibility.add("ASI/Progressive");
+    HO3AgeOfHomeEligibility.add("Bankers");
+    HO3AgeOfHomeEligibility.add("Cabrillo");
+    HO3AgeOfHomeEligibility.add("Centauri");
+    HO3AgeOfHomeEligibility.add("Edison");
+    HO3AgeOfHomeEligibility.add("FedNat");
+    HO3AgeOfHomeEligibility.add("Florida Peninsula");
+    HO3AgeOfHomeEligibility.add("Frontline");
+    HO3AgeOfHomeEligibility.add("Geovera");
+    HO3AgeOfHomeEligibility.add("Heritage");
+    HO3AgeOfHomeEligibility.add("Homeowners Choice");
+    HO3AgeOfHomeEligibility.add("Monarch");
+    HO3AgeOfHomeEligibility.add("Olympus");
+    HO3AgeOfHomeEligibility.add("Prepared");
+    HO3AgeOfHomeEligibility.add("Service (SageSure)");
+    HO3AgeOfHomeEligibility.add("Southern Oak");
+    HO3AgeOfHomeEligibility.add("Swyfft");
+    HO3AgeOfHomeEligibility.add("St. Johns");
+    HO3AgeOfHomeEligibility.add("The Hearth");
+    HO3AgeOfHomeEligibility.add("TypTap Home");
+    HO3AgeOfHomeEligibility.add("United");
+    HO3AgeOfHomeEligibility.add("Universal PC");
+    HO3AgeOfHomeEligibility.add("Velocity");
+    HO3AgeOfHomeEligibility.add("Western World");    
+
+    HO6AgeOfHomeEligibility.add("American Integrity");
+    HO6AgeOfHomeEligibility.add("ASI/Progressive");
+    HO6AgeOfHomeEligibility.add("Cabrillo");
+    HO6AgeOfHomeEligibility.add("Centauri");
+    HO6AgeOfHomeEligibility.add("Edison");
+    HO6AgeOfHomeEligibility.add("FedNat");
+    HO6AgeOfHomeEligibility.add("Florida Peninsula");
+    HO6AgeOfHomeEligibility.add("Frontline");
+    HO6AgeOfHomeEligibility.add("Heritage");
+    HO6AgeOfHomeEligibility.add("Homeowners Choice");
+    HO6AgeOfHomeEligibility.add("Monarch");
+    HO6AgeOfHomeEligibility.add("Olympus");
+    HO6AgeOfHomeEligibility.add("Prepared");
+    HO6AgeOfHomeEligibility.add("Southern Oak");
+    HO6AgeOfHomeEligibility.add("St. Johns");
+    HO6AgeOfHomeEligibility.add("Spinnaker");
+    HO6AgeOfHomeEligibility.add("United");
+    HO6AgeOfHomeEligibility.add("Universal PC");
+    HO6AgeOfHomeEligibility.add("Velocity");
 end
 
 rule "Age of Home 40 years and above"
 when
     AgeOfHomeCarrier(yearBuilt < (year-40))
-then
-    ageOfHomeEligibility.add("American Integrity");
-    ageOfHomeEligibility.add("Cabrillo");
-    ageOfHomeEligibility.add("Frontline");
-    ageOfHomeEligibility.add("GeoVera");
-    ageOfHomeEligibility.add("Homeowners Choice");
-    ageOfHomeEligibility.add("Olympus");
-    ageOfHomeEligibility.add("Prepared");
-    ageOfHomeEligibility.add("Service (SageSure)");
-    ageOfHomeEligibility.add("St. Johns");
-    ageOfHomeEligibility.add("TypTap Home");
-    ageOfHomeEligibility.add("United");
-    ageOfHomeEligibility.add("Universal PC");
-    ageOfHomeEligibility.add("Velocity");
-    ageOfHomeEligibility.add("Western World");
+then  
+
+    HO6AgeOfHomeEligibility.add("American Integrity");
+    HO6AgeOfHomeEligibility.add("Cabrillo");
+    HO6AgeOfHomeEligibility.add("Frontline");
+    HO6AgeOfHomeEligibility.add("Homeowners Choice");
+    HO6AgeOfHomeEligibility.add("Olympus");
+    HO6AgeOfHomeEligibility.add("Spinnaker");
+    HO6AgeOfHomeEligibility.add("United");
+    HO6AgeOfHomeEligibility.add("Universal PC");
+    HO6AgeOfHomeEligibility.add("Velocity");
 end

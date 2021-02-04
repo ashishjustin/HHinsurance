@@ -1,0 +1,50 @@
+package org.brms.hhinsurance;
+global java.util.List frontlineRoofWallConnectType
+
+rule "Check Clips roof wall type"
+    when
+    	FrontlineRoofWallConnectTypeMapping(roofWallConnect.equals("Clips") )
+    then
+    	 frontlineRoofWallConnectType.clear();
+	     frontlineRoofWallConnectType.add("Clips");
+end
+
+rule "Check SingleWraps roof wall type"
+    when
+    	FrontlineRoofWallConnectTypeMapping(roofWallConnect.equals("Single Wraps") )
+    then
+    	 frontlineRoofWallConnectType.clear();
+	     frontlineRoofWallConnectType.add("SingleWraps");
+end
+
+rule "Check DoubleWraps roof wall type"
+    when
+    	FrontlineRoofWallConnectTypeMapping(roofWallConnect.equals("Double Wraps") )
+    then
+    	 frontlineRoofWallConnectType.clear();
+	     frontlineRoofWallConnectType.add("DoubleWraps");
+end
+
+rule "Check Structural roof wall type"
+    when
+    	FrontlineRoofWallConnectTypeMapping(roofWallConnect.equals("Structural") )
+    then
+    	 frontlineRoofWallConnectType.clear();
+	     frontlineRoofWallConnectType.add("Structural");
+end
+
+rule "Check Unknown roof wall type"
+    when
+    	FrontlineRoofWallConnectTypeMapping(roofWallConnect.equals("Unknown") )
+    then
+    	 frontlineRoofWallConnectType.clear();
+	     frontlineRoofWallConnectType.add("Unknown");
+end
+
+rule "Check ToeNails roof wall type"
+    when
+    	FrontlineRoofWallConnectTypeMapping(roofWallConnect not in("Clips", "Single Wraps", "Double Wraps", "Structural", "Unknown") )
+    then
+    	 frontlineRoofWallConnectType.clear();
+	     frontlineRoofWallConnectType.add("ToeNails");
+end

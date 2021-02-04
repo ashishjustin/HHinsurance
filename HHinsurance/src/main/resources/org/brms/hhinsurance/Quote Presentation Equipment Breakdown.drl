@@ -1,58 +1,107 @@
 package org.brms.hhinsurance;
-global java.util.List equipmentBreakdown;
+global java.util.List HO3EquipmentBreakdown;
+global java.util.List HO6EquipmentBreakdown;
+
+rule "carrier which is $50,$100000 and $500 available for HO3"
+when
+    EquipmentBreakdown(carrier in ("Anchor","Centauri","Florida Specialty","Heritage","Service (SageSure)","St. Johns"))
+then
+    HO3EquipmentBreakdown.clear();
+    HO3EquipmentBreakdown.add("Available - $50 ; Sublimit - $100,000 ; Deductible - $500");
+end
+
+rule "carrier which is $33,$100000 and $500 available for HO3"
+when
+    EquipmentBreakdown(carrier in ("Prepared"))
+then
+    HO3EquipmentBreakdown.clear();
+    HO3EquipmentBreakdown.add("Available - $33 ; Sublimit - $100,000 ; Deductible - $500");
+end
+
+rule "carrier which is $40,$50000 and $500 available for HO3"
+when
+    EquipmentBreakdown(carrier in ("United"))
+then
+    HO3EquipmentBreakdown.clear();
+    HO3EquipmentBreakdown.add("Available - $40 ; Sublimit - $50,000 ; Deductible - $500");
+end
+
+rule "carrier which is $44,$10000 and $500 available for HO3"
+when
+    EquipmentBreakdown(carrier in ("Western World"))
+then
+    HO3EquipmentBreakdown.clear();
+    HO3EquipmentBreakdown.add("Available - $44 ; Sublimit - $10,000 ; Deductible - $500");
+end
+
+rule "carrier which is $45,$50000 and $500 available for HO3"
+when
+    EquipmentBreakdown(carrier in ("American Integrity"))
+then
+    HO3EquipmentBreakdown.clear();
+    HO3EquipmentBreakdown.add("Available - $45 ; Sublimit - $50,000 ; Deductible - $500");
+end
+
+rule "carrier which is $50,$50000 and $500 available for HO3"
+when
+    EquipmentBreakdown(carrier in ("FedNat","Monarch"))
+then
+    HO3EquipmentBreakdown.clear();
+    HO3EquipmentBreakdown.add("Available - $50 ; Sublimit - $50,000 ; Deductible - $500");
+end
+
+rule "carrier which equipment breakup is not available for HO3"
+when
+    EquipmentBreakdown(carrier in ("American Strategic","Bankers","Cabrillo","Edison","Florida Peninsula","Frontline","Geovera","Homeowners Choice","Olympus","Southern Oak","Swyfft","TypTap Home","Universal PC","Velocity"))
+then
+    HO3EquipmentBreakdown.clear();
+    HO3EquipmentBreakdown.add("Not Available");
+end
 
 rule "carrier which is $50,$100000 and $500 available"
 when
-    EquipmentBreakdown(carrierList in ("Anchor","Centauri","Florida Specialty","Heritage","Service (SageSure)","St. Johns"))
+    EquipmentBreakdown(carrier in ("Centauri","Heritage","St. Johns"))
 then
-    equipmentBreakdown.clear();
-    equipmentBreakdown.add("Available - $50 ; Sublimit - $100,000 ; Deductible - $500");
+    HO6EquipmentBreakdown.clear();
+    HO6EquipmentBreakdown.add("Available - $50 ; Sublimit - $100,000 ; Deductible - $500");
 end
 
 rule "carrier which is $33,$100000 and $500 available"
 when
-    EquipmentBreakdown(carrierList in ("Prepared"))
+    EquipmentBreakdown(carrier in ("Prepared"))
 then
-    equipmentBreakdown.clear();
-    equipmentBreakdown.add("Available - $33 ; Sublimit - $100,000 ; Deductible - $500");
+    HO6EquipmentBreakdown.clear();
+    HO6EquipmentBreakdown.add("Available - $33 ; Sublimit - $100,000 ; Deductible - $500");
 end
 
 rule "carrier which is $40,$50000 and $500 available"
 when
-    EquipmentBreakdown(carrierList in ("United"))
+    EquipmentBreakdown(carrier in ("United"))
 then
-    equipmentBreakdown.clear();
-    equipmentBreakdown.add("Available - $40 ; Sublimit - $50,000 ; Deductible - $500");
-end
-
-rule "carrier which is $44,$10000 and $500 available"
-when
-    EquipmentBreakdown(carrierList in ("Western World"))
-then
-    equipmentBreakdown.clear();
-    equipmentBreakdown.add("Available - $44 ; Sublimit - $10,000 ; Deductible - $500");
+    HO6EquipmentBreakdown.clear();
+    HO6EquipmentBreakdown.add("Available - $40 ; Sublimit - $50,000 ; Deductible - $500");
 end
 
 rule "carrier which is $45,$50000 and $500 available"
 when
-    EquipmentBreakdown(carrierList in ("American Integrity"))
+    EquipmentBreakdown(carrier in ("American Integrity"))
 then
-    equipmentBreakdown.clear();
-    equipmentBreakdown.add("Available - $45 ; Sublimit - $50,000 ; Deductible - $500");
+    HO6EquipmentBreakdown.clear();
+    HO6EquipmentBreakdown.add("Available - $45 ; Sublimit - $50,000 ; Deductible - $500");
 end
 
 rule "carrier which is $50,$50000 and $500 available"
 when
-    EquipmentBreakdown(carrierList in ("FedNat","Monarch"))
+    EquipmentBreakdown(carrier in ("FedNat","Monarch","Bankers"))
 then
-    equipmentBreakdown.clear();
-    equipmentBreakdown.add("Available - $50 ; Sublimit - $50,000 ; Deductible - $500");
+    HO6EquipmentBreakdown.clear();
+    HO6EquipmentBreakdown.add("Available - $50 ; Sublimit - $50,000 ; Deductible - $500");
 end
 
 rule "carrier which equipment breakup is not available"
 when
-    EquipmentBreakdown(carrierList in ("American Strategic","Bankers","Cabrillo","Edison","Florida Peninsula","Frontline","GeoVera","Homeowners Choice","Olympus","Southern Oak","Swyfft","TypTap Home","Universal PC","Velocity"))
+    EquipmentBreakdown(carrier in ("American Strategic","Cabrillo","Edison","Florida Peninsula","Frontline","Homeowners Choice","Olympus","Southern Oak","Universal PC","Velocity","Spinnaker"))
 then
-    equipmentBreakdown.clear();
-    equipmentBreakdown.add("Not Available");
+    HO6EquipmentBreakdown.clear();
+    HO6EquipmentBreakdown.add("Not Available");
 end

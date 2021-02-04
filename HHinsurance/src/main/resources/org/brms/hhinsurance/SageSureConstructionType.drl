@@ -1,0 +1,59 @@
+package org.brms.hhinsurance;
+global java.util.List ssconstructionType;
+
+rule "check for masonary"
+    when
+	    SSConstructionType(constructionType in("Masonry") )
+    then
+	    ssconstructionType.clear();
+	    ssconstructionType.add("200");
+	    drools.setFocus("ConstructionGroup");
+end
+
+rule "check for frame"
+    when
+	    SSConstructionType(constructionType in("Frame") )
+    then
+	    ssconstructionType.clear();
+	    ssconstructionType.add("100");
+	    drools.setFocus("ConstructionGroup");
+
+end
+
+rule "check for Masonry 50% - Frame 50%"
+ruleflow-group "ConstructionGroup"
+    when
+	    SSConstructionType(construction in("Masonry 50% - Frame 50%") )
+    then
+	    ssconstructionType.clear();
+	    ssconstructionType.add("100");
+end
+
+rule "check for Masonry 67% - Frame 33% and Masonry 75% - Frame 25%"
+ruleflow-group "ConstructionGroup"
+    when
+	    SSConstructionType(construction in("Masonry 67% - Frame 33%", "Masonry 75% - Frame 25%") )
+    then
+	    ssconstructionType.clear();
+	    ssconstructionType.add("200");
+end
+
+
+rule "check for Superior"
+ruleflow-group "ConstructionGroup"
+    when
+	    SSConstructionType(construction in("Superior") )
+    then
+	    ssconstructionType.clear();
+	    ssconstructionType.add("202");
+end
+
+rule "check for Masonry Veneer, Brick Veneer, Stone Veneer"
+ruleflow-group "ConstructionGroup"
+    when
+	    SSConstructionType(construction in("Masonry Veneer", "Brick Veneer", "Stone Veneer") )
+    then
+	    ssconstructionType.clear();
+	    ssconstructionType.add("101");
+end
+
